@@ -1,0 +1,236 @@
+<!-- batch5: steps, swap, tab, table, textarea, textrotate, timeline, toast, toggle, tooltip, validator -->
+<!-- Static-only demos (no JS): checkbox/radio hacks, tooltip-open, static toast/timeline blocks. -->
+<!-- Uses batch5 component classes + presetUno layout utilities only. -->
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Steps</h2>
+  <ul class="steps">
+    <li class="step step-primary">Register</li>
+    <li class="step step-primary">Choose plan</li>
+    <li class="step step-secondary">Purchase</li>
+    <li class="step" data-content="★">Review</li>
+  </ul>
+  <ul class="steps steps-horizontal">
+    <li class="step step-accent">Start</li>
+    <li class="step step-info"><span class="step-icon">✓</span>Middle</li>
+    <li class="step step-neutral">End</li>
+  </ul>
+  <ul class="steps steps-vertical">
+    <li class="step step-success">Done</li>
+    <li class="step step-warning">Pending</li>
+    <li class="step step-error">Failed</li>
+  </ul>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Swap</h2>
+  <div class="flex flex-wrap items-center gap-4">
+    <label class="swap">
+      <input type="checkbox" />
+      <div class="swap-on">ON</div>
+      <div class="swap-off">OFF</div>
+    </label>
+    <label class="swap swap-rotate">
+      <input type="checkbox" />
+      <div class="swap-on">+</div>
+      <div class="swap-off">×</div>
+    </label>
+    <label class="swap swap-flip">
+      <input type="checkbox" />
+      <div class="swap-on">A</div>
+      <div class="swap-off">B</div>
+      <div class="swap-indeterminate">–</div>
+    </label>
+    <div class="swap swap-active">
+      <div class="swap-on">active-on</div>
+      <div class="swap-off">active-off</div>
+    </div>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Tabs</h2>
+  <div class="tabs tabs-border" role="tablist">
+    <input type="radio" name="demo-tabs" class="tab" aria-label="Bordered" checked="checked" />
+    <div class="tab-content">bordered content</div>
+    <a role="tab" class="tab tab-active">Active link</a>
+    <a role="tab" class="tab tab-disabled">Disabled</a>
+  </div>
+  <div class="tabs tabs-lift" role="tablist">
+    <input type="radio" name="demo-tabs-lift" class="tab" aria-label="Lift" checked="checked" />
+    <div class="tab-content">lifted content</div>
+    <input type="radio" name="demo-tabs-lift" class="tab" aria-label="Second" />
+  </div>
+  <div class="tabs tabs-box" role="tablist">
+    <input type="radio" name="demo-tabs-box" class="tab" aria-label="Box" checked="checked" />
+    <div class="tab-content">boxed content</div>
+  </div>
+  <div class="tabs tabs-top" role="tablist">
+    <a role="tab" class="tab tab-active">Top</a>
+    <a role="tab" class="tab">Second</a>
+  </div>
+  <div class="tabs tabs-bottom" role="tablist">
+    <a role="tab" class="tab tab-active">Bottom</a>
+    <a role="tab" class="tab">Second</a>
+  </div>
+  <div class="flex flex-wrap gap-2">
+    <div class="tabs tabs-xs" role="tablist"><a role="tab" class="tab tab-active">xs</a></div>
+    <div class="tabs tabs-sm" role="tablist"><a role="tab" class="tab tab-active">sm</a></div>
+    <div class="tabs tabs-md" role="tablist"><a role="tab" class="tab tab-active">md</a></div>
+    <div class="tabs tabs-lg" role="tablist"><a role="tab" class="tab tab-active">lg</a></div>
+    <div class="tabs tabs-xl" role="tablist"><a role="tab" class="tab tab-active">xl</a></div>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Table</h2>
+  <div class="overflow-x-auto">
+    <table class="table table-zebra">
+      <thead><tr><th>Name</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr class="row-hover"><td>Ada</td><td>Engineer</td></tr>
+        <tr><td>Grace</td><td>Admiral</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="table table-xs table-pin-rows table-pin-cols">
+      <thead><tr><th>#</th><th>Value</th></tr></thead>
+      <tbody><tr><td>1</td><td>xs</td></tr></tbody>
+    </table>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="table table-sm"><tbody><tr><td>sm size</td></tr></tbody></table>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="table table-md"><tbody><tr><td>md size</td></tr></tbody></table>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="table table-lg"><tbody><tr><td>lg size</td></tr></tbody></table>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="table table-xl"><tbody><tr><td>xl size</td></tr></tbody></table>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Textarea</h2>
+  <div class="flex flex-wrap gap-2">
+    <textarea class="textarea" placeholder="default"></textarea>
+    <textarea class="textarea textarea-ghost" placeholder="ghost"></textarea>
+    <textarea class="textarea textarea-neutral" placeholder="neutral"></textarea>
+    <textarea class="textarea textarea-primary" placeholder="primary"></textarea>
+    <textarea class="textarea textarea-secondary" placeholder="secondary"></textarea>
+    <textarea class="textarea textarea-accent" placeholder="accent"></textarea>
+    <textarea class="textarea textarea-info" placeholder="info"></textarea>
+    <textarea class="textarea textarea-success" placeholder="success"></textarea>
+    <textarea class="textarea textarea-warning" placeholder="warning"></textarea>
+    <textarea class="textarea textarea-error" placeholder="error"></textarea>
+  </div>
+  <div class="flex flex-wrap items-center gap-2">
+    <textarea class="textarea textarea-xs" placeholder="xs"></textarea>
+    <textarea class="textarea textarea-sm" placeholder="sm"></textarea>
+    <textarea class="textarea textarea-md" placeholder="md"></textarea>
+    <textarea class="textarea textarea-lg" placeholder="lg"></textarea>
+    <textarea class="textarea textarea-xl" placeholder="xl"></textarea>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Textrotate</h2>
+  <p class="text-sm">We ship <span class="text-rotate"><span><span>fast</span><span>clean</span><span>tiny</span></span></span> CSS.</p>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Timeline</h2>
+  <ul class="timeline timeline-vertical">
+    <li>
+      <hr />
+      <div class="timeline-start timeline-box">Start box</div>
+      <div class="timeline-middle">●</div>
+      <div class="timeline-end">End note</div>
+      <hr />
+    </li>
+    <li>
+      <hr />
+      <div class="timeline-start">Second</div>
+      <div class="timeline-middle">●</div>
+      <div class="timeline-end timeline-box">End box</div>
+      <hr />
+    </li>
+  </ul>
+  <ul class="timeline timeline-horizontal timeline-compact">
+    <li>
+      <hr />
+      <div class="timeline-start">A</div>
+      <div class="timeline-middle">●</div>
+      <div class="timeline-end">B</div>
+      <hr />
+    </li>
+  </ul>
+  <ul class="timeline timeline-snap-icon">
+    <li>
+      <hr />
+      <div class="timeline-start">Snap</div>
+      <div class="timeline-middle">●</div>
+      <div class="timeline-end">Icon</div>
+      <hr />
+    </li>
+  </ul>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Toast</h2>
+  <div class="flex flex-wrap gap-2">
+    <div class="toast toast-start"><div class="timeline-box">start toast</div></div>
+    <div class="toast toast-center"><div class="timeline-box">center toast</div></div>
+    <div class="toast toast-end"><div class="timeline-box">end toast</div></div>
+    <div class="toast toast-top"><div class="timeline-box">top toast</div></div>
+    <div class="toast toast-middle"><div class="timeline-box">middle toast</div></div>
+    <div class="toast toast-bottom"><div class="timeline-box">bottom toast</div></div>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Toggle</h2>
+  <div class="flex flex-wrap items-center gap-3">
+    <input type="checkbox" class="toggle" checked="checked" />
+    <input type="checkbox" class="toggle toggle-primary" checked="checked" />
+    <input type="checkbox" class="toggle toggle-secondary" checked="checked" />
+    <input type="checkbox" class="toggle toggle-accent" checked="checked" />
+    <input type="checkbox" class="toggle toggle-neutral" checked="checked" />
+    <input type="checkbox" class="toggle toggle-success" checked="checked" />
+    <input type="checkbox" class="toggle toggle-warning" checked="checked" />
+    <input type="checkbox" class="toggle toggle-info" checked="checked" />
+    <input type="checkbox" class="toggle toggle-error" checked="checked" />
+  </div>
+  <div class="flex flex-wrap items-center gap-3">
+    <input type="checkbox" class="toggle toggle-xs" checked="checked" />
+    <input type="checkbox" class="toggle toggle-sm" checked="checked" />
+    <input type="checkbox" class="toggle toggle-md" checked="checked" />
+    <input type="checkbox" class="toggle toggle-lg" checked="checked" />
+    <input type="checkbox" class="toggle toggle-xl" checked="checked" />
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Tooltip</h2>
+  <div class="flex flex-wrap items-center gap-2">
+    <div class="tooltip tooltip-open tooltip-top" data-tip="top tip">top</div>
+    <div class="tooltip tooltip-open tooltip-bottom tooltip-primary" data-tip="bottom tip">bottom</div>
+    <div class="tooltip tooltip-open tooltip-left tooltip-secondary" data-tip="left tip">left</div>
+    <div class="tooltip tooltip-open tooltip-right tooltip-accent" data-tip="right tip">right</div>
+    <div class="tooltip tooltip-open tooltip-start tooltip-info" data-tip="start tip">start</div>
+    <div class="tooltip tooltip-open tooltip-center tooltip-success" data-tip="center tip">center</div>
+    <div class="tooltip tooltip-open tooltip-end tooltip-warning" data-tip="end tip">end</div>
+    <div class="tooltip tooltip-open tooltip-error" data-tip="error tip"><span class="tooltip-content">rich content</span>error</div>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Validator</h2>
+  <div class="flex flex-col gap-2">
+    <input type="email" class="validator textarea textarea-primary" placeholder="mail@example.com" required="required" />
+    <p class="validator-hint">Enter a valid email address</p>
+  </div>
+</section>
