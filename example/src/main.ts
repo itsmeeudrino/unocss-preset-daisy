@@ -39,3 +39,29 @@ for (const b of buttons) {
 }
 
 setTheme(initial)
+
+// Placement-modal demo: swap dock classes on one dialog.
+const PLACES = [
+  'modal-top',
+  'modal-middle',
+  'modal-bottom',
+  'modal-start',
+  'modal-end',
+] as const
+
+const placeModal = document.getElementById('place-modal')
+const placeOpen = document.getElementById('place-open')
+const placeClose = document.getElementById('place-close')
+
+placeOpen?.addEventListener('click', () => placeModal?.classList.add('modal-open'))
+placeClose?.addEventListener('click', () => placeModal?.classList.remove('modal-open'))
+
+for (const b of document.querySelectorAll<HTMLButtonElement>('[data-place]')) {
+  b.addEventListener('click', () => {
+    const name = b.dataset.place
+    if (name === undefined || placeModal === null) return
+    placeModal.classList.remove(...PLACES)
+    placeModal.classList.add(name)
+    placeModal.classList.add('modal-open')
+  })
+}

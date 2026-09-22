@@ -26,28 +26,46 @@
       </div>
     </header>
 
-    <!-- buttons -->
+    <!-- buttons: colors -->
     <section class="flex flex-col gap-3">
-      <h2 class="text-xl font-bold">Buttons</h2>
+      <h2 class="text-xl font-bold">Buttons — colors</h2>
       <div class="flex flex-wrap gap-2">
         <button class="btn">default</button>
+        <button class="btn btn-neutral">neutral</button>
         <button class="btn btn-primary">primary</button>
         <button class="btn btn-secondary">secondary</button>
         <button class="btn btn-accent">accent</button>
-        <button class="btn btn-neutral">neutral</button>
         <button class="btn btn-info">info</button>
         <button class="btn btn-success">success</button>
         <button class="btn btn-warning">warning</button>
         <button class="btn btn-error">error</button>
       </div>
+    </section>
+
+    <!-- buttons: styles -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Buttons — styles</h2>
       <div class="flex flex-wrap gap-2">
         <button class="btn btn-outline btn-primary">outline</button>
+        <button class="btn btn-dash btn-secondary">dash</button>
+        <button class="btn btn-soft btn-accent">soft</button>
         <button class="btn btn-ghost">ghost</button>
-        <button class="btn btn-soft btn-secondary">soft</button>
-        <button class="btn btn-dash btn-accent">dash</button>
         <button class="btn btn-link">link</button>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button class="btn btn-outline btn-success">outline success</button>
+        <button class="btn btn-soft btn-error">soft error</button>
+        <button class="btn btn-dash btn-warning">dash warning</button>
+      </div>
+    </section>
+
+    <!-- buttons: behavior / sizes / shapes -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Buttons — behavior, sizes, shapes</h2>
+      <div class="flex flex-wrap gap-2">
         <button class="btn btn-active">active</button>
-        <button class="btn" disabled>disabled</button>
+        <button class="btn" disabled>disabled attr</button>
+        <button class="btn btn-disabled" tabindex="-1" role="button" aria-disabled="true">disabled class</button>
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <button class="btn btn-xs">xs</button>
@@ -55,10 +73,18 @@
         <button class="btn btn-md">md</button>
         <button class="btn btn-lg">lg</button>
         <button class="btn btn-xl">xl</button>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
         <button class="btn btn-circle btn-primary">♥</button>
         <button class="btn btn-square">≡</button>
         <button class="btn btn-wide btn-neutral">wide</button>
         <button class="btn btn-block btn-soft">block</button>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <input type="checkbox" aria-label="check" class="btn" />
+        <input type="checkbox" aria-label="checked" class="btn" checked />
+        <input type="radio" name="btngroup" aria-label="one" class="btn" />
+        <input type="radio" name="btngroup" aria-label="two" class="btn" checked />
       </div>
     </section>
 
@@ -67,10 +93,10 @@
       <h2 class="text-xl font-bold">Badges</h2>
       <div class="flex flex-wrap gap-2">
         <span class="badge">default</span>
+        <span class="badge badge-neutral">neutral</span>
         <span class="badge badge-primary">primary</span>
         <span class="badge badge-secondary">secondary</span>
         <span class="badge badge-accent">accent</span>
-        <span class="badge badge-neutral">neutral</span>
         <span class="badge badge-info">info</span>
         <span class="badge badge-success">success</span>
         <span class="badge badge-warning">warning</span>
@@ -78,9 +104,11 @@
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <span class="badge badge-outline badge-primary">outline</span>
-        <span class="badge badge-soft badge-secondary">soft</span>
+        <span class="badge badge-dash badge-secondary">dash</span>
+        <span class="badge badge-soft badge-accent">soft</span>
         <span class="badge badge-ghost">ghost</span>
-        <span class="badge badge-dash badge-accent">dash</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
         <span class="badge badge-xs">xs</span>
         <span class="badge badge-sm">sm</span>
         <span class="badge badge-md">md</span>
@@ -122,37 +150,134 @@
           </div>
         </div>
       </div>
+      <div class="card card-side bg-base-200 sm:card-side">
+        <figure class="w-full sm:w-48 bg-gradient-to-br from-secondary to-accent"></figure>
+        <div class="card-body">
+          <h3 class="card-title">Side card <span class="badge badge-sm badge-neutral">responsive</span></h3>
+          <p class="text-sm"><code>card-side</code> puts the figure beside the body (stacked on mobile via <code>sm:card-side</code>).</p>
+        </div>
+      </div>
+      <div class="card image-full">
+        <figure><div class="w-full h-48 bg-gradient-to-r from-primary via-secondary to-accent"></div></figure>
+        <div class="card-body">
+          <h3 class="card-title">Image full</h3>
+          <p class="text-sm">Body overlays the figure.</p>
+          <div class="card-actions">
+            <button class="btn btn-sm btn-primary">Go</button>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <div class="card card-xs bg-base-200 w-64">
+          <div class="card-body">
+            <h3 class="card-title">XS card</h3>
+            <p class="text-sm">Compact padding and type.</p>
+          </div>
+        </div>
+        <div class="card card-sm bg-base-200 w-64">
+          <div class="card-body">
+            <h3 class="card-title">SM card</h3>
+            <p class="text-sm">Small padding and type.</p>
+          </div>
+        </div>
+        <div class="card card-md bg-base-200 w-64">
+          <div class="card-body">
+            <h3 class="card-title">MD card</h3>
+            <p class="text-sm">Default-adjacent size.</p>
+          </div>
+        </div>
+        <div class="card card-lg bg-base-200 w-64">
+          <div class="card-body">
+            <h3 class="card-title">LG card</h3>
+            <p class="text-sm">Roomy padding and type.</p>
+          </div>
+        </div>
+        <div class="card card-xl bg-base-200 w-64">
+          <div class="card-body">
+            <h3 class="card-title">XL card</h3>
+            <p class="text-sm">Largest padding and type.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- form -->
+    <!-- inputs -->
     <section class="flex flex-col gap-3">
-      <h2 class="text-xl font-bold">Inputs + join</h2>
+      <h2 class="text-xl font-bold">Inputs</h2>
       <div class="flex flex-wrap gap-2">
-        <input class="input" placeholder="default input" />
+        <input class="input" placeholder="default" />
+        <input class="input input-neutral" placeholder="neutral" />
         <input class="input input-primary" placeholder="primary" />
-        <input class="input input-ghost" placeholder="ghost" />
-        <input class="input input-sm" placeholder="small" />
-        <input class="input input-lg" placeholder="large" />
+        <input class="input input-secondary" placeholder="secondary" />
+        <input class="input input-accent" placeholder="accent" />
+        <input class="input input-info" placeholder="info" />
+        <input class="input input-success" placeholder="success" />
+        <input class="input input-warning" placeholder="warning" />
+        <input class="input input-error" placeholder="error" />
       </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <input class="input input-ghost" placeholder="ghost" />
+        <input class="input" placeholder="disabled" disabled />
+        <input class="input input-xs" placeholder="xs" />
+        <input class="input input-sm" placeholder="sm" />
+        <input class="input input-md" placeholder="md" />
+        <input class="input input-lg" placeholder="lg" />
+        <input class="input input-xl" placeholder="xl" />
+      </div>
+    </section>
+
+    <!-- join -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Join</h2>
       <div class="join">
         <input class="input join-item" placeholder="search…" />
         <button class="btn btn-primary join-item">Search</button>
+      </div>
+      <div class="join join-vertical w-64">
+        <button class="btn join-item">first</button>
+        <button class="btn btn-primary join-item">second</button>
+        <button class="btn join-item">third</button>
+      </div>
+      <div class="join join-horizontal">
+        <button class="btn join-item">‹</button>
+        <button class="btn join-item">1</button>
+        <button class="btn join-item btn-active">2</button>
+        <button class="btn join-item">›</button>
       </div>
     </section>
 
     <!-- modal -->
     <section class="flex flex-col gap-3">
-      <h2 class="text-xl font-bold">Modal (pure CSS)</h2>
-      <div>
-        <label for="demo-modal" class="btn btn-accent">Open modal</label>
+      <h2 class="text-xl font-bold">Modal</h2>
+      <div class="flex flex-wrap gap-2">
+        <label for="demo-modal" class="btn btn-accent">Open checkbox modal</label>
         <input type="checkbox" id="demo-modal" class="modal-toggle" />
         <div class="modal" role="dialog">
           <div class="modal-box">
-            <h3 class="card-title">Hello from daisy-uno!</h3>
-            <p class="py-2 text-sm">This dialog is styled entirely by the UnoCSS preset — no Tailwind runtime involved.</p>
+            <h3 class="card-title">Checkbox modal</h3>
+            <p class="py-2 text-sm">Opened by a <code>modal-toggle</code> checkbox, closed by the backdrop label.</p>
             <div class="modal-action">
               <label for="demo-modal" class="btn btn-primary">Close</label>
             </div>
+          </div>
+          <label class="modal-backdrop" for="demo-modal">Close</label>
+        </div>
+        <button class="btn btn-secondary" id="place-open">Open placement modal</button>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-sm">Placement:</span>
+        <button class="btn btn-xs" data-place="modal-top">top</button>
+        <button class="btn btn-xs" data-place="modal-middle">middle</button>
+        <button class="btn btn-xs" data-place="modal-bottom">bottom</button>
+        <button class="btn btn-xs" data-place="modal-start">start</button>
+        <button class="btn btn-xs" data-place="modal-end">end</button>
+      </div>
+      <div id="place-modal" class="modal modal-middle" role="dialog">
+        <div class="modal-box">
+          <h3 class="card-title">Placement modal</h3>
+          <p class="py-2 text-sm">Pick a placement above, then open — the same dialog docks to every corner and edge.</p>
+          <div class="modal-action">
+            <button class="btn btn-primary" id="place-close">Close</button>
           </div>
         </div>
       </div>
@@ -167,24 +292,74 @@
           <li><a class="menu-active">Active item</a></li>
           <li><a>Plain item</a></li>
           <li class="menu-disabled"><a>Disabled</a></li>
+          <li>
+            <details open>
+              <summary>Submenu</summary>
+              <ul>
+                <li><a>Child one</a></li>
+                <li><a>Child two</a></li>
+              </ul>
+            </details>
+          </li>
         </ul>
         <ul class="menu menu-horizontal bg-base-200 rounded-box">
           <li><a class="menu-active">One</a></li>
           <li><a>Two</a></li>
           <li><a>Three</a></li>
         </ul>
+        <ul class="menu menu-vertical bg-base-200 rounded-box w-56">
+          <li class="menu-title">Explicit vertical</li>
+          <li><a>Item</a></li>
+        </ul>
       </div>
+      <div class="flex flex-wrap gap-4">
+        <ul class="menu menu-xs bg-base-200 rounded-box w-48">
+          <li><a class="menu-active">XS item</a></li>
+          <li><a>XS item</a></li>
+        </ul>
+        <ul class="menu menu-sm bg-base-200 rounded-box w-48">
+          <li><a class="menu-active">SM item</a></li>
+          <li><a>SM item</a></li>
+        </ul>
+        <ul class="menu menu-md bg-base-200 rounded-box w-48">
+          <li><a class="menu-active">MD item</a></li>
+          <li><a>MD item</a></li>
+        </ul>
+        <ul class="menu menu-lg bg-base-200 rounded-box w-48">
+          <li><a class="menu-active">LG item</a></li>
+          <li><a>LG item</a></li>
+        </ul>
+        <ul class="menu menu-xl bg-base-200 rounded-box w-48">
+          <li><a class="menu-active">XL item</a></li>
+          <li><a>XL item</a></li>
+        </ul>
+      </div>
+      <ul class="menu menu-paged bg-base-200 rounded-box w-64">
+        <li>
+          <details open>
+            <summary>Paged parent</summary>
+            <ul>
+              <li><a>Paged child</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
     </section>
 
-    <!-- glass -->
+    <!-- glass + radius -->
     <section class="flex flex-col gap-3">
-      <h2 class="text-xl font-bold">Glass</h2>
+      <h2 class="text-xl font-bold">Glass + radius</h2>
       <div class="rounded-box p-8 bg-gradient-to-r from-primary to-accent">
         <div class="glass rounded-box p-6 max-w-sm">
           <h3 class="card-title text-white">Frosted panel</h3>
           <p class="text-sm text-white/80">The <code>glass</code> utility over a gradient.</p>
           <button class="btn btn-sm mt-3">Got it</button>
         </div>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <div class="rounded-selector bg-primary text-primary-content p-4">rounded-selector</div>
+        <div class="rounded-field bg-secondary text-secondary-content p-4">rounded-field</div>
+        <div class="rounded-box bg-accent text-accent-content p-4">rounded-box</div>
       </div>
     </section>
 
