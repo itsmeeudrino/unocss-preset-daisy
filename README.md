@@ -19,10 +19,20 @@ export default { presets: [presetUno(), presetDaisy({ themes: ['light','dark'] }
 
 ## Status
 
-- [ ] P0 scaffold
-- [ ] P1 tooling (`bun run inventory`, `bun run tokens`)
-- [ ] P2 base + 35 themes
-- [ ] P3 61 components
-- [ ] P4 utilities + color rules
-- [ ] P5 options + bundle
+- [x] P0 scaffold
+- [x] P1 tooling (`bun run inventory`, `bun run tokens`)
+- [x] P2 base + 35 themes
+- [x] P3 6 core components (button, badge, card, input, modal, menu)
+- [x] P4 utilities + color rules + variants + infra (`bun run check` green)
+- [ ] P5 remaining 55 components + options polish
 - [ ] P6 freeze `v5.7-uno.0`
+
+## Example app
+
+`example/` is a Vite + UnoCSS showcase (buttons, badges, cards, inputs,
+modal, menu, join, glass, theme switcher). Needs a fresh preset build first:
+
+```sh
+bun run build          # repo root → dist/
+cd example && bun install && bun run dev   # http://localhost:5173
+```

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>daisy-uno — unocss-preset-daisy showcase</title>
+</head>
+<body class="bg-base-100 text-base-content">
+  <div class="max-w-5xl mx-auto px-4 pb-16 flex flex-col gap-10">
+
+    <!-- header -->
+    <header class="flex flex-wrap items-center justify-between gap-4 py-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-box bg-primary text-primary-content flex items-center justify-center text-xl font-bold">✿</div>
+        <div>
+          <h1 class="text-2xl font-bold">daisy-uno</h1>
+          <p class="text-sm text-base-content/70">daisyUI components, zero Tailwind — powered by UnoCSS</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Theme">
+        <button class="btn btn-sm" data-set-theme="light">light</button>
+        <button class="btn btn-sm" data-set-theme="dark">dark</button>
+        <button class="btn btn-sm" data-set-theme="cupcake">cupcake</button>
+        <button class="btn btn-sm" data-set-theme="synthwave">synthwave</button>
+        <button class="btn btn-sm" data-set-theme="retro">retro</button>
+      </div>
+    </header>
+
+    <!-- buttons -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Buttons</h2>
+      <div class="flex flex-wrap gap-2">
+        <button class="btn">default</button>
+        <button class="btn btn-primary">primary</button>
+        <button class="btn btn-secondary">secondary</button>
+        <button class="btn btn-accent">accent</button>
+        <button class="btn btn-neutral">neutral</button>
+        <button class="btn btn-info">info</button>
+        <button class="btn btn-success">success</button>
+        <button class="btn btn-warning">warning</button>
+        <button class="btn btn-error">error</button>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button class="btn btn-outline btn-primary">outline</button>
+        <button class="btn btn-ghost">ghost</button>
+        <button class="btn btn-soft btn-secondary">soft</button>
+        <button class="btn btn-dash btn-accent">dash</button>
+        <button class="btn btn-link">link</button>
+        <button class="btn btn-active">active</button>
+        <button class="btn" disabled>disabled</button>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <button class="btn btn-xs">xs</button>
+        <button class="btn btn-sm">sm</button>
+        <button class="btn btn-md">md</button>
+        <button class="btn btn-lg">lg</button>
+        <button class="btn btn-xl">xl</button>
+        <button class="btn btn-circle btn-primary">♥</button>
+        <button class="btn btn-square">≡</button>
+        <button class="btn btn-wide btn-neutral">wide</button>
+        <button class="btn btn-block btn-soft">block</button>
+      </div>
+    </section>
+
+    <!-- badges -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Badges</h2>
+      <div class="flex flex-wrap gap-2">
+        <span class="badge">default</span>
+        <span class="badge badge-primary">primary</span>
+        <span class="badge badge-secondary">secondary</span>
+        <span class="badge badge-accent">accent</span>
+        <span class="badge badge-neutral">neutral</span>
+        <span class="badge badge-info">info</span>
+        <span class="badge badge-success">success</span>
+        <span class="badge badge-warning">warning</span>
+        <span class="badge badge-error">error</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="badge badge-outline badge-primary">outline</span>
+        <span class="badge badge-soft badge-secondary">soft</span>
+        <span class="badge badge-ghost">ghost</span>
+        <span class="badge badge-dash badge-accent">dash</span>
+        <span class="badge badge-xs">xs</span>
+        <span class="badge badge-sm">sm</span>
+        <span class="badge badge-md">md</span>
+        <span class="badge badge-lg">lg</span>
+        <span class="badge badge-xl">xl</span>
+      </div>
+    </section>
+
+    <!-- cards -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Cards</h2>
+      <div class="grid gap-4 md:grid-cols-3">
+        <div class="card bg-base-200">
+          <div class="card-body">
+            <h3 class="card-title">Standard card</h3>
+            <p class="text-sm">Body text with title and actions.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-primary">Save</button>
+              <button class="btn btn-sm btn-ghost">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <div class="card card-border">
+          <div class="card-body">
+            <h3 class="card-title">Bordered <span class="badge badge-accent">new</span></h3>
+            <p class="text-sm">The <code>card-border</code> modifier.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline">Details</button>
+            </div>
+          </div>
+        </div>
+        <div class="card card-dash">
+          <div class="card-body">
+            <h3 class="card-title">Dashed</h3>
+            <p class="text-sm">The <code>card-dash</code> modifier.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-soft">Action</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- form -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Inputs + join</h2>
+      <div class="flex flex-wrap gap-2">
+        <input class="input" placeholder="default input" />
+        <input class="input input-primary" placeholder="primary" />
+        <input class="input input-ghost" placeholder="ghost" />
+        <input class="input input-sm" placeholder="small" />
+        <input class="input input-lg" placeholder="large" />
+      </div>
+      <div class="join">
+        <input class="input join-item" placeholder="search…" />
+        <button class="btn btn-primary join-item">Search</button>
+      </div>
+    </section>
+
+    <!-- modal -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Modal (pure CSS)</h2>
+      <div>
+        <label for="demo-modal" class="btn btn-accent">Open modal</label>
+        <input type="checkbox" id="demo-modal" class="modal-toggle" />
+        <div class="modal" role="dialog">
+          <div class="modal-box">
+            <h3 class="card-title">Hello from daisy-uno!</h3>
+            <p class="py-2 text-sm">This dialog is styled entirely by the UnoCSS preset — no Tailwind runtime involved.</p>
+            <div class="modal-action">
+              <label for="demo-modal" class="btn btn-primary">Close</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- menu -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Menu</h2>
+      <div class="flex flex-wrap gap-4">
+        <ul class="menu bg-base-200 rounded-box w-56">
+          <li class="menu-title">Vertical</li>
+          <li><a class="menu-active">Active item</a></li>
+          <li><a>Plain item</a></li>
+          <li class="menu-disabled"><a>Disabled</a></li>
+        </ul>
+        <ul class="menu menu-horizontal bg-base-200 rounded-box">
+          <li><a class="menu-active">One</a></li>
+          <li><a>Two</a></li>
+          <li><a>Three</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- glass -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Glass</h2>
+      <div class="rounded-box p-8 bg-gradient-to-r from-primary to-accent">
+        <div class="glass rounded-box p-6 max-w-sm">
+          <h3 class="card-title text-white">Frosted panel</h3>
+          <p class="text-sm text-white/80">The <code>glass</code> utility over a gradient.</p>
+          <button class="btn btn-sm mt-3">Got it</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- colors -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Theme colors (with opacity)</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm font-medium">
+        <div class="rounded-box p-3 bg-primary text-primary-content">primary</div>
+        <div class="rounded-box p-3 bg-secondary text-secondary-content">secondary</div>
+        <div class="rounded-box p-3 bg-accent text-accent-content">accent</div>
+        <div class="rounded-box p-3 bg-neutral text-neutral-content">neutral</div>
+        <div class="rounded-box p-3 bg-info text-info-content">info</div>
+        <div class="rounded-box p-3 bg-success text-success-content">success</div>
+        <div class="rounded-box p-3 bg-warning text-warning-content">warning</div>
+        <div class="rounded-box p-3 bg-error text-error-content">error</div>
+        <div class="rounded-box p-3 bg-primary/20 text-base-content">primary/20</div>
+        <div class="rounded-box p-3 bg-success/40 text-base-content">success/40</div>
+        <div class="rounded-box p-3 border border-error text-error">border-error</div>
+        <div class="rounded-box p-3 bg-base-200 text-base-content">base-200</div>
+      </div>
+    </section>
+
+    <footer class="text-sm text-base-content/60 py-4">
+      Built with <code>vite + unocss + unocss-preset-daisy</code>. Switch themes above — every color is an oklch CSS variable from the preset.
+    </footer>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
