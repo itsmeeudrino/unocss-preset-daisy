@@ -5,78 +5,78 @@
 
 /** All daisyUI theme variable names (values live in themes.css). */
 export const daisyThemeVars = [
-  '--color-base-100',
-  '--color-base-200',
-  '--color-base-300',
-  '--color-base-content',
-  '--color-primary',
-  '--color-primary-content',
-  '--color-secondary',
-  '--color-secondary-content',
-  '--color-accent',
-  '--color-accent-content',
-  '--color-neutral',
-  '--color-neutral-content',
-  '--color-info',
-  '--color-info-content',
-  '--color-success',
-  '--color-success-content',
-  '--color-warning',
-  '--color-warning-content',
-  '--color-error',
-  '--color-error-content',
-  '--radius-selector',
-  '--radius-field',
-  '--radius-box',
-  '--size-selector',
-  '--size-field',
-  '--border',
-  '--depth',
-  '--noise',
+  "--color-base-100",
+  "--color-base-200",
+  "--color-base-300",
+  "--color-base-content",
+  "--color-primary",
+  "--color-primary-content",
+  "--color-secondary",
+  "--color-secondary-content",
+  "--color-accent",
+  "--color-accent-content",
+  "--color-neutral",
+  "--color-neutral-content",
+  "--color-info",
+  "--color-info-content",
+  "--color-success",
+  "--color-success-content",
+  "--color-warning",
+  "--color-warning-content",
+  "--color-error",
+  "--color-error-content",
+  "--radius-selector",
+  "--radius-field",
+  "--radius-box",
+  "--size-selector",
+  "--size-field",
+  "--border",
+  "--depth",
+  "--noise",
 ] as const;
 
 /** `--color-*` bridge: Uno color name -> CSS var reference. */
 export const daisyColors = {
-  'base-100': 'var(--color-base-100)',
-  'base-200': 'var(--color-base-200)',
-  'base-300': 'var(--color-base-300)',
-  'base-content': 'var(--color-base-content)',
-  primary: 'var(--color-primary)',
-  'primary-content': 'var(--color-primary-content)',
-  secondary: 'var(--color-secondary)',
-  'secondary-content': 'var(--color-secondary-content)',
-  accent: 'var(--color-accent)',
-  'accent-content': 'var(--color-accent-content)',
-  neutral: 'var(--color-neutral)',
-  'neutral-content': 'var(--color-neutral-content)',
-  info: 'var(--color-info)',
-  'info-content': 'var(--color-info-content)',
-  success: 'var(--color-success)',
-  'success-content': 'var(--color-success-content)',
-  warning: 'var(--color-warning)',
-  'warning-content': 'var(--color-warning-content)',
-  error: 'var(--color-error)',
-  'error-content': 'var(--color-error-content)',
+  "base-100": "var(--color-base-100)",
+  "base-200": "var(--color-base-200)",
+  "base-300": "var(--color-base-300)",
+  "base-content": "var(--color-base-content)",
+  primary: "var(--color-primary)",
+  "primary-content": "var(--color-primary-content)",
+  secondary: "var(--color-secondary)",
+  "secondary-content": "var(--color-secondary-content)",
+  accent: "var(--color-accent)",
+  "accent-content": "var(--color-accent-content)",
+  neutral: "var(--color-neutral)",
+  "neutral-content": "var(--color-neutral-content)",
+  info: "var(--color-info)",
+  "info-content": "var(--color-info-content)",
+  success: "var(--color-success)",
+  "success-content": "var(--color-success-content)",
+  warning: "var(--color-warning)",
+  "warning-content": "var(--color-warning-content)",
+  error: "var(--color-error)",
+  "error-content": "var(--color-error-content)",
 } as const;
 
 /** `--radius-*` bridge. Mirrors upstream variables.js borderRadius. */
 export const daisyBorderRadius = {
-  selector: 'var(--radius-selector)',
-  field: 'var(--radius-field)',
-  box: 'var(--radius-box)',
+  selector: "var(--radius-selector)",
+  field: "var(--radius-field)",
+  box: "var(--radius-box)",
 } as const;
 
 /** `--size-*` bridge (field/selector sizing vars). */
 export const daisySizes = {
-  selector: 'var(--size-selector)',
-  field: 'var(--size-field)',
+  selector: "var(--size-selector)",
+  field: "var(--size-field)",
 } as const;
 
 /** Singleton theme vars: depth / noise / border. */
 export const daisySingletons = {
-  border: 'var(--border)',
-  depth: 'var(--depth)',
-  noise: 'var(--noise)',
+  border: "var(--border)",
+  depth: "var(--depth)",
+  noise: "var(--noise)",
 } as const;
 
 /**
@@ -90,7 +90,9 @@ export const daisySingletons = {
  * Accepts the resolved preset options (only `themes` is read; present for
  * API symmetry with the other preset parts). Never contains oklch values.
  */
-export function daisyTheme(_opts: { themes?: string[] | false } = {}): Record<string, any> {
+export function daisyTheme(
+  _opts: { themes?: string[] | false } = {},
+): Record<string, any> {
   void _opts;
   return {
     extend: {
@@ -98,9 +100,9 @@ export function daisyTheme(_opts: { themes?: string[] | false } = {}): Record<st
       borderRadius: { ...daisyBorderRadius },
       // daisyUI-specific vars (verbatim names; values in themes.css)
       size: { ...daisySizes },
-      depth: 'var(--depth)',
-      noise: 'var(--noise)',
-      border: 'var(--border)',
+      depth: "var(--depth)",
+      noise: "var(--noise)",
+      border: "var(--border)",
     },
   };
 }

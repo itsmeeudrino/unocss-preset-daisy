@@ -1,5 +1,5 @@
 import type { StaticShortcut } from "unocss";
-import { applyPrefix, shouldInclude } from "../options.ts";
+import { shouldInclude } from "../options.ts";
 
 // Port of packages/daisyui/src/components/*.css — batch4 (11 components:
 // otp, progress, radialprogress, radio, range, rating, select, skeleton,
@@ -46,7 +46,8 @@ export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
           "border-radius": "var(--radius-field)",
           "font-size": "1.75rem",
           gap: "var(--otp-gap)",
-          "--input-color": "color-mix(in oklab, var(--color-base-content) 20%, #0000)",
+          "--input-color":
+            "color-mix(in oklab, var(--color-base-content) 20%, #0000)",
           "--otp-ch": "1ch",
           "--otp-gap": "calc(var(--otp-ch) * 0.5)",
           "--otp-w": "calc(var(--otp-ch) * 2)",
@@ -76,7 +77,8 @@ export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
         {
           appearance: "none",
           "border-radius": "var(--radius-box)",
-          "background-color": "color-mix(in oklab, currentColor 20%, transparent)",
+          "background-color":
+            "color-mix(in oklab, currentColor 20%, transparent)",
           width: "100%",
           height: "0.5rem",
           color: "var(--color-base-content)",
@@ -145,7 +147,8 @@ export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
           "border-radius": "calc(infinity * 1px)",
           padding: "0.25rem",
           "vertical-align": "middle",
-          border: "var(--border) solid var(--input-color, color-mix(in srgb, currentColor 20%, #0000))",
+          border:
+            "var(--border) solid var(--input-color, color-mix(in srgb, currentColor 20%, #0000))",
           "box-shadow": "0 1px oklch(0% 0 0 / calc(var(--depth) * 0.1)) inset",
           "--size": "calc(var(--size-selector, 0.25rem) * 6)",
           width: "var(--size)",
@@ -249,10 +252,12 @@ export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
           "padding-inline-end": "1.75rem",
           "vertical-align": "middle",
           "--size": "calc(var(--size-field, 0.25rem) * var(--sl-size-mul, 10))",
-          "--input-color": "color-mix(in oklab, var(--color-base-content) 20%, #0000)",
+          "--input-color":
+            "color-mix(in oklab, var(--color-base-content) 20%, #0000)",
           width: "clamp(3rem, 20rem, 100%)",
           height: "var(--size)",
-          "font-size": "max(var(--font-size, 0rem), var(--font-size-min, 0.875rem))",
+          "font-size":
+            "max(var(--font-size, 0rem), var(--font-size-min, 0.875rem))",
           "touch-action": "manipulation",
           "border-start-start-radius": "var(--join-ss, var(--radius-field))",
           "border-start-end-radius": "var(--join-se, var(--radius-field))",
@@ -332,7 +337,19 @@ export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
     // Expanded: rounded-box->border-radius, relative->position,
     // inline-grid->display, grid-flow-col->grid-auto-flow:column,
     // overflow-x-auto->overflow-x:auto.
-    out.push([key("stats"), [{ "border-radius": "var(--radius-box)", position: "relative", display: "inline-grid", "grid-auto-flow": "column", "overflow-x": "auto" }], { layer: "daisy-l3" }]);
+    out.push([
+      key("stats"),
+      [
+        {
+          "border-radius": "var(--radius-box)",
+          position: "relative",
+          display: "inline-grid",
+          "grid-auto-flow": "column",
+          "overflow-x": "auto",
+        },
+      ],
+      { layer: "daisy-l3" },
+    ]);
     // .stat base, upstream layer daisyui.l1.l2.l3 -> daisy-l3. Flat part only;
     // :not(:last-child) divider -> __daisy-stat-nested.
     // Expanded: inline-grid->display, w-full->width:100%, gap-x-4->column-gap:1rem,
@@ -357,31 +374,65 @@ export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
     // place-self-center->place-self:center, justify-self-end->justify-self:end.
     out.push([
       key("stat-figure"),
-      [{ "grid-column-start": "2", "grid-row": "1 / span 3", "place-self": "center", "justify-self": "end" }],
+      [
+        {
+          "grid-column-start": "2",
+          "grid-row": "1 / span 3",
+          "place-self": "center",
+          "justify-self": "end",
+        },
+      ],
       { layer: "daisy-l3" },
     ]);
     // .stat-title, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     // Expanded: text-base-content/60->color-mix 60%, col-start-1, whitespace-nowrap.
     out.push([
       key("stat-title"),
-      [{ "white-space": "nowrap", color: "color-mix(in oklab, var(--color-base-content) 60%, transparent)", "grid-column-start": "1", "font-size": "0.75rem" }],
+      [
+        {
+          "white-space": "nowrap",
+          color:
+            "color-mix(in oklab, var(--color-base-content) 60%, transparent)",
+          "grid-column-start": "1",
+          "font-size": "0.75rem",
+        },
+      ],
       { layer: "daisy-l3" },
     ]);
     // .stat-value, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     // Expanded: col-start-1, whitespace-nowrap.
     out.push([
       key("stat-value"),
-      [{ "white-space": "nowrap", "grid-column-start": "1", "font-size": "2rem", "font-weight": "800" }],
+      [
+        {
+          "white-space": "nowrap",
+          "grid-column-start": "1",
+          "font-size": "2rem",
+          "font-weight": "800",
+        },
+      ],
       { layer: "daisy-l3" },
     ]);
     // .stat-desc, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     out.push([
       key("stat-desc"),
-      [{ "white-space": "nowrap", color: "color-mix(in oklab, var(--color-base-content) 60%, transparent)", "grid-column-start": "1", "font-size": "0.75rem" }],
+      [
+        {
+          "white-space": "nowrap",
+          color:
+            "color-mix(in oklab, var(--color-base-content) 60%, transparent)",
+          "grid-column-start": "1",
+          "font-size": "0.75rem",
+        },
+      ],
       { layer: "daisy-l3" },
     ]);
     // .stat-actions, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
-    out.push([key("stat-actions"), [{ "white-space": "nowrap", "grid-column-start": "1" }], { layer: "daisy-l3" }]);
+    out.push([
+      key("stat-actions"),
+      [{ "white-space": "nowrap", "grid-column-start": "1" }],
+      { layer: "daisy-l3" },
+    ]);
   }
 
   // ─── status ───────────────────────────────────────────────────────────────
@@ -397,7 +448,8 @@ export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
       key("status"),
       [
         {
-          "background-color": "color-mix(in oklab, var(--color-base-content) 20%, transparent)",
+          "background-color":
+            "color-mix(in oklab, var(--color-base-content) 20%, transparent)",
           "border-radius": "var(--radius-selector)",
           display: "inline-block",
           "aspect-ratio": "1",
@@ -418,6 +470,5 @@ export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
     ]);
   }
 
-  void applyPrefix;
   return out;
 }

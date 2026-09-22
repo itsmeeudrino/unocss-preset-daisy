@@ -101,7 +101,10 @@ export function batch5Shortcuts(opts: Ctx): StaticShortcut[] {
       { layer: "daisy-l3" },
     ]);
     // .tab base, upstream layer daisyui.l1.l2.l3 -> daisy-l3. Flat declarations
-    // of the `.tab:is(.tabs > .tab)` block; every nested selector (hover media,
+    // of the `.tab:is(.tabs > .tab)` block emitted here as plain `.tab` (intentional:
+    // lone `.tab` styling itself is harmless DX; inside `.tabs` the vars resolve
+    // identically and l2 modifiers win by layer order regardless of the lower
+    // 0,1,0 specificity vs upstream's 0,3,0). Every nested selector (hover media,
     // radio/label children, checked, dim, empty, focus, disabled) lives in
     // __daisy-tab-nested under the exact upstream selectors, and the
     // .tab-active slice lives in the public tab-active rule (no block emitted twice).
@@ -132,7 +135,8 @@ export function batch5Shortcuts(opts: Ctx): StaticShortcut[] {
           "--tab-radius-ee": "0",
           "--tab-order": "0",
           "--tab-radius-min": "calc(0.75rem - var(--border))",
-          "--tab-radius-limit": "min(var(--radius-field), var(--tab-radius-min))",
+          "--tab-radius-limit":
+            "min(var(--radius-field), var(--tab-radius-min))",
           "--tab-radius-grad":
             "#0000 calc(69% - var(--border)), var(--tab-border-color) calc(69% - var(--border) + 0.25px), var(--tab-border-color) 69%, var(--tab-bg) calc(69% + 0.25px)",
           "border-color": "#0000",
@@ -204,7 +208,8 @@ export function batch5Shortcuts(opts: Ctx): StaticShortcut[] {
           "border-collapse": "separate",
           "--tw-border-spacing-x": "0px",
           "--tw-border-spacing-y": "0px",
-          "border-spacing": "var(--tw-border-spacing-x) var(--tw-border-spacing-y)",
+          "border-spacing":
+            "var(--tw-border-spacing-x) var(--tw-border-spacing-y)",
           "text-align": "left",
         },
         "__daisy-table-nested",
@@ -235,9 +240,11 @@ export function batch5Shortcuts(opts: Ctx): StaticShortcut[] {
           "padding-inline": "0.75rem",
           "padding-block": "0.5rem",
           "vertical-align": "middle",
-          "--input-color": "color-mix(in oklab, var(--color-base-content) 20%, #0000)",
+          "--input-color":
+            "color-mix(in oklab, var(--color-base-content) 20%, #0000)",
           width: "clamp(3rem, 20rem, 100%)",
-          "font-size": "max(var(--font-size, 0rem), var(--font-size-min, 0.875rem))",
+          "font-size":
+            "max(var(--font-size, 0rem), var(--font-size-min, 0.875rem))",
           "touch-action": "manipulation",
           border: "var(--border) solid var(--input-color, #0000)",
           "box-shadow":
@@ -440,10 +447,12 @@ export function batch5Shortcuts(opts: Ctx): StaticShortcut[] {
           "box-shadow":
             "0 1px color-mix(in oklab, currentColor calc(var(--depth) * 10%), #0000) inset",
           transition: "color 0.3s, grid-template-columns 0.2s",
-          "--input-color": "color-mix(in oklab, var(--color-base-content) 50%, #0000)",
+          "--input-color":
+            "color-mix(in oklab, var(--color-base-content) 50%, #0000)",
           "--toggle-p": "calc(var(--size) * 0.125)",
           "--size": "calc(var(--size-selector, 0.25rem) * 6)",
-          width: "calc((var(--size) * 2) - (var(--border) + var(--toggle-p)) * 2)",
+          width:
+            "calc((var(--size) * 2) - (var(--border) + var(--toggle-p)) * 2)",
           height: "var(--size)",
           "flex-shrink": "0",
           "grid-template-columns": "0fr 1fr 1fr",

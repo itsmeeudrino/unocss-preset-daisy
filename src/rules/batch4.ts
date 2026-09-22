@@ -97,7 +97,12 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     for (const [name, fs, mul] of otpSizes) {
       rules.push([
         key(name),
-        [{ "font-size": fs, "--otp-size": `calc(var(--size-field, 0.25rem) * ${mul})` }],
+        [
+          {
+            "font-size": fs,
+            "--otp-size": `calc(var(--size-field, 0.25rem) * ${mul})`,
+          },
+        ],
         { layer: "daisy-l2" },
       ]);
     }
@@ -115,7 +120,11 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     ];
     for (const [name, color] of otpColors) {
       const s = sel(`.${name}`);
-      rules.push([key(name), [`${s},${s}:focus,${s}:focus-within{--input-color:${color};}`], { layer: "daisy-l2" }]);
+      rules.push([
+        key(name),
+        [`${s},${s}:focus,${s}:focus-within{--input-color:${color};}`],
+        { layer: "daisy-l2" },
+      ]);
     }
   }
 
@@ -159,7 +168,9 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     const radial = sel(".radial-progress");
     // Ring + needle, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     // Expanded: absolute->position:absolute, inset-0->inset:0,
-    // rounded-full->border-radius, bg-current->background-color:currentColor.
+    // rounded-full->border-radius:calc(infinity * 1px) (compiled emits
+    // 3.40282e38px — Tailwind v4's infinity normalization; computed-identical),
+    // bg-current->background-color:currentColor.
     rules.push([
       "__daisy-radial-nested",
       [
@@ -176,7 +187,8 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     const radio = sel(".radio");
     // Dot, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     // Expanded: block->display:block, size-full->width/height:100%,
-    // rounded-full->border-radius.
+    // rounded-full->border-radius:calc(infinity * 1px) (compiled 3.40282e38px;
+    // computed-identical, see radial above).
     rules.push([
       "__daisy-radio-nested",
       [
@@ -210,7 +222,11 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
       ["radio-error", "var(--color-error)"],
     ];
     for (const [name, color] of radioColors) {
-      rules.push([key(name), [{ "--input-color": color }], { layer: "daisy-l2" }]);
+      rules.push([
+        key(name),
+        [{ "--input-color": color }],
+        { layer: "daisy-l2" },
+      ]);
     }
     // Sizes, upstream layer daisyui.l1.l2 -> daisy-l2.
     const radioSizes: Array<[string, string, string]> = [
@@ -222,7 +238,13 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     ];
     for (const [name, pad, mul] of radioSizes) {
       const s = sel(`.${name}`);
-      rules.push([key(name), [`${s}{padding:${pad};&:is([type="radio"]){--size:calc(var(--size-selector, 0.25rem) * ${mul});}}`], { layer: "daisy-l2" }]);
+      rules.push([
+        key(name),
+        [
+          `${s}{padding:${pad};&:is([type="radio"]){--size:calc(var(--size-selector, 0.25rem) * ${mul});}}`,
+        ],
+        { layer: "daisy-l2" },
+      ]);
     }
   }
 
@@ -258,7 +280,11 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     // Expanded: text-X->color:var(--color-X).
     const rangeColors: Array<[string, string, string]> = [
       ["range-primary", "var(--color-primary)", "var(--color-primary-content)"],
-      ["range-secondary", "var(--color-secondary)", "var(--color-secondary-content)"],
+      [
+        "range-secondary",
+        "var(--color-secondary)",
+        "var(--color-secondary-content)",
+      ],
       ["range-accent", "var(--color-accent)", "var(--color-accent-content)"],
       ["range-neutral", "var(--color-neutral)", "var(--color-neutral-content)"],
       ["range-success", "var(--color-success)", "var(--color-success-content)"],
@@ -267,7 +293,11 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
       ["range-error", "var(--color-error)", "var(--color-error-content)"],
     ];
     for (const [name, color, thumb] of rangeColors) {
-      rules.push([key(name), [{ color, "--range-thumb": thumb }], { layer: "daisy-l2" }]);
+      rules.push([
+        key(name),
+        [{ color, "--range-thumb": thumb }],
+        { layer: "daisy-l2" },
+      ]);
     }
     // Sizes, upstream layer daisyui.l1.l2 -> daisy-l2.
     const rangeSizes: Array<[string, string]> = [
@@ -278,7 +308,15 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
       ["range-xl", "8"],
     ];
     for (const [name, mul] of rangeSizes) {
-      rules.push([key(name), [{ "--range-thumb-size": `calc(var(--size-selector, 0.25rem) * ${mul})` }], { layer: "daisy-l2" }]);
+      rules.push([
+        key(name),
+        [
+          {
+            "--range-thumb-size": `calc(var(--size-selector, 0.25rem) * ${mul})`,
+          },
+        ],
+        { layer: "daisy-l2" },
+      ]);
     }
     // Vertical, upstream layer daisyui.l1.l2 -> daisy-l2.
     // Expanded: h-full->height:100%.
@@ -335,7 +373,11 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
       ["rating-xl", "8"],
     ];
     for (const [name, mul] of ratingSizes) {
-      rules.push([key(name), [{ "--size": `var(--size-selector, 0.25rem) * ${mul}` }], { layer: "daisy-l2" }]);
+      rules.push([
+        key(name),
+        [{ "--size": `var(--size-selector, 0.25rem) * ${mul}` }],
+        { layer: "daisy-l2" },
+      ]);
     }
   }
 
@@ -406,21 +448,32 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     ];
     for (const [name, color] of selectColors) {
       const s = sel(`.${name}`);
-      rules.push([key(name), [`${s},${s}:focus,${s}:focus-within,${s}:open{--input-color:${color};}`], { layer: "daisy-l2" }]);
+      rules.push([
+        key(name),
+        [
+          `${s},${s}:focus,${s}:focus-within,${s}:open{--input-color:${color};}`,
+        ],
+        { layer: "daisy-l2" },
+      ]);
     }
     // Sizes, upstream layer daisyui.l1.l2 -> daisy-l2 with floating-label hooks.
-    const selectSizes: Array<[string, string, string, string, string, string]> = [
-      ["select-xs", "6", "0.6875rem", "2", "3", "0.6875rem"],
-      ["select-sm", "8", "0.75rem", "2.5", "4", "0.75rem"],
-      ["select-md", "10", "0.875rem", "3", "5", "0.875rem"],
-      ["select-lg", "12", "1.125rem", "4", "6", "1.125rem"],
-      ["select-xl", "14", "1.375rem", "5", "7", "1.375rem"],
-    ];
+    const selectSizes: Array<[string, string, string, string, string, string]> =
+      [
+        ["select-xs", "6", "0.6875rem", "2", "3", "0.6875rem"],
+        ["select-sm", "8", "0.75rem", "2.5", "4", "0.75rem"],
+        ["select-md", "10", "0.875rem", "3", "5", "0.875rem"],
+        ["select-lg", "12", "1.125rem", "4", "6", "1.125rem"],
+        ["select-xl", "14", "1.375rem", "5", "7", "1.375rem"],
+      ];
     for (const [name, mul, fs, px, top, flfs] of selectSizes) {
       const s = sel(`.${name}`);
-      rules.push(
-        [key(name), [`${s}{--sl-size-mul:${mul};--font-size-min:${fs};--option-px:${px};}${sel(".floating-label")}:has(${s}){--top-mul:${top};--font-size:${flfs};}`], { layer: "daisy-l2" }],
-      );
+      rules.push([
+        key(name),
+        [
+          `${s}{--sl-size-mul:${mul};--font-size-min:${fs};--option-px:${px};}${sel(".floating-label")}:has(${s}){--top-mul:${top};--font-size:${flfs};}`,
+        ],
+        { layer: "daisy-l2" },
+      ]);
     }
   }
 
@@ -482,22 +535,30 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     // Explicit positions, upstream layer daisyui.l1.l2 -> daisy-l2.
     rules.push([
       key("stack-bottom"),
-      [`${stack}${sel(".stack-bottom")} > *{grid-column:3 / 4;grid-row:3 / 6;&:nth-child(2){grid-column:2 / 5;grid-row:2 / 5;}&:nth-child(1){grid-column:1 / 6;grid-row:1 / 4;}}`],
+      [
+        `${stack}${sel(".stack-bottom")} > *{grid-column:3 / 4;grid-row:3 / 6;&:nth-child(2){grid-column:2 / 5;grid-row:2 / 5;}&:nth-child(1){grid-column:1 / 6;grid-row:1 / 4;}}`,
+      ],
       { layer: "daisy-l2" },
     ]);
     rules.push([
       key("stack-top"),
-      [`${stack}${sel(".stack-top")} > *{grid-column:3 / 4;grid-row:1 / 4;&:nth-child(2){grid-column:2 / 5;grid-row:2 / 5;}&:nth-child(1){grid-column:1 / 6;grid-row:3 / 6;}}`],
+      [
+        `${stack}${sel(".stack-top")} > *{grid-column:3 / 4;grid-row:1 / 4;&:nth-child(2){grid-column:2 / 5;grid-row:2 / 5;}&:nth-child(1){grid-column:1 / 6;grid-row:3 / 6;}}`,
+      ],
       { layer: "daisy-l2" },
     ]);
     rules.push([
       key("stack-start"),
-      [`${stack}${sel(".stack-start")} > *{grid-column:1 / 4;grid-row:3 / 4;&:nth-child(2){grid-column:2 / 5;grid-row:2 / 5;}&:nth-child(1){grid-column:3 / 6;grid-row:1 / 6;}}`],
+      [
+        `${stack}${sel(".stack-start")} > *{grid-column:1 / 4;grid-row:3 / 4;&:nth-child(2){grid-column:2 / 5;grid-row:2 / 5;}&:nth-child(1){grid-column:3 / 6;grid-row:1 / 6;}}`,
+      ],
       { layer: "daisy-l2" },
     ]);
     rules.push([
       key("stack-end"),
-      [`${stack}${sel(".stack-end")} > *{grid-column:3 / 6;grid-row:3 / 4;&:nth-child(2){grid-column:2 / 5;grid-row:2 / 5;}&:nth-child(1){grid-column:1 / 4;grid-row:1 / 6;}}`],
+      [
+        `${stack}${sel(".stack-end")} > *{grid-column:3 / 6;grid-row:3 / 4;&:nth-child(2){grid-column:2 / 5;grid-row:2 / 5;}&:nth-child(1){grid-column:1 / 4;grid-row:1 / 6;}}`,
+      ],
       { layer: "daisy-l2" },
     ]);
   }
@@ -509,7 +570,9 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     // Divider, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     rules.push([
       "__daisy-stat-nested",
-      [`${stat}:not(:last-child){border-inline-end:var(--border) dashed color-mix(in oklab, currentColor 10%, #0000);border-block-end:none;}`],
+      [
+        `${stat}:not(:last-child){border-inline-end:var(--border) dashed color-mix(in oklab, currentColor 10%, #0000);border-block-end:none;}`,
+      ],
       { layer: "daisy-l3", internal: true },
     ]);
     // Orientations, upstream layer daisyui.l1.l2 -> daisy-l2.
@@ -549,7 +612,11 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
       ["status-error", "var(--color-error)"],
     ];
     for (const [name, color] of statusColors) {
-      rules.push([key(name), [{ "background-color": color, color }], { layer: "daisy-l2" }]);
+      rules.push([
+        key(name),
+        [{ "background-color": color, color }],
+        { layer: "daisy-l2" },
+      ]);
     }
     // Sizes, upstream layer daisyui.l1.l2 -> daisy-l2.
     const statusSizes: Array<[string, string]> = [
@@ -560,7 +627,11 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
       ["status-xl", "4"],
     ];
     for (const [name, mul] of statusSizes) {
-      rules.push([key(name), [{ "--size": `calc(var(--size-selector, 0.25rem) * ${mul})` }], { layer: "daisy-l2" }]);
+      rules.push([
+        key(name),
+        [{ "--size": `calc(var(--size-selector, 0.25rem) * ${mul})` }],
+        { layer: "daisy-l2" },
+      ]);
     }
   }
 

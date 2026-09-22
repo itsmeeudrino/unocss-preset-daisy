@@ -38,8 +38,57 @@ import 'unocss-preset-daisy/themes' // oklch theme variables (without this, colo
 - [x] P2 base + 35 themes
 - [x] P3 6 core components (button, badge, card, input, modal, menu)
 - [x] P4 utilities + color rules + variants + infra (`bun run check` green)
-- [ ] P5 remaining 55 components + options polish
-- [ ] P6 freeze `v5.7-uno.0`
+- [x] P5 61/61 components (batches 1–5 wired, 664 tests green)
+- [ ] P6 freeze `v5.7-uno.0` (gated on visual sign-off)
+
+## Migration from daisyUI (Tailwind)
+
+- `@plugin "daisyui"` → `presetDaisy()` in `uno.config.ts` (after `presetUno()`).
+- Tailwind `@apply` in your own CSS → plain CSS or Uno shortcuts (the preset
+  already expands all upstream `@apply` to raw CSS; no Tailwind needed).
+- `separators: [':']` is REQUIRED (see quickstart). Dash-form variants would
+  eat `hover-3d`, `file-input*`, `link-*`.
+- Both imports required: `virtual:uno.css` (generated components) +
+  `unocss-preset-daisy/themes` (35 oklch theme vars).
+- `themes: [...]` option is currently inert: it is accepted (and echoed by
+  `logs: true`) but narrows nothing — `daisyTheme()` ignores it (see
+  `src/theme/tokens.ts`: `void _opts`) and the whole `themes.css` ships
+  regardless. Subset emission is F.2 TBD.
+
+## Known limitations
+
+- `filter` component shadows presetUno's `filter` utility (same class name —
+  upstream name, unavoidable). With `presets: [presetUno(), presetDaisy()]`
+  OUR `.filter` wins (locked in `tests/composed.test.ts`).
+- Dash-form variants lost for `hover-*`/`file-*`/`link-*` class names (hence
+  the `separators: [':']` requirement). Colon-form (`hover:`, `sm:`) works.
+- `typography` is a stub (`.prose` CSS vars only; nested `:where(code)` TBD).
+- Formatted with Biome (`bun run format`; config in `biome.json`, pinned
+  `@biomejs/biome@2.5.9`). Raw CSS lives inside template literals, which
+  formatters leave untouched; `src/theme/themes.css` (verbatim upstream) is
+  excluded from formatting.
+
+## Size
+
+Measured 2026-09-22 (Bun 1.4.0) from `dist/` as built in-repo:
+
+| file | raw | gzip |
+| --- | --- | --- |
+| `dist/index.js` | 309,806 B (302.5 KiB) | 51,076 B (49.9 KiB) |
+| `dist/themes.css` | 43,824 B (42.8 KiB) | 7,190 B (7.0 KiB) |
+| `dist/**/*.d.ts` (20 files, F.1) | 8,652 B total | — (types, not shipped to browsers) |
+| runtime total (`index.js` + `themes.css`) | 353,630 B (345.3 KiB) | 58,266 B (56.9 KiB) |
+
+- Methodology (Bun/Node built-ins only, no analyzer dep): raw = byte length
+  via `Bun.file(f).bytes()`; gzip = `Bun.gzipSync(buf).length` at default
+  compression level; hashes via `node:crypto` sha256.
+- Dist content hash (sha256 over `index.js` + `themes.css` concatenated):
+  `bd9096a5493b8ac0c23d4bd258914dd327607f783b595d391f70fcf37deb28aa`
+  (per-file sha16: `index.js` 673ac2622ff4c2d4, `themes.css` c6edac045a0ce21e).
+- STALENESS FLAG: the packaging workstream owns `dist/` and may rebuild it
+  (F.2 themes subset). Verified 2026-09-22 post-F.1: `index.js` + `themes.css`
+  are byte-identical to the hash above (F.1 added only the `.d.ts` tree) —
+  re-measure after any rebuild; do not chase drift.
 
 ## Example app
 

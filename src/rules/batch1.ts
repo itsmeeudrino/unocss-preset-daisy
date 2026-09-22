@@ -73,7 +73,8 @@ function prefixSelectors(css: string, prefix: string): string {
     if (ch === "{") {
       const seg = css.slice(segStart, i);
       const bare = seg.replace(/\/\*[\s\S]*?\*\//g, "").trimStart();
-      out += (bare.startsWith("@") ? seg : prefixSelectorSegment(seg, prefix)) + "{";
+      out +=
+        (bare.startsWith("@") ? seg : prefixSelectorSegment(seg, prefix)) + "{";
       segStart = i + 1;
       i++;
       continue;
@@ -1614,7 +1615,9 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
     // &:has(> :nth-child(2)), upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     rules.push([
       "__daisy-alert-nested",
-      [`${sel(".alert")}:has(> :nth-child(2)){grid-template-columns:auto minmax(auto, 1fr);}`],
+      [
+        `${sel(".alert")}:has(> :nth-child(2)){grid-template-columns:auto minmax(auto, 1fr);}`,
+      ],
       { layer: "daisy-l3", internal: true },
     ]);
     // Orientation modifiers, upstream layer daisyui.l1.l2 -> daisy-l2.
@@ -1712,7 +1715,9 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
     // Expanded: flex->display:flex, items-center/justify-center.
     rules.push([
       key("avatar-placeholder"),
-      [`${sel(".avatar-placeholder")} > div{display:flex;align-items:center;justify-content:center;}`],
+      [
+        `${sel(".avatar-placeholder")} > div{display:flex;align-items:center;justify-content:center;}`,
+      ],
       { layer: "daisy-l2" },
     ]);
     // Online/offline dots, upstream layer daisyui.l1.l2 -> daisy-l2.
@@ -1748,20 +1753,42 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
     // opacity-40->opacity:0.4.
     const bc = sel(".breadcrumbs");
     const lists = ["menu", "ul", "ol"].map((t) => `${bc} > ${t}`).join(",");
-    const items = ["menu", "ul", "ol"].map((t) => `${bc} > ${t} > li`).join(",");
-    const links = ["menu", "ul", "ol"].map((t) => `${bc} > ${t} > li > *`).join(",");
-    const seps = ["menu", "ul", "ol"].map((t) => `${bc} > ${t} > li + *:before`).join(",");
-    const rtlSeps = ["menu", "ul", "ol"].map((t) => `[dir="rtl"] ${bc} > ${t} > li + *:before`).join(",");
+    const items = ["menu", "ul", "ol"]
+      .map((t) => `${bc} > ${t} > li`)
+      .join(",");
+    const links = ["menu", "ul", "ol"]
+      .map((t) => `${bc} > ${t} > li > *`)
+      .join(",");
+    const seps = ["menu", "ul", "ol"]
+      .map((t) => `${bc} > ${t} > li + *:before`)
+      .join(",");
+    const rtlSeps = ["menu", "ul", "ol"]
+      .map((t) => `[dir="rtl"] ${bc} > ${t} > li + *:before`)
+      .join(",");
     rules.push([
       "__daisy-breadcrumbs-nested",
       [
         `${lists}{display:flex;min-height:min-content;align-items:center;padding-inline-start:0.25rem;white-space:nowrap;}` +
           `${items}{display:flex;align-items:center;}` +
           `${links}{display:flex;cursor:pointer;align-items:center;gap:0.5rem;}` +
-          `${links.split(",").map((s) => `${s}:hover`).join(",")}{@media (hover:hover){text-decoration-line:underline;}}` +
-          `${links.split(",").map((s) => `${s}:focus`).join(",")}{--tw-outline-style:none;outline-style:none;}` +
-          `@media (forced-colors:active){${links.split(",").map((s) => `${s}:focus`).join(",")}{outline-offset:2px;outline:2px solid #0000;}}` +
-          `${links.split(",").map((s) => `${s}:focus-visible`).join(",")}{outline:2px solid currentColor;outline-offset:2px;}` +
+          `${links
+            .split(",")
+            .map((s) => `${s}:hover`)
+            .join(
+              ",",
+            )}{@media (hover:hover){text-decoration-line:underline;}}` +
+          `${links
+            .split(",")
+            .map((s) => `${s}:focus`)
+            .join(",")}{--tw-outline-style:none;outline-style:none;}` +
+          `@media (forced-colors:active){${links
+            .split(",")
+            .map((s) => `${s}:focus`)
+            .join(",")}{outline-offset:2px;outline:2px solid #0000;}}` +
+          `${links
+            .split(",")
+            .map((s) => `${s}:focus-visible`)
+            .join(",")}{outline:2px solid currentColor;outline-offset:2px;}` +
           `${seps}{content:"";margin-inline-start:0.5rem;margin-inline-end:0.75rem;display:block;height:0.375rem;width:0.375rem;opacity:0.4;rotate:45deg;border-top:1px solid;border-right:1px solid;background-color:#0000;}` +
           `${rtlSeps}{rotate:-135deg;}`,
       ],

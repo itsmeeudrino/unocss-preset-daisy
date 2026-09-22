@@ -82,18 +82,24 @@ export function batch2Rules(opts: Ctx): Preset["rules"] {
     ] as const;
     for (const color of dividerColors) {
       const s = sel(`.divider-${color}`);
-      rules.push(
-        [key(`divider-${color}`), [`${s}:before,${s}:after{background-color:var(--color-${color});}`], { layer: "daisy-l2" }],
-      );
+      rules.push([
+        key(`divider-${color}`),
+        [`${s}:before,${s}:after{background-color:var(--color-${color});}`],
+        { layer: "daisy-l2" },
+      ]);
     }
     // Placement, upstream layer daisyui.l1.l2 -> daisy-l2.
     // Expanded: hidden->display:none.
-    rules.push(
-      [key("divider-start"), [`${sel(".divider-start")}:before{display:none;}`], { layer: "daisy-l2" }],
-    );
-    rules.push(
-      [key("divider-end"), [`${sel(".divider-end")}:after{display:none;}`], { layer: "daisy-l2" }],
-    );
+    rules.push([
+      key("divider-start"),
+      [`${sel(".divider-start")}:before{display:none;}`],
+      { layer: "daisy-l2" },
+    ]);
+    rules.push([
+      key("divider-end"),
+      [`${sel(".divider-end")}:after{display:none;}`],
+      { layer: "daisy-l2" },
+    ]);
   }
 
   // ─── dock ─────────────────────────────────────────────────────────────────
@@ -130,15 +136,20 @@ export function batch2Rules(opts: Ctx): Preset["rules"] {
     // below so the declarations are never emitted twice.
     // Expanded: w-10->width:2.5rem, bg-current->background-color:currentColor,
     // text-current->color:currentColor.
-    const current = '[aria-current]:not([aria-current="false"], [aria-current=""])';
+    const current =
+      '[aria-current]:not([aria-current="false"], [aria-current=""])';
     rules.push([
       "__daisy-dock-current",
-      [`${dock} > ${current}:after{color:currentColor;background-color:currentColor;width:2.5rem;}`],
+      [
+        `${dock} > ${current}:after{color:currentColor;background-color:currentColor;width:2.5rem;}`,
+      ],
       { layer: "daisy-l2", internal: true },
     ]);
     rules.push([
       key("dock-active"),
-      [`${sel(".dock-active")}:after{color:currentColor;background-color:currentColor;width:2.5rem;}`],
+      [
+        `${sel(".dock-active")}:after{color:currentColor;background-color:currentColor;width:2.5rem;}`,
+      ],
       { layer: "daisy-l2" },
     ]);
     // Item label, upstream layer daisyui.l1.l2.l3 -> daisy-l3. Single source of
@@ -340,9 +351,11 @@ export function batch2Rules(opts: Ctx): Preset["rules"] {
     // Content positioning hook, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     // Single source of truth for `.dropdown .dropdown-content{position:absolute}`.
     // Expanded: absolute->position:absolute.
-    rules.push(
-      [key("dropdown-content"), [`${dropdown} ${content}{position:absolute;}`], { layer: "daisy-l3" }],
-    );
+    rules.push([
+      key("dropdown-content"),
+      [`${dropdown} ${content}{position:absolute;}`],
+      { layer: "daisy-l3" },
+    ]);
     // Placements, upstream layer daisyui.l1.l2 -> daisy-l2.
     // Expanded: end-auto->inset-inline-end:auto, end-1/2->inset-inline-end:50%,
     // end-0->inset-inline-end:0, end-full->inset-inline-end:100%,
@@ -459,12 +472,16 @@ export function batch2Rules(opts: Ctx): Preset["rules"] {
     // Close / main-action pinning, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     // Split from the upstream combined selector so each token emits alone.
     // Expanded: absolute->position:absolute, end-0->inset-inline-end:0, bottom-0->bottom:0.
-    rules.push(
-      [key("fab-close"), [`${fab} ${close}{position:absolute;inset-inline-end:0;bottom:0;}`], { layer: "daisy-l3" }],
-    );
-    rules.push(
-      [key("fab-main-action"), [`${fab} ${main}{position:absolute;inset-inline-end:0;bottom:0;}`], { layer: "daisy-l3" }],
-    );
+    rules.push([
+      key("fab-close"),
+      [`${fab} ${close}{position:absolute;inset-inline-end:0;bottom:0;}`],
+      { layer: "daisy-l3" },
+    ]);
+    rules.push([
+      key("fab-main-action"),
+      [`${fab} ${main}{position:absolute;inset-inline-end:0;bottom:0;}`],
+      { layer: "daisy-l3" },
+    ]);
     // Flower fan-out, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     // Expanded: grid->display:grid, hidden->display:none.
     const flower = sel(".fab-flower");
@@ -516,7 +533,8 @@ export function batch2Rules(opts: Ctx): Preset["rules"] {
       ],
       { layer: "daisy-l3", internal: true },
     ]);
-    // :disabled states, upstream layer daisyui.l1.l2 -> daisy-l2.
+    // :disabled states, upstream layer daisyui.l1.l2 -> daisy-l2 (same as P3
+    // input/select/textarea :disabled — one rule for all form controls).
     // Expanded: border-base-200->border-color:var(--color-base-200),
     // bg-base-200->background-color:var(--color-base-200),
     // placeholder-base-content->&::placeholder color, /20->color-mix 20%,
@@ -546,13 +564,37 @@ export function batch2Rules(opts: Ctx): Preset["rules"] {
     // Color variants, upstream layer daisyui.l1.l2 -> daisy-l2. Each block keeps
     // its three selectors (--btn-color, button fg, --input-color compound).
     const fileinputColors: Array<[string, string, string]> = [
-      ["file-input-neutral", "var(--color-neutral)", "var(--color-neutral-content)"],
-      ["file-input-primary", "var(--color-primary)", "var(--color-primary-content)"],
-      ["file-input-secondary", "var(--color-secondary)", "var(--color-secondary-content)"],
-      ["file-input-accent", "var(--color-accent)", "var(--color-accent-content)"],
+      [
+        "file-input-neutral",
+        "var(--color-neutral)",
+        "var(--color-neutral-content)",
+      ],
+      [
+        "file-input-primary",
+        "var(--color-primary)",
+        "var(--color-primary-content)",
+      ],
+      [
+        "file-input-secondary",
+        "var(--color-secondary)",
+        "var(--color-secondary-content)",
+      ],
+      [
+        "file-input-accent",
+        "var(--color-accent)",
+        "var(--color-accent-content)",
+      ],
       ["file-input-info", "var(--color-info)", "var(--color-info-content)"],
-      ["file-input-success", "var(--color-success)", "var(--color-success-content)"],
-      ["file-input-warning", "var(--color-warning)", "var(--color-warning-content)"],
+      [
+        "file-input-success",
+        "var(--color-success)",
+        "var(--color-success-content)",
+      ],
+      [
+        "file-input-warning",
+        "var(--color-warning)",
+        "var(--color-warning-content)",
+      ],
       ["file-input-error", "var(--color-error)", "var(--color-error-content)"],
     ];
     for (const [name, color, content] of fileinputColors) {

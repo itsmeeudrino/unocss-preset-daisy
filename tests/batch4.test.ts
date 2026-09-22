@@ -3,7 +3,13 @@ import { createGenerator, type Preset } from "unocss";
 import { presetUno } from "unocss";
 import { batch4Shortcuts } from "../src/shortcuts/batch4.ts";
 import { batch4Rules } from "../src/rules/batch4.ts";
-import { parseCss, resolveFor, themeVars, tvar, winningDecl } from "./compat.ts";
+import {
+  parseCss,
+  resolveFor,
+  themeVars,
+  tvar,
+  winningDecl,
+} from "./compat.ts";
 
 interface Opts {
   prefix: string;
@@ -13,8 +19,15 @@ interface Opts {
 
 const baseOpts: Opts = { prefix: "", include: [], exclude: [] };
 
-async function cssForBatch4(classes: string, opts: Opts = baseOpts): Promise<string> {
-  const testPreset = { name: "batch4test", shortcuts: batch4Shortcuts(opts), rules: batch4Rules(opts) ?? [] } as Preset;
+async function cssForBatch4(
+  classes: string,
+  opts: Opts = baseOpts,
+): Promise<string> {
+  const testPreset = {
+    name: "batch4test",
+    shortcuts: batch4Shortcuts(opts),
+    rules: batch4Rules(opts) ?? [],
+  } as Preset;
   const uno = await createGenerator({
     presets: [presetUno(), testPreset],
   });
@@ -22,37 +35,147 @@ async function cssForBatch4(classes: string, opts: Opts = baseOpts): Promise<str
   return css;
 }
 
-const OTP_COLORS = ["neutral", "primary", "secondary", "accent", "info", "success", "warning", "error"] as const;
-const PROGRESS_COLORS = ["primary", "secondary", "accent", "neutral", "info", "success", "warning", "error"] as const;
-const RADIO_COLORS = ["neutral", "primary", "secondary", "accent", "info", "success", "warning", "error"] as const;
-const RANGE_COLORS = ["primary", "secondary", "accent", "neutral", "success", "warning", "info", "error"] as const;
-const SELECT_COLORS = ["neutral", "primary", "secondary", "accent", "info", "success", "warning", "error"] as const;
-const STATUS_COLORS = ["primary", "secondary", "accent", "neutral", "info", "success", "warning", "error"] as const;
+const OTP_COLORS = [
+  "neutral",
+  "primary",
+  "secondary",
+  "accent",
+  "info",
+  "success",
+  "warning",
+  "error",
+] as const;
+const PROGRESS_COLORS = [
+  "primary",
+  "secondary",
+  "accent",
+  "neutral",
+  "info",
+  "success",
+  "warning",
+  "error",
+] as const;
+const RADIO_COLORS = [
+  "neutral",
+  "primary",
+  "secondary",
+  "accent",
+  "info",
+  "success",
+  "warning",
+  "error",
+] as const;
+const RANGE_COLORS = [
+  "primary",
+  "secondary",
+  "accent",
+  "neutral",
+  "success",
+  "warning",
+  "info",
+  "error",
+] as const;
+const SELECT_COLORS = [
+  "neutral",
+  "primary",
+  "secondary",
+  "accent",
+  "info",
+  "success",
+  "warning",
+  "error",
+] as const;
+const STATUS_COLORS = [
+  "primary",
+  "secondary",
+  "accent",
+  "neutral",
+  "info",
+  "success",
+  "warning",
+  "error",
+] as const;
 
 const OTP_TOKENS = [
-  "otp", "otp-joined", "otp-xs", "otp-sm", "otp-md", "otp-lg", "otp-xl",
+  "otp",
+  "otp-joined",
+  "otp-xs",
+  "otp-sm",
+  "otp-md",
+  "otp-lg",
+  "otp-xl",
   ...OTP_COLORS.map((c) => `otp-${c}`),
 ];
-const PROGRESS_TOKENS = ["progress", ...PROGRESS_COLORS.map((c) => `progress-${c}`)];
+const PROGRESS_TOKENS = [
+  "progress",
+  ...PROGRESS_COLORS.map((c) => `progress-${c}`),
+];
 const RADIO_TOKENS = [
-  "radio", ...RADIO_COLORS.map((c) => `radio-${c}`),
-  "radio-xs", "radio-sm", "radio-md", "radio-lg", "radio-xl",
+  "radio",
+  ...RADIO_COLORS.map((c) => `radio-${c}`),
+  "radio-xs",
+  "radio-sm",
+  "radio-md",
+  "radio-lg",
+  "radio-xl",
 ];
 const RANGE_TOKENS = [
-  "range", ...RANGE_COLORS.map((c) => `range-${c}`),
-  "range-xs", "range-sm", "range-md", "range-lg", "range-xl", "range-vertical",
+  "range",
+  ...RANGE_COLORS.map((c) => `range-${c}`),
+  "range-xs",
+  "range-sm",
+  "range-md",
+  "range-lg",
+  "range-xl",
+  "range-vertical",
 ];
-const RATING_TOKENS = ["rating", "rating-half", "rating-hidden", "rating-xs", "rating-sm", "rating-md", "rating-lg", "rating-xl"];
+const RATING_TOKENS = [
+  "rating",
+  "rating-half",
+  "rating-hidden",
+  "rating-xs",
+  "rating-sm",
+  "rating-md",
+  "rating-lg",
+  "rating-xl",
+];
 const SELECT_TOKENS = [
-  "select", "select-ghost", ...SELECT_COLORS.map((c) => `select-${c}`),
-  "select-xs", "select-sm", "select-md", "select-lg", "select-xl",
+  "select",
+  "select-ghost",
+  ...SELECT_COLORS.map((c) => `select-${c}`),
+  "select-xs",
+  "select-sm",
+  "select-md",
+  "select-lg",
+  "select-xl",
 ];
 const SKELETON_TOKENS = ["skeleton", "skeleton-text"];
-const STACK_TOKENS = ["stack", "stack-bottom", "stack-top", "stack-start", "stack-end"];
-const STAT_TOKENS = ["stats", "stat", "stat-figure", "stat-title", "stat-value", "stat-desc", "stat-actions", "stats-horizontal", "stats-vertical"];
+const STACK_TOKENS = [
+  "stack",
+  "stack-bottom",
+  "stack-top",
+  "stack-start",
+  "stack-end",
+];
+const STAT_TOKENS = [
+  "stats",
+  "stat",
+  "stat-figure",
+  "stat-title",
+  "stat-value",
+  "stat-desc",
+  "stat-actions",
+  "stats-horizontal",
+  "stats-vertical",
+];
 const STATUS_TOKENS = [
-  "status", ...STATUS_COLORS.map((c) => `status-${c}`),
-  "status-xs", "status-sm", "status-md", "status-lg", "status-xl",
+  "status",
+  ...STATUS_COLORS.map((c) => `status-${c}`),
+  "status-xs",
+  "status-sm",
+  "status-md",
+  "status-lg",
+  "status-xl",
 ];
 
 describe("batch4 smoke: every public class generates CSS", () => {
@@ -89,7 +212,9 @@ describe("otp colors resolve to theme values", () => {
       const w = winningDecl(rules, classes, "--input-color");
       expect(w).not.toBeNull();
       expect(w?.layer).toBe("daisy-l2");
-      expect(resolveFor(rules, classes, vars, w?.value ?? "")).toBe(tvar(vars, `--color-${color}`));
+      expect(resolveFor(rules, classes, vars, w?.value ?? "")).toBe(
+        tvar(vars, `--color-${color}`),
+      );
     });
   }
 });
@@ -113,7 +238,9 @@ describe("otp sizes match upstream numeric values", () => {
     const rules = parseCss(await cssForBatch4("otp otp-joined"));
     expect(winningDecl(rules, ["otp"], "--otp-ch")?.value).toBe("1ch");
     expect(winningDecl(rules, ["otp"], "font-size")?.value).toBe("1.75rem");
-    expect(winningDecl(rules, ["otp", "otp-joined"], "--otp-gap")?.value).toBe("0rem");
+    expect(winningDecl(rules, ["otp", "otp-joined"], "--otp-gap")?.value).toBe(
+      "0rem",
+    );
     const css = await cssForBatch4("otp");
     expect(css).toContain(":has(> span:nth-child(8))");
     expect(css).toContain(":focus-within");
@@ -130,14 +257,18 @@ describe("progress colors resolve to theme values", () => {
       const w = winningDecl(rules, classes, "color");
       expect(w).not.toBeNull();
       expect(w?.layer).toBe("daisy-l2");
-      expect(resolveFor(rules, classes, vars, w?.value ?? "")).toBe(tvar(vars, `--color-${color}`));
+      expect(resolveFor(rules, classes, vars, w?.value ?? "")).toBe(
+        tvar(vars, `--color-${color}`),
+      );
     });
   }
   test("progress base + indeterminate + keyframes", async () => {
     const rules = parseCss(await cssForBatch4("progress"));
     expect(winningDecl(rules, ["progress"], "height")?.value).toBe("0.5rem");
     expect(winningDecl(rules, ["progress"], "width")?.value).toBe("100%");
-    expect(winningDecl(rules, ["progress"], "border-radius")?.value).toBe("var(--radius-box)");
+    expect(winningDecl(rules, ["progress"], "border-radius")?.value).toBe(
+      "var(--radius-box)",
+    );
     const css = await cssForBatch4("progress");
     expect(css).toContain(":indeterminate");
     expect(css).toContain("::-moz-progress-bar");
@@ -149,10 +280,16 @@ describe("progress colors resolve to theme values", () => {
 describe("radial-progress value-driven", () => {
   test("base vars + rings", async () => {
     const rules = parseCss(await cssForBatch4("radial-progress"));
-    expect(winningDecl(rules, ["radial-progress"], "--size")?.value).toBe("5rem");
+    expect(winningDecl(rules, ["radial-progress"], "--size")?.value).toBe(
+      "5rem",
+    );
     expect(winningDecl(rules, ["radial-progress"], "--value")?.value).toBe("0");
-    expect(winningDecl(rules, ["radial-progress"], "--thickness")?.value).toBe("calc(var(--size) / 10)");
-    expect(winningDecl(rules, ["radial-progress"], "display")?.value).toBe("inline-grid");
+    expect(winningDecl(rules, ["radial-progress"], "--thickness")?.value).toBe(
+      "calc(var(--size) / 10)",
+    );
+    expect(winningDecl(rules, ["radial-progress"], "display")?.value).toBe(
+      "inline-grid",
+    );
     const css = await cssForBatch4("radial-progress");
     expect(css).toContain(":before");
     expect(css).toContain("conic-gradient");
@@ -169,7 +306,9 @@ describe("radio colors resolve to theme values", () => {
       const rules = parseCss(await cssForBatch4(classes.join(" ")));
       const w = winningDecl(rules, classes, "--input-color");
       expect(w).not.toBeNull();
-      expect(resolveFor(rules, classes, vars, w?.value ?? "")).toBe(tvar(vars, `--color-${color}`));
+      expect(resolveFor(rules, classes, vars, w?.value ?? "")).toBe(
+        tvar(vars, `--color-${color}`),
+      );
     });
   }
 });
@@ -189,7 +328,9 @@ describe("radio sizes match upstream numeric values", () => {
     });
   }
   test("radio size --size vars present + states", async () => {
-    const css = await cssForBatch4("radio radio-xs radio-sm radio-md radio-lg radio-xl");
+    const css = await cssForBatch4(
+      "radio radio-xs radio-sm radio-md radio-lg radio-xl",
+    );
     expect(css).toContain("--size:calc(var(--size-selector, 0.25rem) * 4)");
     expect(css).toContain("--size:calc(var(--size-selector, 0.25rem) * 8)");
     expect(css).toContain(":checked");
@@ -197,7 +338,9 @@ describe("radio sizes match upstream numeric values", () => {
     expect(css).toContain(":disabled");
     expect(css).toContain("@keyframes radio");
     const rules = parseCss(await cssForBatch4("radio"));
-    expect(winningDecl(rules, ["radio"], "--size")?.value).toBe("calc(var(--size-selector, 0.25rem) * 6)");
+    expect(winningDecl(rules, ["radio"], "--size")?.value).toBe(
+      "calc(var(--size-selector, 0.25rem) * 6)",
+    );
   });
 });
 
@@ -209,7 +352,9 @@ describe("range colors resolve to theme values", () => {
       const rules = parseCss(await cssForBatch4(classes.join(" ")));
       const w = winningDecl(rules, classes, "color");
       expect(w).not.toBeNull();
-      expect(resolveFor(rules, classes, vars, w?.value ?? "")).toBe(tvar(vars, `--color-${color}`));
+      expect(resolveFor(rules, classes, vars, w?.value ?? "")).toBe(
+        tvar(vars, `--color-${color}`),
+      );
     });
   }
   test("range thumbs resolve to content colors", async () => {
@@ -222,9 +367,14 @@ describe("range colors resolve to theme values", () => {
     for (const [cls, tv] of pairs) {
       const classes = ["range", cls];
       const rules = parseCss(await cssForBatch4(classes.join(" ")));
-      expect(resolveFor(rules, classes, vars, winningDecl(rules, classes, "--range-thumb")?.value ?? "")).toBe(
-        tvar(vars, tv),
-      );
+      expect(
+        resolveFor(
+          rules,
+          classes,
+          vars,
+          winningDecl(rules, classes, "--range-thumb")?.value ?? "",
+        ),
+      ).toBe(tvar(vars, tv));
     }
   });
 });
@@ -240,7 +390,9 @@ describe("range sizes match upstream numeric values", () => {
   for (const [cls, size] of Object.entries(expected)) {
     test(`${cls}: ${size}`, async () => {
       const rules = parseCss(await cssForBatch4(`range ${cls}`));
-      expect(winningDecl(rules, ["range", cls], "--range-thumb-size")?.value).toBe(size);
+      expect(
+        winningDecl(rules, ["range", cls], "--range-thumb-size")?.value,
+      ).toBe(size);
     });
   }
   test("range track/thumb + vertical + disabled", async () => {
@@ -273,7 +425,9 @@ describe("rating sizes match upstream numeric values", () => {
     expect(css).toContain(":focus-visible");
     expect(css).toContain("@keyframes rating");
     const rules = parseCss(await cssForBatch4("rating rating-hidden"));
-    expect(winningDecl(rules, ["rating-hidden"], "width")?.value).toBe("0.5rem");
+    expect(winningDecl(rules, ["rating-hidden"], "width")?.value).toBe(
+      "0.5rem",
+    );
   });
 });
 
@@ -285,7 +439,9 @@ describe("select colors resolve to theme values", () => {
       const rules = parseCss(await cssForBatch4(classes.join(" ")));
       const w = winningDecl(rules, classes, "--input-color");
       expect(w).not.toBeNull();
-      expect(resolveFor(rules, classes, vars, w?.value ?? "")).toBe(tvar(vars, `--color-${color}`));
+      expect(resolveFor(rules, classes, vars, w?.value ?? "")).toBe(
+        tvar(vars, `--color-${color}`),
+      );
     });
   }
 });
@@ -301,8 +457,12 @@ describe("select sizes match upstream numeric values", () => {
   for (const [cls, [mul, fs]] of Object.entries(expected)) {
     test(`${cls}: mul ${mul}, font ${fs}`, async () => {
       const rules = parseCss(await cssForBatch4(`select ${cls}`));
-      expect(winningDecl(rules, ["select", cls], "--sl-size-mul")?.value).toBe(mul);
-      expect(winningDecl(rules, ["select", cls], "--font-size-min")?.value).toBe(fs);
+      expect(winningDecl(rules, ["select", cls], "--sl-size-mul")?.value).toBe(
+        mul,
+      );
+      expect(
+        winningDecl(rules, ["select", cls], "--font-size-min")?.value,
+      ).toBe(fs);
     });
   }
   test("select ghost + disabled + picker", async () => {
@@ -311,21 +471,31 @@ describe("select sizes match upstream numeric values", () => {
     expect(css).toContain(":focus-within");
     expect(css).toContain("select[disabled]");
     const rules = parseCss(await cssForBatch4("select"));
-    expect(winningDecl(rules, ["select"], "background-color")?.value).toBe("var(--color-base-100)");
+    expect(winningDecl(rules, ["select"], "background-color")?.value).toBe(
+      "var(--color-base-100)",
+    );
   });
 });
 
 describe("skeleton shimmer", () => {
   test("base + text + keyframes", async () => {
     const rules = parseCss(await cssForBatch4("skeleton"));
-    expect(winningDecl(rules, ["skeleton"], "background-color")?.value).toBe("var(--color-base-300)");
-    expect(winningDecl(rules, ["skeleton"], "border-radius")?.value).toBe("var(--radius-box)");
+    expect(winningDecl(rules, ["skeleton"], "background-color")?.value).toBe(
+      "var(--color-base-300)",
+    );
+    expect(winningDecl(rules, ["skeleton"], "border-radius")?.value).toBe(
+      "var(--radius-box)",
+    );
     const css = await cssForBatch4("skeleton skeleton-text");
     expect(css).toContain("@keyframes skeleton");
     expect(css).toContain("animation:skeleton 1.8s ease-in-out infinite");
     const textRules = parseCss(await cssForBatch4("skeleton-text"));
-    expect(winningDecl(textRules, ["skeleton-text"], "color")?.value).toBe("transparent");
-    expect(winningDecl(textRules, ["skeleton-text"], "background-clip")?.value).toBe("text");
+    expect(winningDecl(textRules, ["skeleton-text"], "color")?.value).toBe(
+      "transparent",
+    );
+    expect(
+      winningDecl(textRules, ["skeleton-text"], "background-clip")?.value,
+    ).toBe("text");
   });
 });
 
@@ -333,8 +503,12 @@ describe("stack cards", () => {
   test("grid template + children + positions", async () => {
     const rules = parseCss(await cssForBatch4("stack"));
     expect(winningDecl(rules, ["stack"], "display")?.value).toBe("inline-grid");
-    expect(winningDecl(rules, ["stack"], "grid-template-columns")?.value).toBe("3px 4px 1fr 4px 3px");
-    const css = await cssForBatch4("stack stack-top stack-start stack-end stack-bottom");
+    expect(winningDecl(rules, ["stack"], "grid-template-columns")?.value).toBe(
+      "3px 4px 1fr 4px 3px",
+    );
+    const css = await cssForBatch4(
+      "stack stack-top stack-start stack-end stack-bottom",
+    );
     expect(css).toContain("grid-column:3 / 4");
     expect(css).toContain("grid-column:1 / 6");
     expect(css).toContain("opacity:0.7");
@@ -346,16 +520,30 @@ describe("stat sections", () => {
   test("title/value/desc resolve + layout", async () => {
     const vars = await themeVars("light");
     const titleRules = parseCss(await cssForBatch4("stat-title"));
-    expect(winningDecl(titleRules, ["stat-title"], "font-size")?.value).toBe("0.75rem");
-    expect(winningDecl(titleRules, ["stat-title"], "color")?.value).toContain("var(--color-base-content)");
+    expect(winningDecl(titleRules, ["stat-title"], "font-size")?.value).toBe(
+      "0.75rem",
+    );
+    expect(winningDecl(titleRules, ["stat-title"], "color")?.value).toContain(
+      "var(--color-base-content)",
+    );
     const valueRules = parseCss(await cssForBatch4("stat-value"));
-    expect(winningDecl(valueRules, ["stat-value"], "font-size")?.value).toBe("2rem");
-    expect(winningDecl(valueRules, ["stat-value"], "font-weight")?.value).toBe("800");
+    expect(winningDecl(valueRules, ["stat-value"], "font-size")?.value).toBe(
+      "2rem",
+    );
+    expect(winningDecl(valueRules, ["stat-value"], "font-weight")?.value).toBe(
+      "800",
+    );
     const figRules = parseCss(await cssForBatch4("stat-figure"));
-    expect(winningDecl(figRules, ["stat-figure"], "grid-column-start")?.value).toBe("2");
+    expect(
+      winningDecl(figRules, ["stat-figure"], "grid-column-start")?.value,
+    ).toBe("2");
     const statsRules = parseCss(await cssForBatch4("stats"));
-    expect(winningDecl(statsRules, ["stats"], "display")?.value).toBe("inline-grid");
-    expect(winningDecl(statsRules, ["stats"], "border-radius")?.value).toBe("var(--radius-box)");
+    expect(winningDecl(statsRules, ["stats"], "display")?.value).toBe(
+      "inline-grid",
+    );
+    expect(winningDecl(statsRules, ["stats"], "border-radius")?.value).toBe(
+      "var(--radius-box)",
+    );
     void vars;
   });
   test("horizontal/vertical dividers", async () => {
@@ -376,8 +564,12 @@ describe("status dot colors resolve to theme values", () => {
       const fg = winningDecl(rules, classes, "color");
       expect(bg).not.toBeNull();
       expect(fg).not.toBeNull();
-      expect(resolveFor(rules, classes, vars, bg?.value ?? "")).toBe(tvar(vars, `--color-${color}`));
-      expect(resolveFor(rules, classes, vars, fg?.value ?? "")).toBe(tvar(vars, `--color-${color}`));
+      expect(resolveFor(rules, classes, vars, bg?.value ?? "")).toBe(
+        tvar(vars, `--color-${color}`),
+      );
+      expect(resolveFor(rules, classes, vars, fg?.value ?? "")).toBe(
+        tvar(vars, `--color-${color}`),
+      );
     });
   }
 });
@@ -398,29 +590,44 @@ describe("status sizes match upstream numeric values", () => {
   }
   test("status base dot", async () => {
     const rules = parseCss(await cssForBatch4("status"));
-    expect(winningDecl(rules, ["status"], "display")?.value).toBe("inline-block");
+    expect(winningDecl(rules, ["status"], "display")?.value).toBe(
+      "inline-block",
+    );
     expect(winningDecl(rules, ["status"], "aspect-ratio")?.value).toBe("1");
-    expect(winningDecl(rules, ["status"], "border-radius")?.value).toBe("var(--radius-selector)");
+    expect(winningDecl(rules, ["status"], "border-radius")?.value).toBe(
+      "var(--radius-selector)",
+    );
   });
 });
 
 describe("batch4 prefix + include/exclude", () => {
   test("prefix d- renames all selectors", async () => {
     const opts: Opts = { prefix: "d-", include: [], exclude: [] };
-    const testPreset = { name: "batch4test", shortcuts: batch4Shortcuts(opts), rules: batch4Rules(opts) ?? [] } as Preset;
+    const testPreset = {
+      name: "batch4test",
+      shortcuts: batch4Shortcuts(opts),
+      rules: batch4Rules(opts) ?? [],
+    } as Preset;
     const uno = await createGenerator({
       presets: [presetUno(), testPreset],
     });
-    const { css } = await uno.generate("d-progress d-progress-primary d-status d-status-success d-rating", {
-      preflights: false,
-    });
+    const { css } = await uno.generate(
+      "d-progress d-progress-primary d-status d-status-success d-rating",
+      {
+        preflights: false,
+      },
+    );
     expect(css).toContain(".d-progress");
     expect(css).toContain(".d-progress-primary");
     expect(css).toContain(".d-status-success");
     expect(css).not.toContain(".progress{");
   });
   test("exclude filters component", async () => {
-    const css = await cssForBatch4("progress status", { prefix: "", include: [], exclude: ["progress"] });
+    const css = await cssForBatch4("progress status", {
+      prefix: "",
+      include: [],
+      exclude: ["progress"],
+    });
     expect(css).not.toContain(".progress{");
     expect(css).toContain(".status");
   });

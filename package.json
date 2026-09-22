@@ -6,21 +6,20 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "exports": {
-    ".": "./dist/index.js",
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
     "./themes": "./dist/themes.css"
   },
+  "types": "./dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
     "build": "bun build.ts",
     "lint": "tsc --noEmit",
+    "format": "bunx @biomejs/biome@2.5.9 format --write src tests scripts build.ts uno.config.ts playground/serve.ts",
     "test": "bun test",
     "check": "bun run build && bun run lint && bun test",
     "inventory": "bun scripts/inventory-apply.ts",
     "tokens": "bun scripts/generate-tokens.ts",
     "playground": "bun playground/serve.ts"
-  },
-  "dependencies": {
-    "unocss": "latest"
   },
   "peerDependencies": {
     "unocss": ">=0.60.0"

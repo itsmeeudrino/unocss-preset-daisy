@@ -191,7 +191,9 @@ function extractApplies(css: string): { statements: number; tokens: string[] } {
 }
 
 const files = await discoverFiles();
-console.log(`inventory: discovered ${files.length} files (${AREAS.join(", ")})`);
+console.log(
+  `inventory: discovered ${files.length} files (${AREAS.join(", ")})`,
+);
 
 const utilities: Record<string, number> = {};
 const perFile: Record<string, string[]> = {};
@@ -217,7 +219,8 @@ await Promise.all(
 
 // Sort utilities by count desc, then name asc (stable, useful top-20).
 const sortedUtils = Object.entries(utilities).sort(
-  ([aName, aCount], [bName, bCount]) => bCount - aCount || aName.localeCompare(bName),
+  ([aName, aCount], [bName, bCount]) =>
+    bCount - aCount || aName.localeCompare(bName),
 );
 const sortedUtilities: Record<string, number> = {};
 for (const [k, v] of sortedUtils) sortedUtilities[k] = v;

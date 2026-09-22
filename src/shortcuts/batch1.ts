@@ -77,9 +77,11 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
       ["alert-error", "var(--color-error)", "var(--color-error-content)"],
     ];
     for (const [name, color, fg] of alertColors) {
-      out.push(
-        [key(name), [{ color: fg, "--alert-border-color": color, "--alert-color": color }], { layer: "daisy-l2" }],
-      );
+      out.push([
+        key(name),
+        [{ color: fg, "--alert-border-color": color, "--alert-color": color }],
+        { layer: "daisy-l2" },
+      ]);
     }
     // Style variants, upstream bare daisyui layer -> daisy-l1. All flat.
     // Expanded: bg-transparent->background-color:#0000 (compiled form).
@@ -142,9 +144,11 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
           display: "inline-block",
           "--aura-padding": "0.125rem",
           padding: "var(--aura-padding)",
-          "border-radius": "calc(var(--aura-padding) + var(--aura-radius, var(--radius-box)))",
+          "border-radius":
+            "calc(var(--aura-padding) + var(--aura-radius, var(--radius-box)))",
           animation: "aura var(--tw-duration, 6s) linear infinite",
-          "background-image": "conic-gradient(from var(--aura-angle), transparent 225deg, currentColor)",
+          "background-image":
+            "conic-gradient(from var(--aura-angle), transparent 225deg, currentColor)",
         },
         "__daisy-aura-nested",
       ],
@@ -387,7 +391,7 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
       [
         {
           "--mask-chat":
-            'url("data:image/svg+xml,%3csvg width=\'13\' height=\'13\' xmlns=\'http://www.w3.org/2000/svg\'%3e%3cpath fill=\'black\' d=\'M0 11.5004C0 13.0004 2 13.0004 2 13.0004H12H13V0.00036329L12.5 0C12.5 0 11.977 2.09572 11.8581 2.50033C11.6075 3.35237 10.9149 4.22374 9 5.50036C6 7.50036 0 10.0004 0 11.5004Z\'/%3e%3c/svg%3e")',
+            "url(\"data:image/svg+xml,%3csvg width='13' height='13' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='black' d='M0 11.5004C0 13.0004 2 13.0004 2 13.0004H12H13V0.00036329L12.5 0C12.5 0 11.977 2.09572 11.8581 2.50033C11.6075 3.35237 10.9149 4.22374 9 5.50036C6 7.50036 0 10.0004 0 11.5004Z'/%3e%3c/svg%3e\")",
           display: "grid",
           "grid-auto-rows": "min-content",
           "column-gap": "0.75rem",
@@ -427,17 +431,45 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
     // Bubble colors, upstream layer daisyui.l1.l2 -> daisy-l2. All flat.
     // Expanded: bg-X->background-color, text-X-content->color.
     const bubbleColors: Array<[string, string, string]> = [
-      ["chat-bubble-primary", "var(--color-primary)", "var(--color-primary-content)"],
-      ["chat-bubble-secondary", "var(--color-secondary)", "var(--color-secondary-content)"],
-      ["chat-bubble-accent", "var(--color-accent)", "var(--color-accent-content)"],
-      ["chat-bubble-neutral", "var(--color-neutral)", "var(--color-neutral-content)"],
+      [
+        "chat-bubble-primary",
+        "var(--color-primary)",
+        "var(--color-primary-content)",
+      ],
+      [
+        "chat-bubble-secondary",
+        "var(--color-secondary)",
+        "var(--color-secondary-content)",
+      ],
+      [
+        "chat-bubble-accent",
+        "var(--color-accent)",
+        "var(--color-accent-content)",
+      ],
+      [
+        "chat-bubble-neutral",
+        "var(--color-neutral)",
+        "var(--color-neutral-content)",
+      ],
       ["chat-bubble-info", "var(--color-info)", "var(--color-info-content)"],
-      ["chat-bubble-success", "var(--color-success)", "var(--color-success-content)"],
-      ["chat-bubble-warning", "var(--color-warning)", "var(--color-warning-content)"],
+      [
+        "chat-bubble-success",
+        "var(--color-success)",
+        "var(--color-success-content)",
+      ],
+      [
+        "chat-bubble-warning",
+        "var(--color-warning)",
+        "var(--color-warning-content)",
+      ],
       ["chat-bubble-error", "var(--color-error)", "var(--color-error-content)"],
     ];
     for (const [name, bg, fg] of bubbleColors) {
-      out.push([key(name), [{ "background-color": bg, color: fg }], { layer: "daisy-l2" }]);
+      out.push([
+        key(name),
+        [{ "background-color": bg, color: fg }],
+        { layer: "daisy-l2" },
+      ]);
     }
     // Slots, upstream layer daisyui.l1.l2.l3 -> daisy-l3. All flat.
     // Expanded: row-span-2->grid-row:span 2/span 2, self-end->align-self:flex-end,
@@ -449,12 +481,26 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
     ]);
     out.push([
       key("chat-header"),
-      [{ "grid-row-start": "1", display: "flex", gap: "0.25rem", "font-size": "0.6875rem" }],
+      [
+        {
+          "grid-row-start": "1",
+          display: "flex",
+          gap: "0.25rem",
+          "font-size": "0.6875rem",
+        },
+      ],
       { layer: "daisy-l3" },
     ]);
     out.push([
       key("chat-footer"),
-      [{ "grid-row-start": "3", display: "flex", gap: "0.25rem", "font-size": "0.6875rem" }],
+      [
+        {
+          "grid-row-start": "3",
+          display: "flex",
+          gap: "0.25rem",
+          "font-size": "0.6875rem",
+        },
+      ],
       { layer: "daisy-l3" },
     ]);
   }
@@ -502,17 +548,41 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
     // Color variants, upstream layer daisyui.l1.l2 -> daisy-l2. All flat.
     // Expanded: text-X-content->color.
     const checkboxColors: Array<[string, string, string]> = [
-      ["checkbox-primary", "var(--color-primary-content)", "var(--color-primary)"],
-      ["checkbox-secondary", "var(--color-secondary-content)", "var(--color-secondary)"],
+      [
+        "checkbox-primary",
+        "var(--color-primary-content)",
+        "var(--color-primary)",
+      ],
+      [
+        "checkbox-secondary",
+        "var(--color-secondary-content)",
+        "var(--color-secondary)",
+      ],
       ["checkbox-accent", "var(--color-accent-content)", "var(--color-accent)"],
-      ["checkbox-neutral", "var(--color-neutral-content)", "var(--color-neutral)"],
+      [
+        "checkbox-neutral",
+        "var(--color-neutral-content)",
+        "var(--color-neutral)",
+      ],
       ["checkbox-info", "var(--color-info-content)", "var(--color-info)"],
-      ["checkbox-success", "var(--color-success-content)", "var(--color-success)"],
-      ["checkbox-warning", "var(--color-warning-content)", "var(--color-warning)"],
+      [
+        "checkbox-success",
+        "var(--color-success-content)",
+        "var(--color-success)",
+      ],
+      [
+        "checkbox-warning",
+        "var(--color-warning-content)",
+        "var(--color-warning)",
+      ],
       ["checkbox-error", "var(--color-error-content)", "var(--color-error)"],
     ];
     for (const [name, fg, color] of checkboxColors) {
-      out.push([key(name), [{ color: fg, "--input-color": color }], { layer: "daisy-l2" }]);
+      out.push([
+        key(name),
+        [{ color: fg, "--input-color": color }],
+        { layer: "daisy-l2" },
+      ]);
     }
     // Sizes, upstream layer daisyui.l1.l2 -> daisy-l2. Flat var sets.
     // Expanded: p-[0.125rem]->padding:0.125rem, etc.
@@ -524,9 +594,16 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
       ["checkbox-xl", "0.375rem", "8"],
     ];
     for (const [name, pad, mul] of checkboxSizes) {
-      out.push(
-        [key(name), [{ padding: pad, "--size": `calc(var(--size-selector, 0.25rem) * ${mul})` }], { layer: "daisy-l2" }],
-      );
+      out.push([
+        key(name),
+        [
+          {
+            padding: pad,
+            "--size": `calc(var(--size-selector, 0.25rem) * ${mul})`,
+          },
+        ],
+        { layer: "daisy-l2" },
+      ]);
     }
   }
 
@@ -609,7 +686,10 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
     // overflow-x-clip->overflow-x:clip.
     out.push([
       key("countdown"),
-      [{ "line-height": "1em", display: "inline-flex" }, "__daisy-countdown-nested"],
+      [
+        { "line-height": "1em", display: "inline-flex" },
+        "__daisy-countdown-nested",
+      ],
       { layer: "daisy-l3" },
     ]);
   }

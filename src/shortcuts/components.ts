@@ -1,5 +1,5 @@
 import type { StaticShortcut } from "unocss";
-import { applyPrefix, shouldInclude } from "../options.ts";
+import { shouldInclude } from "../options.ts";
 
 // Port of packages/daisyui/src/components/*.css — P3 batch 1 (6 canonical components).
 // Static, flat, single-selector classes live here as Uno shortcuts.
@@ -196,7 +196,6 @@ export function componentShortcuts(opts: Ctx): StaticShortcut[] {
         { layer: "daisy-l2" },
       ]);
     }
-    void applyPrefix;
   }
 
   // ─── badge ────────────────────────────────────────────────────────────────

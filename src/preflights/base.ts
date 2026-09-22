@@ -1,4 +1,4 @@
-import type { Preset } from 'unocss'
+import type { Preset } from "unocss";
 
 // Port of packages/daisyui/src/base/*.css (7 files) @ daisyui v5.7.43.
 // Upstream wraps these in `@layer base` at build time (see functions/generateRawStyles.js);
@@ -17,7 +17,7 @@ const properties = `@property --radialprogress {
   inherits: false;
   initial-value: 0deg;
 }
-`
+`;
 
 // packages/daisyui/src/base/reset.css (verbatim)
 const reset = `/* a smaller version of Tailwind CSS 4 preflight.css - MIT License - Copyright (c) Tailwind Labs, Inc. */
@@ -150,7 +150,7 @@ video {
   max-width: 100%;
   height: auto;
 }
-`
+`;
 
 // packages/daisyui/src/base/rootcolor.css (verbatim)
 const rootColor = `:root,
@@ -166,7 +166,7 @@ const rootColor = `:root,
 :where(:root, [data-theme]) {
   --root-bg: var(--color-base-100);
 }
-`
+`;
 
 // packages/daisyui/src/base/rootscrollgutter.css (verbatim)
 const rootScrollgutter = `:root {
@@ -190,7 +190,7 @@ const rootScrollgutter = `:root {
     --page-has-scroll: ;
   }
 }
-`
+`;
 
 // packages/daisyui/src/base/rootscrolllock.css (verbatim)
 const rootScrolllock = `:root {
@@ -202,29 +202,31 @@ const rootScrolllock = `:root {
 :root:not(span) {
   overflow: var(--page-overflow);
 }
-`
+`;
 
 // packages/daisyui/src/base/scrollbar.css (verbatim)
 const scrollbar = `:root {
   scrollbar-color: color-mix(in oklch, currentColor 35%, #0000) #0000;
 }
-`
+`;
 
 // packages/daisyui/src/base/svg.css (verbatim)
 const svg = `:root {
   --fx-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.34' numOctaves='4' stitchTiles='stitch'%3E%3C/feTurbulence%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23a)' opacity='0.2'%3E%3C/rect%3E%3C/svg%3E");
 }
-`
+`;
 
-export function basePreflights(_opts: { prefix: string }): Exclude<Preset['preflights'], undefined> {
+export function basePreflights(_opts: {
+  prefix: string;
+}): Exclude<Preset["preflights"], undefined> {
   // Base selectors (:root, *, element resets) carry no component classes, so prefix does not apply.
   return [
-    { layer: 'base', getCSS: () => properties },
-    { layer: 'base', getCSS: () => reset },
-    { layer: 'base', getCSS: () => rootColor },
-    { layer: 'base', getCSS: () => rootScrollgutter },
-    { layer: 'base', getCSS: () => rootScrolllock },
-    { layer: 'base', getCSS: () => scrollbar },
-    { layer: 'base', getCSS: () => svg },
-  ]
+    { layer: "base", getCSS: () => properties },
+    { layer: "base", getCSS: () => reset },
+    { layer: "base", getCSS: () => rootColor },
+    { layer: "base", getCSS: () => rootScrollgutter },
+    { layer: "base", getCSS: () => rootScrolllock },
+    { layer: "base", getCSS: () => scrollbar },
+    { layer: "base", getCSS: () => svg },
+  ];
 }

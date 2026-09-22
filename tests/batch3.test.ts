@@ -21,7 +21,10 @@ const baseOpts: Opts = { prefix: "", include: [], exclude: [] };
 
 const batchCache = new Map<string, string>();
 
-async function cssForBatch3(classes: string, opts: Opts = baseOpts): Promise<string> {
+async function cssForBatch3(
+  classes: string,
+  opts: Opts = baseOpts,
+): Promise<string> {
   const cacheKey = `${opts.prefix}|${classes}`;
   const hit = batchCache.get(cacheKey);
   if (hit !== undefined) return hit;
@@ -160,10 +163,12 @@ describe("batch3 hovergallery", () => {
   test("base sets --items:1 and grid template", async () => {
     const rules = parseCss(await cssForBatch3("hover-gallery"));
     expect(winningDecl(rules, ["hover-gallery"], "--items")?.value).toBe("1");
-    expect(winningDecl(rules, ["hover-gallery"], "grid-template-columns")?.value).toBe(
-      "repeat(var(--items), 1fr)",
+    expect(
+      winningDecl(rules, ["hover-gallery"], "grid-template-columns")?.value,
+    ).toBe("repeat(var(--items), 1fr)");
+    expect(winningDecl(rules, ["hover-gallery"], "overflow")?.value).toBe(
+      "hidden",
     );
-    expect(winningDecl(rules, ["hover-gallery"], "overflow")?.value).toBe("hidden");
   });
   test("nested counts and hover behavior emitted", async () => {
     const css = await cssForBatch3("hover-gallery");
@@ -179,9 +184,15 @@ describe("batch3 hovergallery", () => {
 describe("batch3 indicator", () => {
   test("base is relative inline-flex max-content", async () => {
     const rules = parseCss(await cssForBatch3("indicator"));
-    expect(winningDecl(rules, ["indicator"], "position")?.value).toBe("relative");
-    expect(winningDecl(rules, ["indicator"], "display")?.value).toBe("inline-flex");
-    expect(winningDecl(rules, ["indicator"], "width")?.value).toBe("max-content");
+    expect(winningDecl(rules, ["indicator"], "position")?.value).toBe(
+      "relative",
+    );
+    expect(winningDecl(rules, ["indicator"], "display")?.value).toBe(
+      "inline-flex",
+    );
+    expect(winningDecl(rules, ["indicator"], "width")?.value).toBe(
+      "max-content",
+    );
   });
   test("item positioning vars with defaults", async () => {
     const css = await cssForBatch3("indicator indicator-item");
@@ -204,7 +215,9 @@ describe("batch3 indicator", () => {
     }
   });
   test("rtl overrides emitted", async () => {
-    const css = await cssForBatch3("indicator-start indicator-center indicator-end");
+    const css = await cssForBatch3(
+      "indicator-start indicator-center indicator-end",
+    );
     expect(css).toContain('[dir="rtl"]');
   });
 });
@@ -213,13 +226,25 @@ describe("batch3 kbd", () => {
   test("base uses base-200 bg and base-content fg", async () => {
     const vars = await themeVars("light");
     const rules = parseCss(await cssForBatch3("kbd"));
-    expect(resolveFor(rules, ["kbd"], vars, winningDecl(rules, ["kbd"], "background-color")?.value ?? "")).toBe(
-      tvar(vars, "--color-base-200"),
+    expect(
+      resolveFor(
+        rules,
+        ["kbd"],
+        vars,
+        winningDecl(rules, ["kbd"], "background-color")?.value ?? "",
+      ),
+    ).toBe(tvar(vars, "--color-base-200"));
+    expect(
+      resolveFor(
+        rules,
+        ["kbd"],
+        vars,
+        winningDecl(rules, ["kbd"], "color")?.value ?? "",
+      ),
+    ).toBe(tvar(vars, "--color-base-content"));
+    expect(winningDecl(rules, ["kbd"], "border-radius")?.value).toBe(
+      "var(--radius-field)",
     );
-    expect(resolveFor(rules, ["kbd"], vars, winningDecl(rules, ["kbd"], "color")?.value ?? "")).toBe(
-      tvar(vars, "--color-base-content"),
-    );
-    expect(winningDecl(rules, ["kbd"], "border-radius")?.value).toBe("var(--radius-field)");
   });
   test("sizes match upstream numeric values", async () => {
     const expected: Record<string, [string, string]> = {
@@ -252,8 +277,12 @@ describe("batch3 label", () => {
   });
   test("floating-label is relative flex with span behavior", async () => {
     const rules = parseCss(await cssForBatch3("floating-label"));
-    expect(winningDecl(rules, ["floating-label"], "display")?.value).toBe("flex");
-    expect(winningDecl(rules, ["floating-label"], "position")?.value).toBe("relative");
+    expect(winningDecl(rules, ["floating-label"], "display")?.value).toBe(
+      "flex",
+    );
+    expect(winningDecl(rules, ["floating-label"], "position")?.value).toBe(
+      "relative",
+    );
     const css = await cssForBatch3("floating-label");
     expect(css).toContain("::placeholder");
     expect(css).toContain("--top-mul");
@@ -279,7 +308,9 @@ describe("batch3 link colors resolve to theme values", () => {
       const rules = parseCss(await cssForBatch3(classes.join(" ")));
       const fg = winningDecl(rules, classes, "color");
       expect(fg).not.toBeNull();
-      expect(resolveFor(rules, classes, vars, fg?.value ?? "")).toBe(tvar(vars, `--color-${color}`));
+      expect(resolveFor(rules, classes, vars, fg?.value ?? "")).toBe(
+        tvar(vars, `--color-${color}`),
+      );
     });
     test(`dark: link-${color}`, async () => {
       const classes = ["link", `link-${color}`];
@@ -287,24 +318,32 @@ describe("batch3 link colors resolve to theme values", () => {
       const rules = parseCss(await cssForBatch3(classes.join(" ")));
       const fg = winningDecl(rules, classes, "color");
       expect(fg).not.toBeNull();
-      expect(resolveFor(rules, classes, vars, fg?.value ?? "")).toBe(tvar(vars, `--color-${color}`));
+      expect(resolveFor(rules, classes, vars, fg?.value ?? "")).toBe(
+        tvar(vars, `--color-${color}`),
+      );
     });
   }
   test("link base is underline pointer", async () => {
     const rules = parseCss(await cssForBatch3("link"));
-    expect(winningDecl(rules, ["link"], "text-decoration-line")?.value).toBe("underline");
+    expect(winningDecl(rules, ["link"], "text-decoration-line")?.value).toBe(
+      "underline",
+    );
     expect(winningDecl(rules, ["link"], "cursor")?.value).toBe("pointer");
   });
   test("link-hover is none with hover underline", async () => {
     const rules = parseCss(await cssForBatch3("link-hover"));
-    expect(winningDecl(rules, ["link-hover"], "text-decoration-line")?.value).toBe("none");
+    expect(
+      winningDecl(rules, ["link-hover"], "text-decoration-line")?.value,
+    ).toBe("none");
     const css = await cssForBatch3("link-hover");
     expect(css).toContain(":hover");
     expect(css).toContain("text-decoration-line:underline");
   });
   test("link color hover darkens via color-mix", async () => {
     const css = await cssForBatch3("link link-primary");
-    expect(css).toContain("color-mix(in oklab, var(--color-primary) 80%, #000)");
+    expect(css).toContain(
+      "color-mix(in oklab, var(--color-primary) 80%, #000)",
+    );
   });
 });
 
@@ -312,12 +351,16 @@ describe("batch3 list", () => {
   test("list is flex column", async () => {
     const rules = parseCss(await cssForBatch3("list"));
     expect(winningDecl(rules, ["list"], "display")?.value).toBe("flex");
-    expect(winningDecl(rules, ["list"], "flex-direction")?.value).toBe("column");
+    expect(winningDecl(rules, ["list"], "flex-direction")?.value).toBe(
+      "column",
+    );
   });
   test("list-row grid emitted with divider", async () => {
     const css = await cssForBatch3("list list-row");
     expect(css).toContain("grid-template-columns:var(--list-grid-cols)");
-    expect(css).toContain("border-color:color-mix(in oklab, var(--color-base-content) 5%, transparent)");
+    expect(css).toContain(
+      "border-color:color-mix(in oklab, var(--color-base-content) 5%, transparent)",
+    );
   });
   test("list-col-grow counts emitted", async () => {
     const css = await cssForBatch3("list");
@@ -327,24 +370,37 @@ describe("batch3 list", () => {
   });
   test("list-col-wrap is row-start 2", async () => {
     const rules = parseCss(await cssForBatch3("list-col-wrap"));
-    expect(winningDecl(rules, ["list-col-wrap"], "grid-row-start")?.value).toBe("2");
+    expect(winningDecl(rules, ["list-col-wrap"], "grid-row-start")?.value).toBe(
+      "2",
+    );
   });
 });
 
 describe("batch3 loading", () => {
   test("base is currentColor mask with spinner", async () => {
     const rules = parseCss(await cssForBatch3("loading"));
-    expect(winningDecl(rules, ["loading"], "background-color")?.value).toBe("currentColor");
+    expect(winningDecl(rules, ["loading"], "background-color")?.value).toBe(
+      "currentColor",
+    );
     expect(winningDecl(rules, ["loading"], "aspect-ratio")?.value).toBe("1");
     expect(winningDecl(rules, ["loading"], "mask-size")?.value).toBe("100%");
-    expect(winningDecl(rules, ["loading"], "mask-image")?.value).toContain("data:image/svg+xml");
+    expect(winningDecl(rules, ["loading"], "mask-image")?.value).toContain(
+      "data:image/svg+xml",
+    );
   });
-  for (const v of ["spinner", "dots", "ring", "ball", "bars", "infinity"] as const) {
+  for (const v of [
+    "spinner",
+    "dots",
+    "ring",
+    "ball",
+    "bars",
+    "infinity",
+  ] as const) {
     test(`loading-${v} has mask-image`, async () => {
       const rules = parseCss(await cssForBatch3(`loading loading-${v}`));
-      expect(winningDecl(rules, ["loading", `loading-${v}`], "mask-image")?.value).toContain(
-        "data:image/svg+xml",
-      );
+      expect(
+        winningDecl(rules, ["loading", `loading-${v}`], "mask-image")?.value,
+      ).toContain("data:image/svg+xml");
     });
   }
   test("sizes match upstream numeric values", async () => {
@@ -367,13 +423,17 @@ describe("batch3 mask", () => {
     const rules = parseCss(await cssForBatch3("mask"));
     expect(winningDecl(rules, ["mask"], "display")?.value).toBe("inline-block");
     expect(winningDecl(rules, ["mask"], "mask-size")?.value).toBe("contain");
-    expect(winningDecl(rules, ["mask"], "mask-repeat")?.value).toBe("no-repeat");
+    expect(winningDecl(rules, ["mask"], "mask-repeat")?.value).toBe(
+      "no-repeat",
+    );
     expect(winningDecl(rules, ["mask"], "mask-position")?.value).toBe("center");
   });
   test("half masks have 200% size with rtl flip", async () => {
     for (const cls of ["mask-half-1", "mask-half-2"] as const) {
       const rules = parseCss(await cssForBatch3(`mask ${cls}`));
-      expect(winningDecl(rules, ["mask", cls], "mask-size")?.value).toBe("200%");
+      expect(winningDecl(rules, ["mask", cls], "mask-size")?.value).toBe(
+        "200%",
+      );
     }
     const css = await cssForBatch3("mask-half-1 mask-half-2");
     expect(css).toContain(":dir(rtl)");
@@ -396,7 +456,9 @@ describe("batch3 mask", () => {
   ] as const) {
     test(`mask-${s} has mask-image`, async () => {
       const rules = parseCss(await cssForBatch3(`mask mask-${s}`));
-      expect(winningDecl(rules, ["mask", `mask-${s}`], "mask-image")?.value).toContain("data:image/svg+xml");
+      expect(
+        winningDecl(rules, ["mask", `mask-${s}`], "mask-image")?.value,
+      ).toContain("data:image/svg+xml");
     });
   }
 });
@@ -405,8 +467,12 @@ describe("batch3 megamenu", () => {
   test("base is flex with mm vars", async () => {
     const rules = parseCss(await cssForBatch3("megamenu"));
     expect(winningDecl(rules, ["megamenu"], "display")?.value).toBe("flex");
-    expect(winningDecl(rules, ["megamenu"], "--mm-anchor")?.value).toBe("--mm1");
-    expect(winningDecl(rules, ["megamenu"], "--size")?.value).toBe("calc(var(--size-field, 0.25rem) * 10)");
+    expect(winningDecl(rules, ["megamenu"], "--mm-anchor")?.value).toBe(
+      "--mm1",
+    );
+    expect(winningDecl(rules, ["megamenu"], "--size")?.value).toBe(
+      "calc(var(--size-field, 0.25rem) * 10)",
+    );
   });
   test("popovertarget/popover/has behavior emitted", async () => {
     const css = await cssForBatch3("megamenu megamenu-active");
@@ -417,22 +483,46 @@ describe("batch3 megamenu", () => {
   });
   test("active is absolute with base-content 10%", async () => {
     const rules = parseCss(await cssForBatch3("megamenu-active"));
-    expect(winningDecl(rules, ["megamenu-active"], "position")?.value).toBe("absolute");
-    expect(winningDecl(rules, ["megamenu-active"], "background-color")?.value).toContain(
-      "var(--color-base-content)",
+    expect(winningDecl(rules, ["megamenu-active"], "position")?.value).toBe(
+      "absolute",
     );
+    expect(
+      winningDecl(rules, ["megamenu-active"], "background-color")?.value,
+    ).toContain("var(--color-base-content)");
   });
   test("sizes match upstream numeric values", async () => {
     const expected: Record<string, [string, string, string]> = {
-      "megamenu-xs": ["0.6875rem", "0.5rem", "calc(var(--size-field, 0.25rem) * 6)"],
-      "megamenu-sm": ["0.75rem", "0.75rem", "calc(var(--size-field, 0.25rem) * 8)"],
-      "megamenu-md": ["0.875rem", "1rem", "calc(var(--size-field, 0.25rem) * 10)"],
-      "megamenu-lg": ["1.125rem", "1.25rem", "calc(var(--size-field, 0.25rem) * 12)"],
-      "megamenu-xl": ["1.375rem", "1.5rem", "calc(var(--size-field, 0.25rem) * 14)"],
+      "megamenu-xs": [
+        "0.6875rem",
+        "0.5rem",
+        "calc(var(--size-field, 0.25rem) * 6)",
+      ],
+      "megamenu-sm": [
+        "0.75rem",
+        "0.75rem",
+        "calc(var(--size-field, 0.25rem) * 8)",
+      ],
+      "megamenu-md": [
+        "0.875rem",
+        "1rem",
+        "calc(var(--size-field, 0.25rem) * 10)",
+      ],
+      "megamenu-lg": [
+        "1.125rem",
+        "1.25rem",
+        "calc(var(--size-field, 0.25rem) * 12)",
+      ],
+      "megamenu-xl": [
+        "1.375rem",
+        "1.5rem",
+        "calc(var(--size-field, 0.25rem) * 14)",
+      ],
     };
     for (const [cls, [fs, p, size]] of Object.entries(expected)) {
       const rules = parseCss(await cssForBatch3(`megamenu ${cls}`));
-      expect(winningDecl(rules, ["megamenu", cls], "--fontsize")?.value).toBe(fs);
+      expect(winningDecl(rules, ["megamenu", cls], "--fontsize")?.value).toBe(
+        fs,
+      );
       expect(winningDecl(rules, ["megamenu", cls], "--mm-p")?.value).toBe(p);
       expect(winningDecl(rules, ["megamenu", cls], "--size")?.value).toBe(size);
     }
@@ -443,15 +533,27 @@ describe("batch3 mockup", () => {
   test("mockup-code uses neutral colors", async () => {
     const vars = await themeVars("light");
     const rules = parseCss(await cssForBatch3("mockup-code"));
-    expect(resolveFor(rules, ["mockup-code"], vars, winningDecl(rules, ["mockup-code"], "background-color")?.value ?? "")).toBe(
-      tvar(vars, "--color-neutral"),
-    );
-    expect(resolveFor(rules, ["mockup-code"], vars, winningDecl(rules, ["mockup-code"], "color")?.value ?? "")).toBe(
-      tvar(vars, "--color-neutral-content"),
-    );
+    expect(
+      resolveFor(
+        rules,
+        ["mockup-code"],
+        vars,
+        winningDecl(rules, ["mockup-code"], "background-color")?.value ?? "",
+      ),
+    ).toBe(tvar(vars, "--color-neutral"));
+    expect(
+      resolveFor(
+        rules,
+        ["mockup-code"],
+        vars,
+        winningDecl(rules, ["mockup-code"], "color")?.value ?? "",
+      ),
+    ).toBe(tvar(vars, "--color-neutral-content"));
   });
   test("code/window/browser/phone nests emitted", async () => {
-    const css = await cssForBatch3("mockup-code mockup-window mockup-browser mockup-phone");
+    const css = await cssForBatch3(
+      "mockup-code mockup-window mockup-browser mockup-phone",
+    );
     expect(css).toContain("box-shadow:1.4em 0, 2.8em 0, 4.2em 0");
     expect(css).toContain("data-prefix");
     expect(css).toContain("mockup-browser-toolbar");
@@ -459,16 +561,28 @@ describe("batch3 mockup", () => {
   });
   test("phone camera/display grid placement", async () => {
     const cam = parseCss(await cssForBatch3("mockup-phone-camera"));
-    expect(winningDecl(cam, ["mockup-phone-camera"], "grid-column")?.value).toBe("1 / 1");
+    expect(
+      winningDecl(cam, ["mockup-phone-camera"], "grid-column")?.value,
+    ).toBe("1 / 1");
     const disp = parseCss(await cssForBatch3("mockup-phone-display"));
-    expect(winningDecl(disp, ["mockup-phone-display"], "overflow")?.value).toBe("hidden");
-    expect(winningDecl(disp, ["mockup-phone-display"], "border-radius")?.value).toBe("54px");
+    expect(winningDecl(disp, ["mockup-phone-display"], "overflow")?.value).toBe(
+      "hidden",
+    );
+    expect(
+      winningDecl(disp, ["mockup-phone-display"], "border-radius")?.value,
+    ).toBe("54px");
   });
   test("phone frame matches upstream", async () => {
     const rules = parseCss(await cssForBatch3("mockup-phone"));
-    expect(winningDecl(rules, ["mockup-phone"], "border")?.value).toBe("5px solid #6b6b6b");
-    expect(winningDecl(rules, ["mockup-phone"], "max-width")?.value).toBe("462px");
-    expect(winningDecl(rules, ["mockup-phone"], "aspect-ratio")?.value).toBe("462 / 978");
+    expect(winningDecl(rules, ["mockup-phone"], "border")?.value).toBe(
+      "5px solid #6b6b6b",
+    );
+    expect(winningDecl(rules, ["mockup-phone"], "max-width")?.value).toBe(
+      "462px",
+    );
+    expect(winningDecl(rules, ["mockup-phone"], "aspect-ratio")?.value).toBe(
+      "462 / 978",
+    );
   });
 });
 
@@ -482,11 +596,15 @@ describe("batch3 navbar", () => {
   test("sections layout", async () => {
     const s = parseCss(await cssForBatch3("navbar-start"));
     expect(winningDecl(s, ["navbar-start"], "width")?.value).toBe("50%");
-    expect(winningDecl(s, ["navbar-start"], "justify-content")?.value).toBe("flex-start");
+    expect(winningDecl(s, ["navbar-start"], "justify-content")?.value).toBe(
+      "flex-start",
+    );
     const c = parseCss(await cssForBatch3("navbar-center"));
     expect(winningDecl(c, ["navbar-center"], "flex-shrink")?.value).toBe("0");
     const e = parseCss(await cssForBatch3("navbar-end"));
-    expect(winningDecl(e, ["navbar-end"], "justify-content")?.value).toBe("flex-end");
+    expect(winningDecl(e, ["navbar-end"], "justify-content")?.value).toBe(
+      "flex-end",
+    );
   });
   test(":where navbar relative emitted", async () => {
     const css = await cssForBatch3("navbar");

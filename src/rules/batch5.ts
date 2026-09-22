@@ -69,7 +69,11 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
     const stepColors: Array<[string, string, string]> = [
       ["step-neutral", "var(--color-neutral)", "var(--color-neutral-content)"],
       ["step-primary", "var(--color-primary)", "var(--color-primary-content)"],
-      ["step-secondary", "var(--color-secondary)", "var(--color-secondary-content)"],
+      [
+        "step-secondary",
+        "var(--color-secondary)",
+        "var(--color-secondary-content)",
+      ],
       ["step-accent", "var(--color-accent)", "var(--color-accent-content)"],
       ["step-info", "var(--color-info)", "var(--color-info-content)"],
       ["step-success", "var(--color-success)", "var(--color-success-content)"],
@@ -80,7 +84,9 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
       const c = sel(`.${name}`);
       rules.push([
         key(name),
-        [`${steps} ${c}+${c}:before,${steps} ${c}:after,${steps} ${c}>${icon}{--step-bg:${bg};--step-fg:${fg};}`],
+        [
+          `${steps} ${c}+${c}:before,${steps} ${c}:after,${steps} ${c}>${icon}{--step-bg:${bg};--step-fg:${fg};}`,
+        ],
         { layer: "daisy-l2" },
       ]);
     }
@@ -348,7 +354,9 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
       const s = sel(`.${name}`);
       rules.push([
         key(name),
-        [`${s}{--tab-height:calc(var(--size-field, 0.25rem) * ${mul});}${s}>${tab}{--tab-p:${p};--tab-radius-min:${rmin};font-size:${fs};}`],
+        [
+          `${s}{--tab-height:calc(var(--size-field, 0.25rem) * ${mul});}${s}>${tab}{--tab-p:${p};--tab-radius-min:${rmin};font-size:${fs};}`,
+        ],
         { layer: "daisy-l2" },
       ]);
     }
@@ -366,7 +374,7 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
       "__daisy-table-nested",
       [
         `${table}:where(:dir(rtl), [dir=rtl], [dir=rtl] *){text-align:right;}` +
-          `@media (hover:hover){:is(:is(${table} tr.row-hover),${table} tr.row-hover:nth-child(2n)):hover{background-color:var(--color-base-200);}}` +
+          `@media (hover:hover){:is(:is(${table} tr${sel(".row-hover")}),${table} tr${sel(".row-hover")}:nth-child(2n)):hover{background-color:var(--color-base-200);}}` +
           `${table} :where(th, td){vertical-align:middle;padding-block:0.75rem;padding-inline:1rem;}` +
           `${table} :where(thead, tfoot){white-space:nowrap;color:color-mix(in oklab, var(--color-base-content) 60%, transparent);font-size:0.875rem;font-weight:600;}` +
           `${table} :where(tfoot tr:first-child :is(td, th)){border-top:var(--border) solid color-mix(in oklch, var(--color-base-content) 5%, #0000);}` +
@@ -381,7 +389,7 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
       key("table-zebra"),
       [
         `${zebra} tbody tr:where(:nth-child(2n)){background-color:var(--color-base-200);& :where(${sel(".table-pin-cols")} tr th){background-color:var(--color-base-200);}}` +
-          `@media (hover:hover){:is(:is(${zebra} tbody tr.row-hover),${zebra} tbody tr.row-hover:where(:nth-child(2n))):hover{background-color:var(--color-base-300);}}`,
+          `@media (hover:hover){:is(:is(${zebra} tbody tr${sel(".row-hover")}),${zebra} tbody tr${sel(".row-hover")}:where(:nth-child(2n))):hover{background-color:var(--color-base-300);}}`,
       ],
       { layer: "daisy-l2" },
     ]);
@@ -418,7 +426,9 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
       const s = sel(`.${name}`);
       rules.push([
         key(name),
-        [`${s} :not(thead, tfoot) tr{font-size:${fs};}${s} :where(th, td){padding-block:${pb};padding-inline:${pi};}`],
+        [
+          `${s} :not(thead, tfoot) tr{font-size:${fs};}${s} :where(th, td){padding-block:${pb};padding-inline:${pi};}`,
+        ],
         { layer: "daisy-l2" },
       ]);
     }
@@ -496,7 +506,9 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
       const s = sel(`.${name}`);
       rules.push([
         key(name),
-        [`${s}{--font-size-min:${fs};}${sel(".floating-label")}:has(${s}){--top-mul:${top};--font-size:${fs};}`],
+        [
+          `${s}{--font-size-min:${fs};}${sel(".floating-label")}:has(${s}){--top-mul:${top};--font-size:${fs};}`,
+        ],
         { layer: "daisy-l2" },
       ]);
     }
@@ -569,7 +581,9 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
     // .timeline-snap-icon, upstream layer daisyui.l1.l2 -> daisy-l2.
     rules.push([
       key("timeline-snap-icon"),
-      [`${sel(".timeline-snap-icon")}>li{--timeline-col-start:0.5rem;--timeline-row-start:minmax(0, 1fr);}`],
+      [
+        `${sel(".timeline-snap-icon")}>li{--timeline-col-start:0.5rem;--timeline-row-start:minmax(0, 1fr);}`,
+      ],
       { layer: "daisy-l2" },
     ]);
     // .timeline-vertical, upstream layer daisyui.l1.l2 -> daisy-l2.
@@ -711,7 +725,9 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
       const s = sel(`.${name}`);
       rules.push([
         key(name),
-        [`${s}:is([type=checkbox]),${s}:has([type=checkbox]){--size:calc(var(--size-selector, 0.25rem) * ${mul});}`],
+        [
+          `${s}:is([type=checkbox]),${s}:has([type=checkbox]){--size:calc(var(--size-selector, 0.25rem) * ${mul});}`,
+        ],
         { layer: "daisy-l2" },
       ]);
     }
@@ -824,19 +840,37 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
     // Colors, upstream layer daisyui.l1.l2 -> daisy-l2.
     // Expanded: text-<color>-content->color.
     const tooltipColors: Array<[string, string, string]> = [
-      ["tooltip-primary", "var(--color-primary)", "var(--color-primary-content)"],
-      ["tooltip-secondary", "var(--color-secondary)", "var(--color-secondary-content)"],
+      [
+        "tooltip-primary",
+        "var(--color-primary)",
+        "var(--color-primary-content)",
+      ],
+      [
+        "tooltip-secondary",
+        "var(--color-secondary)",
+        "var(--color-secondary-content)",
+      ],
       ["tooltip-accent", "var(--color-accent)", "var(--color-accent-content)"],
       ["tooltip-info", "var(--color-info)", "var(--color-info-content)"],
-      ["tooltip-success", "var(--color-success)", "var(--color-success-content)"],
-      ["tooltip-warning", "var(--color-warning)", "var(--color-warning-content)"],
+      [
+        "tooltip-success",
+        "var(--color-success)",
+        "var(--color-success-content)",
+      ],
+      [
+        "tooltip-warning",
+        "var(--color-warning)",
+        "var(--color-warning-content)",
+      ],
       ["tooltip-error", "var(--color-error)", "var(--color-error-content)"],
     ];
     for (const [name, bg, fg] of tooltipColors) {
       const s = sel(`.${name}`);
       rules.push([
         key(name),
-        [`${s}{--tt-bg:${bg};}${s}>${tcontent},${s}[data-tip]:before{color:${fg};}`],
+        [
+          `${s}{--tt-bg:${bg};}${s}>${tcontent},${s}[data-tip]:before{color:${fg};}`,
+        ],
         { layer: "daisy-l2" },
       ]);
     }

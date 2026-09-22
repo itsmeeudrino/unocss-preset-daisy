@@ -1,5 +1,5 @@
 import type { StaticShortcut } from "unocss";
-import { applyPrefix, shouldInclude } from "../options.ts";
+import { shouldInclude } from "../options.ts";
 
 // Port of packages/daisyui/src/components/*.css — P3 batch 2 (11 components:
 // divider, dock, drawer, dropdown, fab, fieldset, fileinput, filter, footer,
@@ -27,7 +27,6 @@ export function batch2Shortcuts(opts: Ctx): StaticShortcut[] {
   const out: StaticShortcut[] = [];
   // Shortcut key: plain class name with prefix. Selector strings go through applyPrefix.
   const key = (name: string): string => `${opts.prefix}${name}`;
-  void applyPrefix;
 
   // ─── divider ──────────────────────────────────────────────────────────────
   // Upstream: https://raw.githubusercontent.com/saadeghi/daisyui/master/packages/daisyui/src/components/divider.css
@@ -202,7 +201,8 @@ export function batch2Shortcuts(opts: Ctx): StaticShortcut[] {
         {
           position: "relative",
           display: "inline-block",
-          "position-area": "var(--anchor-v, block-end) var(--anchor-h, span-inline-end)",
+          "position-area":
+            "var(--anchor-v, block-end) var(--anchor-h, span-inline-end)",
         },
         "__daisy-dropdown-nested",
       ],
@@ -299,7 +299,8 @@ export function batch2Shortcuts(opts: Ctx): StaticShortcut[] {
           display: "flex",
           "align-items": "center",
           gap: "0.375rem",
-          color: "color-mix(in oklab, var(--color-base-content) 60%, transparent)",
+          color:
+            "color-mix(in oklab, var(--color-base-content) 60%, transparent)",
         },
         "__daisy-fieldset-label-nested",
       ],

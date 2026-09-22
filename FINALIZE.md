@@ -1,11 +1,33 @@
 # FINALIZE — unocss-preset-daisy port completion plan
 
 > Snapshot: base commit `778dd75` — 61/61 components wired, 596 tests green
-> (12 files), tsc clean. The plan and temp-file rescues landed on top of it;
+> (12 files), tsc clean at fork point (now 664 pass / 16 files, tsc clean).
+> The plan and temp-file rescues landed on top of it;
 > don't pin the exact top SHA (it moves with every fix) — verify state with
 > `bun run check`, not `git log`. This file is the resumption checklist. Work
 > top to bottom; each workstream lists goal → files → verification (+ effort).
 > Do not skip the verification steps.
+>
+> Status 2026-09-22: A–D DONE, G.3 done, F/C-partial done — `bun run check`
+> green, 664 pass / 0 fail (16 files, +68: deviations/prefix-e2e/composed/
+> compat-extended). Real bug found & fixed: `tr.row-hover` bypassed
+> `applyPrefix` (prefix-mode leak, caught by new B test). Link `:focus` now
+> matches compiled form (`--tw-outline-style` + forced-colors). package.json
+> is peer-only (`unocss: latest` dep dropped). README carries migration +
+> known-limitations + themes whole-file note.
+>
+> Status 2026-09-22 (subagents): F.1 DONE (`bun run build` emits 20-file
+> `dist/**/*.d.ts` via local tsc devDep, Bun.$-orchestrated; package.json gains
+> `types` + export conditions; `bun publish --dry-run` packs 24 files, auth
+> pending), F.2 DOCUMENTED (subset impossible w/o API change; code comment in
+> `src/options.ts` + manual slicing guide), F.4 DONE (Size section +
+> blank-project `file:` install test green), G.2 DONE (AGENTS/PLAN drift fixed),
+> E CHECKLIST READY (66 sections + 5 coverage gaps flagged: rating masks,
+> toast children, drawer-menu, validator-invalid).
+> REMAINING: E human screenshots (blocks H — checklist ready, 2 demo gaps
+> flagged), H release (v5.7-uno.0, CHANGELOG, tag, publish — needs npm auth),
+> I docs rebuild (DEFERRED by human decision). G.1 DONE (Biome, tree formatted,
+> `bun run format`; approved 2026-09-22).
 
 ## 0. Resume here
 
@@ -13,7 +35,7 @@
 cd /home/void/unocss-preset-daisy
 git log --oneline -5          # 778dd75 in history; plan/rescue commits may sit on top
 bun install
-bun run check                 # build + lint + test; expect 596 pass / 0 fail
+bun run check                 # build + lint + test; expect 664 pass / 0 fail
 cd example && bun install && bun run build   # expect ✓ built, ~74KB+ CSS
 ```
 
@@ -37,7 +59,7 @@ Upstream pin for everything below: **daisyUI v5.7.43** (`7fbfd0b`). One-time har
 - **7 base files** → `src/preflights/base.ts`; **35 themes verbatim** → `src/theme/themes.css` + `theme.extend` bridge (`src/theme/tokens.ts`); **4 utilities** → `src/rules/utilities.ts`; **color rules** → `src/rules/colors.ts`; drawer/responsive variants → `src/variants.ts`.
 - **3 Converter bugs found & fixed**: inverted daisy layer priority (now `base < daisy-l3 < daisy-l2 < daisy-l1 < components < utilities`, outer-wins per saadeghi/daisyui#4209), `applyPrefix` decimal/URL corruption (lookbehind fix in `src/options.ts`), stray `]` in btn selectors.
 - **Hard requirement discovered**: `separators: [':']` in user Uno config — `hover-3d`, `file-input*`, `link-*` collide with Uno's dash-form variants (a 463-token sweep proved `file-input` rendered *wrong* styles, others empty). Enforced in: `tests/compat.ts` harness, `example/uno.config.ts`, README quickstart.
-- **Tests**: 596 pass across 12 files (compat matrices resolve cascade+vars against real themes; 35-theme contract; example coverage gate over ~550 tokens; options/prefix unit tests; snapshot tests; separators sweep — §5).
+- **Tests**: 664 pass across 16 files (was 596/12 at fork point; +deviations, prefix-e2e, composed, compat-extended). Compat matrices resolve cascade+vars against real themes; 35-theme contract; example coverage gate over ~550 tokens; options/prefix unit tests; snapshot tests; separators sweep — §5).
 - **Example**: 66 sections (`example/index.html` + `example/sections/batch{1..5}.html`), builds clean.
 - **Temp-file rescues**: separators sweep → `tests/separators.test.ts`, docs spike → `DOCS-SPIKE.md`; nothing plan-critical lives only in `/tmp` anymore.
 

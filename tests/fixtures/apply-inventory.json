@@ -931,12 +931,8 @@
       "row-start-1",
       "w-full"
     ],
-    "components/hover3d.css": [
-      "size-1/3"
-    ],
-    "components/hovergallery.css": [
-      "hidden"
-    ],
+    "components/hover3d.css": ["size-1/3"],
+    "components/hovergallery.css": ["hidden"],
     "components/indicator.css": [
       "absolute",
       "inline-flex",
@@ -1707,12 +1703,7 @@
       "text-warning-content",
       "whitespace-normal"
     ],
-    "components/validator.css": [
-      "invisible",
-      "mt-2",
-      "text-error",
-      "visible"
-    ],
+    "components/validator.css": ["invisible", "mt-2", "text-error", "visible"],
     "utilities/glass.css": [],
     "utilities/join.css": [
       "flex-col",
