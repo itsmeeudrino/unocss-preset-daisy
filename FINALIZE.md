@@ -1,16 +1,19 @@
 # FINALIZE — unocss-preset-daisy port completion plan
 
-> Snapshot: master @ `778dd75` — 61/61 components wired, 592 tests green, tsc clean.
-> This file is the resumption checklist. Work top to bottom; each workstream
-> lists goal → files → verification. Do not skip the verification steps.
+> Snapshot: base commit `778dd75` — 61/61 components wired, 596 tests green
+> (12 files), tsc clean. The plan and temp-file rescues landed on top of it;
+> don't pin the exact top SHA (it moves with every fix) — verify state with
+> `bun run check`, not `git log`. This file is the resumption checklist. Work
+> top to bottom; each workstream lists goal → files → verification (+ effort).
+> Do not skip the verification steps.
 
 ## 0. Resume here
 
 ```sh
 cd /home/void/unocss-preset-daisy
-git log --oneline -3          # expect 778dd75 on top
+git log --oneline -5          # 778dd75 in history; plan/rescue commits may sit on top
 bun install
-bun run check                 # build + lint + test; expect 592 pass / 0 fail
+bun run check                 # build + lint + test; expect 596 pass / 0 fail
 cd example && bun install && bun run build   # expect ✓ built, ~74KB+ CSS
 ```
 
@@ -22,6 +25,10 @@ curl -s https://cdn.jsdelivr.net/npm/daisyui@5.7.43/daisyui.css -o /tmp/daisy-re
 # https://raw.githubusercontent.com/saadeghi/daisyui/master/packages/daisyui/src/components/<name>.css
 ```
 
+Rescued from `/tmp` into the repo (survives a wipe): separators sweep →
+`tests/separators.test.ts`, docs spike → `DOCS-SPIKE.md`. Only `daisy-ref.css`
+stays `/tmp`-resident, re-fetchable with the curl above.
+
 Upstream pin for everything below: **daisyUI v5.7.43** (`7fbfd0b`). One-time hard fork — no sync automation (locked decision).
 
 ## 1. What is done (do not redo)
@@ -30,8 +37,9 @@ Upstream pin for everything below: **daisyUI v5.7.43** (`7fbfd0b`). One-time har
 - **7 base files** → `src/preflights/base.ts`; **35 themes verbatim** → `src/theme/themes.css` + `theme.extend` bridge (`src/theme/tokens.ts`); **4 utilities** → `src/rules/utilities.ts`; **color rules** → `src/rules/colors.ts`; drawer/responsive variants → `src/variants.ts`.
 - **3 Converter bugs found & fixed**: inverted daisy layer priority (now `base < daisy-l3 < daisy-l2 < daisy-l1 < components < utilities`, outer-wins per saadeghi/daisyui#4209), `applyPrefix` decimal/URL corruption (lookbehind fix in `src/options.ts`), stray `]` in btn selectors.
 - **Hard requirement discovered**: `separators: [':']` in user Uno config — `hover-3d`, `file-input*`, `link-*` collide with Uno's dash-form variants (a 463-token sweep proved `file-input` rendered *wrong* styles, others empty). Enforced in: `tests/compat.ts` harness, `example/uno.config.ts`, README quickstart.
-- **Tests**: 592 pass across 11 files (compat matrices resolve cascade+vars against real themes; 35-theme contract; example coverage gate over ~550 tokens; options/prefix unit tests; snapshot tests).
+- **Tests**: 596 pass across 12 files (compat matrices resolve cascade+vars against real themes; 35-theme contract; example coverage gate over ~550 tokens; options/prefix unit tests; snapshot tests; separators sweep — §5).
 - **Example**: 66 sections (`example/index.html` + `example/sections/batch{1..5}.html`), builds clean.
+- **Temp-file rescues**: separators sweep → `tests/separators.test.ts`, docs spike → `DOCS-SPIKE.md`; nothing plan-critical lives only in `/tmp` anymore.
 
 ## 2. Definition of done
 
@@ -43,7 +51,7 @@ Upstream pin for everything below: **daisyUI v5.7.43** (`7fbfd0b`). One-time har
 
 ## 3. Workstreams (in order)
 
-### A. Batch deviation review (correctness sweep)
+### A. Batch deviation review (correctness sweep) — S–M (~0.5–1d)
 
 Each batch agent logged intentional deviations — re-verify the risky ones against `/tmp/daisy-ref.css` (compiled declarations per class):
 
@@ -59,52 +67,52 @@ Each batch agent logged intentional deviations — re-verify the risky ones agai
 
 Verify with: targeted `winningDecl`/`resolveFor` assertions added to the relevant `tests/batchN.test.ts` (not just eyeballing).
 
-### B. Prefix-mode end-to-end (`prefix: 'd-'`)
+### B. Prefix-mode end-to-end (`prefix: 'd-'`) — S (~0.5d)
 
 Unit-tested at `applyPrefix` level only. With the decimal fix in, run the real thing:
 
 1. `tests/prefix-e2e.test.ts` (new): build generator with `presetDaisy({ prefix: 'd-' })`, generate a matrix (`d-btn d-btn-primary`, `d-menu d-menu-active`, `d-card`, `d-input`, `d-join d-join-item`, `d-modal d-modal-box`, plus one batch token per batch file) and assert: no unprefixed `.btn`-style selectors leak, no `d-` inside values (`0.d-2`, `url()`, `oklch()` args), theme vars still resolve.
-2. Example smoke: temporarily set prefix in `example/uno.config.ts`? No — instead generate the example token set with prefix in the test above and assert non-empty output per token.
+2. In the same test, generate the full example/fixture token set with the prefixed generator and assert non-empty, exact `d-`-prefixed output per token — no mutation of `example/uno.config.ts` needed.
 
-### C. Composed-mode duplicate output (presetUno + presetDaisy)
+### C. Composed-mode duplicate output (presetUno + presetDaisy) — S (~0.5d)
 
 P4 noted our color rules and presetUno's theme-bridge rules both fire for `bg-primary` etc. (harmless but noisy). Decide: keep (documented duplication, first-match-wins is deterministic) or narrow `src/rules/colors.ts` to daisy-only names already covered (it already is — then just document). Verify identical winning declarations either way; add one test locking the winner for `bg-primary text-accent border-error`.
 
 Also resolve: `filter` component shadows presetUno's `filter` utility (same class name — upstream name, unavoidable). Document in README known-limitations; add test pinning OUR `filter` output when presetDaisy is composed (order-dependent — lock current behavior).
 
-### D. Compat matrices beyond button/badge
+### D. Compat matrices beyond button/badge — M (~1–2d)
 
 `tests/compat-buttons/components` cover button/badge deeply; batches 1–5 carry their own cascade tests, but coverage is uneven. Extend `tests/compat-components.test.ts` (or per-batch files) with resolved-value matrices for: alert colors, chat bubbles, checkbox/radio/range/rating/select/textarea/toggle colors (fg+bg resolve to content/color vars, light+dark), tooltip colors, steps colors, table zebra (declaration-level), dropdown/modal/menu states. Reuse `resolveFor`/`themeVars` — no new harness needed.
 
-### E. Visual sign-off (human)
+### E. Visual sign-off (human) — M (~1–2d, human-gated; **blocks H**)
 
-Automated tests assert resolved values, not pixels. Required before release:
+Automated tests assert resolved values, not pixels. **Hard gate: H (release) must not start until this workstream is signed off** (DoD item 3). Required before release:
 
 1. `cd example && bun run dev`, screenshot every section in **light + dark** (min).
 2. Side-by-side against https://daisyui.com/components/ reference for the same classes. Known-good areas (button matrix, themes) get a quick pass; focus on complex components: calendar, carousel, drawer, dropdown, mask shapes, mockup-phone, rating, swap, timeline, toast positions, tooltip positions, modal placements.
 3. File mismatches as GitHub issues in-repo (or fix directly if one-liners); link them here.
 
-### F. Packaging & bundle
+### F. Packaging & bundle — M (~1–2d)
 
 1. `dist/*.d.ts` generation (currently JS+CSS only). Bun-only constraint: generate via `bun build --external` + a `.d.ts` bundling step that stays in the Bun toolchain (document the choice in build.ts header).
 2. `themes` option actually filters: today the whole 43KB `themes.css` ships regardless. Either implement subset emission or change the option to document current behavior. Do not leave the lie in the API.
-3. `package.json`: verify `files`, `exports` (`./themes`), `peerDependencies`; `bun publish --dry-run`.
+3. `package.json`: verify `files`, `exports` (`./themes`), `peerDependencies`; fix the `unocss` dep overlap — `"unocss": "latest"` sits in `dependencies` while `peerDependencies` says `>=0.60.0` (a preset should be peer-only: drop the dep, and never ship `"latest"`); bump `version` from `0.1.0` → `5.7-uno.0` (H.1); `bun publish --dry-run`.
 4. Size report: port the `wallace` script idea (`bunx wallace-cli` is npm-based — find a Bun-compatible CSS analyzer or record raw/gzip sizes of `dist/` in README).
 5. `README.md`: blank-project install test (follow your own instructions in /tmp and confirm dev+build work), migration notes (Tailwind `@apply`→Uno, `@plugin`→`presetDaisy()`, `separators` requirement, `themes.css` import requirement), known limitations (filter shadowing, dash-variant loss, typography stub).
 
-### G. Repo hygiene
+### G. Repo hygiene — S (~0.5d)
 
 1. No formatter is configured (P4 noted `prettier --check` fails repo-wide). Decide: add `bunx @biomejs/biome` (single binary, Bun-friendly) or document no-format policy. Apply whatever is decided to the whole tree once.
 2. `AGENTS.md`/`PLAN.md` already updated for layers/separators — re-read after the above and fix drift.
-3. Delete dead code found during review (e.g. stray `void applyPrefix;` if still present in `src/shortcuts/components.ts`).
+3. Delete dead code found during review: stray `void applyPrefix;` ×4 — `src/shortcuts/components.ts:199`, `src/shortcuts/batch2.ts:30`, `src/shortcuts/batch3.ts:525`, `src/shortcuts/batch4.ts:421` (verified present 2026-09-22; after deletion `grep -rn "void applyPrefix" src/` must return empty).
 
-### H. Release
+### H. Release — S (~0.5d + human npm auth; gated on E)
 
 1. Version `5.7-uno.0`, `CHANGELOG.md` (new file: port notes + known limitations + upgrade path from daisyUI).
 2. `git tag v5.7-uno.0`, GitHub release with example screenshots.
 3. `bun publish` (needs npm auth — human step).
 
-### I. Docs shell rebuild (unblocks on A–E; spike at /tmp/daisy-docs-spike.md — COPY ESSENTIALS HERE since /tmp may vanish)
+### I. Docs shell rebuild (unblocks on A–E; spike rescued to `DOCS-SPIKE.md`) — M (1–2 wks)
 
 - Docs stack: SvelteKit 2 + Svelte 5 + Vite 8 + `@tailwindcss/vite` + `daisyui: workspace:*` + mdsvex + `@tailwindcss/typography` + `theme-change@3.0.4` + 27-lang i18n (135 JSON) + optional external `daisyui-api`.
 - Theme switching is `theme-change` JS + `localStorage["theme"]` pre-hydration — CSS-agnostic, works as-is. Verified our `themes.css` carries all 35 `:root:has(input.theme-controller[value="…"]:checked)` selectors in upstream's exact format.
@@ -118,13 +126,20 @@ Automated tests assert resolved values, not pixels. Required before release:
 |---|---|---|
 | White text on colored buttons (base beat modifiers) | Layer priority `base < daisy-l3 < daisy-l2 < daisy-l1` (outer-wins, #4209) | `compat-buttons` matrix |
 | `applyPrefix` corrupted decimals/URLs | Lookbehind + letter-start regex | `options.test.ts` |
-| `hover-3d`/`file-input*`/`link-*` eaten by dash variants | Require `separators: [':']` | sweep in CI? (see §5) |
+| `hover-3d`/`file-input*`/`link-*` eaten by dash variants | Require `separators: [':']` | `tests/separators.test.ts` (§5) |
 | Stray `]` in btn `:active`/`:is` selectors | Removed, matches upstream | example `vite build` (lightningcss minify) |
 | Missing theme vars in example | Import `unocss-preset-daisy/themes` | README documents both imports |
 
-## 5. Suggested final CI (`bun run check` extension)
+## 5. CI: variant-sweep test — DONE (`tests/separators.test.ts`)
 
-Current `check` = build + lint + test. Add when resuming: variant-sweep test (the 463-token script from integration — port `/tmp/sweep.ts` content into `tests/separators.test.ts` asserting exact-match generation under `[':']` for every fixture token) so future components can't reintroduce eaten classes silently.
+Rescued from the /tmp one-off (`sweep.ts`) and hardened; picked up automatically
+by `bun run check` (plain `bun test` member, ~250ms). Locks: all 463 fixture/core
+tokens styled under `[':']` — own exact class, or via a documented parent for the
+9 upstream parent-scoped children (`step`, `step-icon`, `tooltip-content`,
+`list-row`, `list-col-grow`, `indicator-item`, `mockup-browser-toolbar`,
+`row-hover`, `collapse-close`) — plus the default-separator collisions
+(`hover-3d`, `link-*`, `file-input*`) that justify the README requirement.
+Re-verify green in §0; no further action.
 
 ## 6. Decisions needed from a human (not blockers for A–G)
 
