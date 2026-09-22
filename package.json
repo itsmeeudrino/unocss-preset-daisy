@@ -12,20 +12,14 @@
   "files": ["dist"],
   "scripts": {
     "build": "bun build.ts",
-    "test": "bun test --parallel=4",
+    "test": "bun test",
     "check": "bun run build && bun test",
     "inventory": "bun scripts/inventory-apply.ts",
     "tokens": "bun scripts/generate-tokens.ts",
-    "playground": "bunx vite playground --port 3000",
-    "format": "bunx prettier --write 'src/**/*.ts' '*.md'"
+    "playground": "bun playground/serve.ts"
   },
   "dependencies": {
     "unocss": "latest"
-  },
-  "devDependencies": {
-    "@unocss/core": "latest",
-    "typescript": "latest",
-    "vitest": "latest"
   },
   "peerDependencies": {
     "unocss": ">=0.60.0"

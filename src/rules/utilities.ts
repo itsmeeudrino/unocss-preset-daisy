@@ -1,5 +1,5 @@
 import type { Preset, StaticRule } from 'unocss'
-import { shouldInclude } from '../options.js'
+import { shouldInclude } from '../options.ts'
 
 // Port of `packages/daisyui/src/utilities/*.css`: glass, join, radius, typography.
 // Upstream `@apply` deps are expanded to raw CSS (see `scripts/inventory-apply.ts`):

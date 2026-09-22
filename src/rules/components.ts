@@ -1,5 +1,5 @@
 import type { Preset, StaticRule } from "unocss";
-import { applyPrefix, shouldInclude } from "../options.js";
+import { applyPrefix, shouldInclude } from "../options.ts";
 
 // Port of packages/daisyui/src/components/*.css — P3 batch 1 (6 canonical components).
 // Dynamic, sized and stateful classes live here as Uno rules.

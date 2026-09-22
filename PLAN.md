@@ -67,7 +67,7 @@ HTML stays identical: `<button class="btn btn-primary">`, `<div data-theme="dark
 
 ## 4. Phases
 
-- **P0 scaffold (1–2d):** this repo. Stub `presetDaisy()`, `vitest + playground`. Done when `bun test` + `bun run build` pass on stubs.
+- **P0 scaffold (1–2d):** this repo. Stub `presetDaisy()`, `bun test + playground`. Done when `bun test` + `bun run build` pass on stubs.
 - **P1 tooling (2–3d):** finish `scripts/inventory-apply.ts`, `scripts/generate-tokens.ts`. Output: `tests/fixtures/apply-inventory.json`, `src/theme/tokens.ts` draft.
 - **P2 base+themes (3–4d):** port 7 base → preflights, 35 themes → `themes.css`. Validate theme switching in `playground/`.
 - **P3 components (2–3w):** 61 files in alpha batches. Order: `button, input, card, modal, dropdown, menu` first (pattern discovery), then bulk. Each batch needs snapshot test.

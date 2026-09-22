@@ -1,5 +1,5 @@
 import type { Preset, StaticShortcut } from "unocss";
-import { applyPrefix, shouldInclude } from "../options.js";
+import { applyPrefix, shouldInclude } from "../options.ts";
 
 // Port of packages/daisyui/src/components/*.css — P3 batch 1 (6 canonical components).
 // Static, flat, single-selector classes live here as Uno shortcuts.

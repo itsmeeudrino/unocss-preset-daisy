@@ -9,7 +9,7 @@
 
 ## Stack
 
-- `unocss` (`presetUno` / `presetMini` compatible), plain CSS strings, `vitest`/`bun test`.
+- `unocss` (`presetUno` / `presetMini` compatible), plain CSS strings, `bun test`. No `vitest`, no `tsc`, no `vite` — Bun only.
 - `src/` is the preset. `scripts/` is throwaway codegen. `tests/` is snapshots + ported upstream tests. `playground/` is manual visual check. Never ship `scripts/` or `playground/`.
 
 ## Layout
@@ -37,8 +37,7 @@
 - `bun run check` — `build + test + validatecss`
 - `bun run inventory` — `bun scripts/inventory-apply.ts` (writes `tests/fixtures/apply-inventory.json`)
 - `bun run tokens` — `bun scripts/generate-tokens.ts` (writes `src/theme/tokens.ts`)
-- `bun run playground` — serve `playground/` with Uno + preset for visual check
-- `bunx prettier --write` — format (`src/**/*.ts`, `*.md`)
+- `bun run playground` — serve `playground/` with Uno + preset for visual check (Bun-only, see `playground/serve.ts`)
 
 ## Porting conventions
 
