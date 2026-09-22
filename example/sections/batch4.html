@@ -1,0 +1,301 @@
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">OTP</h2>
+  <div class="flex flex-wrap items-center gap-4">
+    <div class="otp otp-md otp-primary">
+      <input maxlength="4" value="1234" />
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="otp otp-joined otp-sm otp-secondary">
+      <input maxlength="4" value="5678" />
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="otp otp-xs otp-neutral">
+      <input maxlength="2" value="12" />
+      <span></span><span></span>
+    </div>
+    <div class="otp otp-lg otp-accent">
+      <input maxlength="4" value="0000" />
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="otp otp-xl otp-error">
+      <input maxlength="4" value="9999" />
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center gap-4">
+    <div class="otp otp-info">
+      <input maxlength="4" value="1111" />
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="otp otp-success">
+      <input maxlength="4" value="2222" />
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="otp otp-warning">
+      <input maxlength="4" value="3333" disabled />
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Progress</h2>
+  <div class="flex flex-col gap-2 w-full max-w-md">
+    <progress class="progress" value="30" max="100"></progress>
+    <progress class="progress progress-primary" value="50" max="100"></progress>
+    <progress class="progress progress-secondary" value="60" max="100"></progress>
+    <progress class="progress progress-accent" value="70" max="100"></progress>
+    <progress class="progress progress-neutral" value="40" max="100"></progress>
+    <progress class="progress progress-info" value="55" max="100"></progress>
+    <progress class="progress progress-success" value="80" max="100"></progress>
+    <progress class="progress progress-warning" value="65" max="100"></progress>
+    <progress class="progress progress-error" value="90" max="100"></progress>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Radial progress</h2>
+  <div class="flex flex-wrap items-center gap-4">
+    <div class="radial-progress" style="--value:70">70%</div>
+    <div class="radial-progress" style="--value:45; --size:3rem">45%</div>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Radio</h2>
+  <div class="flex flex-wrap items-center gap-3">
+    <input type="radio" name="b4-radio" class="radio" checked />
+    <input type="radio" name="b4-radio" class="radio radio-neutral" />
+    <input type="radio" name="b4-radio2" class="radio radio-primary" checked />
+    <input type="radio" name="b4-radio2" class="radio radio-secondary" />
+    <input type="radio" name="b4-radio3" class="radio radio-accent" checked />
+    <input type="radio" name="b4-radio3" class="radio radio-info" />
+    <input type="radio" name="b4-radio4" class="radio radio-success" checked />
+    <input type="radio" name="b4-radio4" class="radio radio-warning" />
+    <input type="radio" name="b4-radio5" class="radio radio-error" />
+    <input type="radio" name="b4-radio5" class="radio" disabled />
+  </div>
+  <div class="flex flex-wrap items-center gap-3">
+    <input type="radio" name="b4-size" class="radio radio-xs" checked />
+    <input type="radio" name="b4-size" class="radio radio-sm" />
+    <input type="radio" name="b4-size" class="radio radio-md" />
+    <input type="radio" name="b4-size" class="radio radio-lg" />
+    <input type="radio" name="b4-size" class="radio radio-xl" />
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Range</h2>
+  <div class="flex flex-col gap-2 w-full max-w-md">
+    <input type="range" class="range" value="30" />
+    <input type="range" class="range range-primary" value="50" />
+    <input type="range" class="range range-secondary" value="60" />
+    <input type="range" class="range range-accent" value="70" />
+    <input type="range" class="range range-neutral" value="40" />
+    <input type="range" class="range range-success" value="80" />
+    <input type="range" class="range range-warning" value="65" />
+    <input type="range" class="range range-info" value="55" />
+    <input type="range" class="range range-error" value="90" />
+    <input type="range" class="range" value="20" disabled />
+  </div>
+  <div class="flex flex-wrap items-center gap-3">
+    <input type="range" class="range range-xs" value="20" />
+    <input type="range" class="range range-sm" value="30" />
+    <input type="range" class="range range-md" value="40" />
+    <input type="range" class="range range-lg" value="50" />
+    <input type="range" class="range range-xl" value="60" />
+    <input type="range" class="range range-vertical" value="50" style="height:8rem" />
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Rating</h2>
+  <div class="flex flex-wrap items-center gap-4">
+    <div class="rating">
+      <input type="radio" name="b4-rating" class="rating-hidden" />
+      <input type="radio" name="b4-rating" checked />
+      <input type="radio" name="b4-rating" />
+      <input type="radio" name="b4-rating" />
+      <input type="radio" name="b4-rating" />
+      <input type="radio" name="b4-rating" />
+    </div>
+    <div class="rating rating-half">
+      <input type="radio" name="b4-rating-half" checked />
+      <input type="radio" name="b4-rating-half" />
+      <input type="radio" name="b4-rating-half" />
+      <input type="radio" name="b4-rating-half" />
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center gap-4">
+    <div class="rating rating-xs">
+      <input type="radio" name="b4-rxs" checked />
+      <input type="radio" name="b4-rxs" />
+      <input type="radio" name="b4-rxs" />
+    </div>
+    <div class="rating rating-sm">
+      <input type="radio" name="b4-rsm" checked />
+      <input type="radio" name="b4-rsm" />
+      <input type="radio" name="b4-rsm" />
+    </div>
+    <div class="rating rating-md">
+      <input type="radio" name="b4-rmd" checked />
+      <input type="radio" name="b4-rmd" />
+      <input type="radio" name="b4-rmd" />
+    </div>
+    <div class="rating rating-lg">
+      <input type="radio" name="b4-rlg" checked />
+      <input type="radio" name="b4-rlg" />
+      <input type="radio" name="b4-rlg" />
+    </div>
+    <div class="rating rating-xl">
+      <input type="radio" name="b4-rxl" checked />
+      <input type="radio" name="b4-rxl" />
+      <input type="radio" name="b4-rxl" />
+    </div>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Select</h2>
+  <div class="flex flex-wrap items-center gap-3">
+    <select class="select">
+      <option>default</option>
+      <option>two</option>
+    </select>
+    <select class="select select-ghost">
+      <option>ghost</option>
+    </select>
+    <select class="select select-neutral">
+      <option>neutral</option>
+    </select>
+    <select class="select select-primary">
+      <option>primary</option>
+    </select>
+    <select class="select select-secondary">
+      <option>secondary</option>
+    </select>
+    <select class="select select-accent">
+      <option>accent</option>
+    </select>
+    <select class="select select-info">
+      <option>info</option>
+    </select>
+    <select class="select select-success">
+      <option>success</option>
+    </select>
+    <select class="select select-warning">
+      <option>warning</option>
+    </select>
+    <select class="select select-error">
+      <option>error</option>
+    </select>
+  </div>
+  <div class="flex flex-wrap items-center gap-3">
+    <select class="select select-xs">
+      <option>xs</option>
+    </select>
+    <select class="select select-sm">
+      <option>sm</option>
+    </select>
+    <select class="select select-md">
+      <option>md</option>
+    </select>
+    <select class="select select-lg">
+      <option>lg</option>
+    </select>
+    <select class="select select-xl">
+      <option>xl</option>
+    </select>
+    <select class="select" disabled>
+      <option>disabled</option>
+    </select>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Skeleton</h2>
+  <div class="flex flex-col gap-2 w-full max-w-md">
+    <div class="skeleton" style="height:2rem; width:100%"></div>
+    <div class="skeleton" style="height:1rem; width:60%"></div>
+    <div class="skeleton-text text-xl font-bold">shimmer text</div>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Stack</h2>
+  <div class="flex flex-wrap items-center gap-6">
+    <div class="stack">
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">one</div>
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">two</div>
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">three</div>
+    </div>
+    <div class="stack stack-bottom">
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">one</div>
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">two</div>
+    </div>
+    <div class="stack stack-top">
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">one</div>
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">two</div>
+    </div>
+    <div class="stack stack-start">
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">one</div>
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">two</div>
+    </div>
+    <div class="stack stack-end">
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">one</div>
+      <div style="width:6rem; height:4rem; border:1px solid currentColor">two</div>
+    </div>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Stat</h2>
+  <div class="stats stats-horizontal">
+    <div class="stat">
+      <div class="stat-figure">↗</div>
+      <div class="stat-title">downloads</div>
+      <div class="stat-value">31K</div>
+      <div class="stat-desc">Jan to Feb</div>
+      <div class="stat-actions">more</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">users</div>
+      <div class="stat-value">4.2K</div>
+      <div class="stat-desc">up 12%</div>
+    </div>
+  </div>
+  <div class="stats stats-vertical">
+    <div class="stat">
+      <div class="stat-title">vertical one</div>
+      <div class="stat-value">100</div>
+      <div class="stat-desc">first</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">vertical two</div>
+      <div class="stat-value">200</div>
+      <div class="stat-desc">second</div>
+    </div>
+  </div>
+</section>
+
+<section class="flex flex-col gap-3">
+  <h2 class="text-xl font-bold">Status</h2>
+  <div class="flex flex-wrap items-center gap-3">
+    <span class="status"></span>
+    <span class="status status-neutral"></span>
+    <span class="status status-primary"></span>
+    <span class="status status-secondary"></span>
+    <span class="status status-accent"></span>
+    <span class="status status-info"></span>
+    <span class="status status-success"></span>
+    <span class="status status-warning"></span>
+    <span class="status status-error"></span>
+  </div>
+  <div class="flex flex-wrap items-center gap-3">
+    <span class="status status-xs status-success"></span>
+    <span class="status status-sm status-info"></span>
+    <span class="status status-md status-warning"></span>
+    <span class="status status-lg status-error"></span>
+    <span class="status status-xl status-primary"></span>
+  </div>
+</section>
