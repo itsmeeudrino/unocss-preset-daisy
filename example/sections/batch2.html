@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>batch2 — divider, dock, drawer, dropdown, fab, fieldset, fileinput, filter, footer, hero, hover3d</title>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <div class="max-w-5xl mx-auto px-4 pb-16 flex flex-col gap-10">
+
+    <header class="flex flex-col gap-2 py-6">
+      <h1 class="text-2xl font-bold">Batch 2 components</h1>
+      <p class="text-sm text-gray-600">Static-only showcase: checkbox toggles and details/summary, no JavaScript. Only batch-2 classes + presetUno layout utilities.</p>
+    </header>
+
+    <!-- divider -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Divider</h2>
+      <div class="divider">OR</div>
+      <div class="flex items-stretch gap-2 p-4 bg-white rounded border">
+        <span class="text-sm">left</span>
+        <div class="divider divider-horizontal"></div>
+        <span class="text-sm">right</span>
+      </div>
+      <div class="flex gap-2 p-4 bg-white rounded border">
+        <span class="text-sm">top</span>
+        <div class="divider divider-vertical">mid</div>
+        <span class="text-sm">bottom</span>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="divider divider-neutral">neutral</div>
+        <div class="divider divider-primary">primary</div>
+        <div class="divider divider-secondary">secondary</div>
+        <div class="divider divider-accent">accent</div>
+        <div class="divider divider-success">success</div>
+        <div class="divider divider-warning">warning</div>
+        <div class="divider divider-info">info</div>
+        <div class="divider divider-error">error</div>
+        <div class="divider divider-start">start</div>
+        <div class="divider divider-end">end</div>
+      </div>
+    </section>
+
+    <!-- dock -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Dock</h2>
+      <p class="text-sm text-gray-600">The live dock below is fixed to the viewport bottom. Size variants are shown as static blocks.</p>
+      <div class="dock dock-xs static border">
+        <button type="button"><span class="dock-label">xs home</span></button>
+        <button type="button" class="dock-active"><span class="dock-label">xs active</span></button>
+      </div>
+      <div class="dock dock-sm static border">
+        <button type="button"><span class="dock-label">sm home</span></button>
+        <button type="button" class="dock-active"><span class="dock-label">sm active</span></button>
+      </div>
+      <div class="dock dock-md static border">
+        <button type="button"><span class="dock-label">md home</span></button>
+        <button type="button" class="dock-active"><span class="dock-label">md active</span></button>
+      </div>
+      <div class="dock dock-lg static border">
+        <button type="button"><span class="dock-label">lg home</span></button>
+        <button type="button" class="dock-active"><span class="dock-label">lg active</span></button>
+      </div>
+      <div class="dock dock-xl static border">
+        <button type="button"><span class="dock-label">xl home</span></button>
+        <button type="button" class="dock-active"><span class="dock-label">xl active</span></button>
+      </div>
+      <div class="dock">
+        <button type="button"><span class="dock-label">home</span></button>
+        <button type="button" class="dock-active"><span class="dock-label">search</span></button>
+        <button type="button" aria-disabled="true"><span class="dock-label">off</span></button>
+      </div>
+    </section>
+
+    <!-- drawer -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Drawer</h2>
+      <div class="drawer border rounded bg-white" style="min-height:12rem">
+        <input id="batch2-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content flex flex-col items-center justify-center gap-2 p-4">
+          <p class="text-sm">Checkbox-driven drawer (closed by default).</p>
+          <label for="batch2-drawer" class="cursor-pointer underline text-sm">open drawer</label>
+        </div>
+        <div class="drawer-side">
+          <label for="batch2-drawer" class="drawer-overlay" aria-label="close sidebar"></label>
+          <div class="p-4 bg-white text-sm" style="width:12rem">side skeleton</div>
+        </div>
+      </div>
+      <div class="drawer drawer-end border rounded bg-white" style="min-height:12rem">
+        <input id="batch2-drawer-end" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content flex flex-col items-center justify-center gap-2 p-4">
+          <p class="text-sm">End-side drawer (closed by default).</p>
+          <label for="batch2-drawer-end" class="cursor-pointer underline text-sm">open end drawer</label>
+        </div>
+        <div class="drawer-side">
+          <label for="batch2-drawer-end" class="drawer-overlay" aria-label="close sidebar"></label>
+          <div class="p-4 bg-white text-sm" style="width:12rem">end skeleton</div>
+        </div>
+      </div>
+      <div class="drawer drawer-open border rounded bg-white" style="min-height:12rem">
+        <input type="checkbox" class="drawer-toggle" checked />
+        <div class="drawer-content flex flex-col items-center justify-center gap-2 p-4">
+          <p class="text-sm">Always-open drawer.</p>
+        </div>
+        <div class="drawer-side">
+          <label class="drawer-overlay" aria-label="overlay"></label>
+          <div class="p-4 bg-white text-sm" style="width:12rem">open skeleton</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- dropdown -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Dropdown</h2>
+      <div class="flex flex-wrap gap-4">
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">focus me</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm" style="min-width:10rem">
+            <a href="#batch2">focus content one</a><br />
+            <a href="#batch2">focus content two</a>
+          </div>
+        </div>
+        <details class="dropdown">
+          <summary class="p-2 bg-white rounded border text-sm cursor-pointer">details toggle</summary>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm" style="min-width:10rem">
+            <a href="#batch2">details content</a>
+          </div>
+        </details>
+        <div class="dropdown dropdown-open">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">open</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm" style="min-width:10rem">
+            <a href="#batch2">pinned open</a>
+          </div>
+        </div>
+        <div class="dropdown dropdown-close">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">closed</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm" style="min-width:10rem">
+            <a href="#batch2">forced shut</a>
+          </div>
+        </div>
+        <div class="dropdown dropdown-hover">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">hover me</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm" style="min-width:10rem">
+            <a href="#batch2">hover content</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <div class="dropdown dropdown-start">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">start</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">a</a></div>
+        </div>
+        <div class="dropdown dropdown-center">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">center</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">b</a></div>
+        </div>
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">end</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">c</a></div>
+        </div>
+        <div class="dropdown dropdown-left">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">left</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">d</a></div>
+        </div>
+        <div class="dropdown dropdown-right">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">right</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">e</a></div>
+        </div>
+        <div class="dropdown dropdown-top">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">top</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">f</a></div>
+        </div>
+        <div class="dropdown dropdown-bottom">
+          <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">bottom</div>
+          <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">g</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- fab -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Fab</h2>
+      <div class="relative bg-white rounded border" style="min-height:14rem">
+        <div class="fab">
+          <div tabindex="0" role="button" class="w-10 h-10 bg-gray-800 text-white rounded items-center justify-center flex text-sm">+</div>
+          <div class="px-2 py-1 bg-gray-200 rounded text-sm">action one</div>
+          <div class="px-2 py-1 bg-gray-200 rounded text-sm">action two</div>
+          <div class="fab-main-action px-2 py-1 bg-gray-800 text-white rounded text-sm">main</div>
+        </div>
+      </div>
+      <div class="relative bg-white rounded border" style="min-height:14rem">
+        <div class="fab fab-flower">
+          <div tabindex="0" role="button" class="w-10 h-10 bg-gray-800 text-white rounded items-center justify-center flex text-sm">✿</div>
+          <div class="px-2 py-1 bg-gray-200 rounded text-sm">fan one</div>
+          <div class="px-2 py-1 bg-gray-200 rounded text-sm">fan two</div>
+          <div class="px-2 py-1 bg-gray-200 rounded text-sm">fan three</div>
+          <div class="fab-close px-2 py-1 bg-gray-800 text-white rounded text-sm">close</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- fieldset -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Fieldset</h2>
+      <fieldset class="fieldset bg-white rounded border p-4">
+        <legend class="fieldset-legend">Shipping preferences</legend>
+        <label class="fieldset-label"><input type="checkbox" /> Track this order</label>
+        <label class="fieldset-label"><input type="radio" name="batch2-speed" /> Standard</label>
+        <label class="fieldset-label"><input type="radio" name="batch2-speed" /> Express</label>
+      </fieldset>
+    </section>
+
+    <!-- fileinput -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">File input</h2>
+      <div class="flex flex-wrap gap-2">
+        <input type="file" class="file-input" />
+        <input type="file" class="file-input file-input-ghost" />
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <input type="file" class="file-input file-input-neutral" />
+        <input type="file" class="file-input file-input-primary" />
+        <input type="file" class="file-input file-input-secondary" />
+        <input type="file" class="file-input file-input-accent" />
+        <input type="file" class="file-input file-input-info" />
+        <input type="file" class="file-input file-input-success" />
+        <input type="file" class="file-input file-input-warning" />
+        <input type="file" class="file-input file-input-error" />
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <input type="file" class="file-input file-input-xs" />
+        <input type="file" class="file-input file-input-sm" />
+        <input type="file" class="file-input file-input-md" />
+        <input type="file" class="file-input file-input-lg" />
+        <input type="file" class="file-input file-input-xl" />
+      </div>
+    </section>
+
+    <!-- filter -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Filter</h2>
+      <form class="filter gap-2">
+        <input type="reset" value="×" class="filter-reset" aria-label="reset" />
+        <input type="radio" name="batch2-filter" aria-label="all" checked />
+        <input type="radio" name="batch2-filter" aria-label="open" />
+        <input type="radio" name="batch2-filter" aria-label="done" />
+      </form>
+    </section>
+
+    <!-- footer -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Footer</h2>
+      <footer class="footer bg-white rounded border p-6">
+        <nav>
+          <span class="footer-title">services</span>
+          <a href="#batch2" class="text-sm">branding</a>
+          <a href="#batch2" class="text-sm">design</a>
+        </nav>
+        <nav>
+          <span class="footer-title">company</span>
+          <a href="#batch2" class="text-sm">about</a>
+          <a href="#batch2" class="text-sm">jobs</a>
+        </nav>
+      </footer>
+      <footer class="footer footer-center bg-white rounded border p-6">
+        <nav>
+          <span class="footer-title">centered</span>
+          <a href="#batch2" class="text-sm">one</a>
+          <a href="#batch2" class="text-sm">two</a>
+        </nav>
+      </footer>
+      <footer class="footer footer-horizontal bg-white rounded border p-6">
+        <nav>
+          <span class="footer-title">across</span>
+          <a href="#batch2" class="text-sm">one</a>
+        </nav>
+        <nav>
+          <span class="footer-title">across two</span>
+          <a href="#batch2" class="text-sm">two</a>
+        </nav>
+      </footer>
+      <footer class="footer footer-vertical bg-white rounded border p-6">
+        <nav>
+          <span class="footer-title">stacked</span>
+          <a href="#batch2" class="text-sm">one</a>
+        </nav>
+      </footer>
+    </section>
+
+    <!-- hero -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Hero</h2>
+      <div class="hero rounded overflow-hidden bg-gray-800" style="min-height:16rem">
+        <div class="hero-overlay"></div>
+        <div class="hero-content text-center text-white">
+          <div class="flex flex-col gap-2 max-w-sm">
+            <h3 class="text-2xl font-bold">Layered headline</h3>
+            <p class="text-sm">Overlay dims the backdrop; content stays isolated on top.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- hover3d -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Hover 3D</h2>
+      <div class="hover-3d w-full max-w-sm">
+        <div class="bg-gray-800 text-white p-8 rounded text-center text-sm">tilt card — hover the zones</div>
+        <div aria-hidden="true"></div>
+        <div aria-hidden="true"></div>
+        <div aria-hidden="true"></div>
+        <div aria-hidden="true"></div>
+        <div aria-hidden="true"></div>
+        <div aria-hidden="true"></div>
+        <div aria-hidden="true"></div>
+        <div aria-hidden="true"></div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
