@@ -1,0 +1,209 @@
+<section class="flex flex-col gap-4 p-4 max-w-5xl mx-auto">
+  <h1 class="text-2xl font-bold">Batch 1 — alert, aura, avatar, breadcrumbs, calendar, carousel, chat, checkbox, collapse, countdown, diff</h1>
+
+  <!-- alert -->
+  <h2 class="text-xl font-bold">Alert</h2>
+  <div class="flex flex-col gap-2">
+    <div class="alert" role="alert">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/></svg>
+      <span>Base alert with icon + text (two children trigger the :has grid).</span>
+    </div>
+    <div class="alert alert-info" role="alert"><span>Info alert.</span></div>
+    <div class="alert alert-success" role="alert"><span>Success alert.</span></div>
+    <div class="alert alert-warning" role="alert"><span>Warning alert.</span></div>
+    <div class="alert alert-error" role="alert"><span>Error alert.</span></div>
+    <div class="alert alert-soft alert-error" role="alert"><span>Soft error alert.</span></div>
+    <div class="alert alert-outline alert-info" role="alert"><span>Outline info alert.</span></div>
+    <div class="alert alert-dash alert-warning" role="alert"><span>Dash warning alert.</span></div>
+    <div class="alert alert-vertical alert-success" role="alert">
+      <span>Vertical success alert.</span>
+      <span class="text-sm">Centered stacked layout.</span>
+    </div>
+    <div class="alert alert-horizontal alert-info" role="alert">
+      <span>Horizontal info alert.</span>
+      <span class="text-sm">Column flow layout.</span>
+    </div>
+  </div>
+
+  <!-- aura -->
+  <h2 class="text-xl font-bold">Aura</h2>
+  <div class="flex flex-wrap items-center gap-4">
+    <span class="aura" style="color:#8b5cf6"><span class="alert">Base aura</span></span>
+    <span class="aura aura-rainbow"><span class="alert alert-info"><span>Rainbow</span></span></span>
+    <span class="aura aura-holo"><span class="alert alert-success"><span>Holo</span></span></span>
+    <span class="aura aura-dual" style="color:#22d3ee"><span class="alert"><span>Dual</span></span></span>
+    <span class="aura aura-silver"><span class="alert"><span>Silver</span></span></span>
+    <span class="aura aura-gold"><span class="alert"><span>Gold</span></span></span>
+    <span class="aura aura-glow" style="color:#f472b6"><span class="alert"><span>Glow</span></span></span>
+  </div>
+  <div class="flex flex-wrap items-center gap-4">
+    <span class="aura aura-xs" style="color:#8b5cf6"><span class="alert"><span>xs</span></span></span>
+    <span class="aura aura-sm" style="color:#8b5cf6"><span class="alert"><span>sm</span></span></span>
+    <span class="aura aura-md" style="color:#8b5cf6"><span class="alert"><span>md</span></span></span>
+    <span class="aura aura-lg" style="color:#8b5cf6"><span class="alert"><span>lg</span></span></span>
+    <span class="aura aura-xl" style="color:#8b5cf6"><span class="alert"><span>xl</span></span></span>
+  </div>
+
+  <!-- avatar -->
+  <h2 class="text-xl font-bold">Avatar</h2>
+  <div class="flex flex-wrap items-center gap-4">
+    <div class="avatar">
+      <div class="w-16 h-16" style="background:#8b5cf6"><span style="color:#fff">AB</span></div>
+    </div>
+    <div class="avatar avatar-online">
+      <div class="w-16 h-16" style="background:#22d3ee"><span style="color:#fff">ON</span></div>
+    </div>
+    <div class="avatar avatar-offline">
+      <div class="w-16 h-16" style="background:#f472b6"><span style="color:#fff">OFF</span></div>
+    </div>
+    <div class="avatar avatar-placeholder">
+      <div class="w-16 h-16" style="background:#a3a3a3"><span style="color:#fff">PH</span></div>
+    </div>
+    <div class="avatar-group">
+      <div class="avatar"><div class="w-16 h-16" style="background:#8b5cf6"><span style="color:#fff">A</span></div></div>
+      <div class="avatar"><div class="w-16 h-16" style="background:#22d3ee"><span style="color:#fff">B</span></div></div>
+      <div class="avatar avatar-placeholder"><div class="w-16 h-16" style="background:#a3a3a3"><span style="color:#fff">+9</span></div></div>
+    </div>
+  </div>
+
+  <!-- breadcrumbs -->
+  <h2 class="text-xl font-bold">Breadcrumbs</h2>
+  <div class="breadcrumbs">
+    <ul>
+      <li><a>Home</a></li>
+      <li><a>Library</a></li>
+      <li><a>Batch 1</a></li>
+    </ul>
+  </div>
+
+  <!-- calendar -->
+  <h2 class="text-xl font-bold">Calendar</h2>
+  <div class="flex flex-col gap-4">
+    <cally-calendar class="cally"><calendar-month></calendar-month></cally-calendar>
+    <div class="react-day-picker" dir="ltr">
+      <div class="rdp-months"><div class="rdp-month">
+        <div class="rdp-month_caption"><span class="rdp-caption_label">September 2026</span></div>
+        <div class="rdp-day"><button class="rdp-day_button" type="button">22</button></div>
+      </div></div>
+      <div class="rdp-footer">Footer</div>
+    </div>
+    <div class="pika-single">
+      <div class="pika-lendar">
+        <div class="pika-title"><span class="pika-label">September 2026</span></div>
+        <table class="pika-table"><tbody><tr><td class="is-today"><button class="pika-button" type="button">22</button></td></tr></tbody></table>
+      </div>
+    </div>
+    <div class="vc" data-vc-calendar>
+      <div data-vc="controls"><button data-vc-arrow="prev" type="button">‹</button></div>
+      <div data-vc="grid"><div data-vc="column">
+        <div data-vc="header"><h3 class="vc-header__content">September</h3></div>
+        <div data-vc="dates"><div class="vc-date" data-vc-date-selected="first"><button data-vc-date-btn type="button">22</button></div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- carousel -->
+  <h2 class="text-xl font-bold">Carousel</h2>
+  <div class="flex flex-col gap-4">
+    <div class="carousel carousel-start w-full gap-2">
+      <div class="carousel-item w-24 h-24 items-center" style="background:#8b5cf6"><span style="color:#fff">1</span></div>
+      <div class="carousel-item w-24 h-24 items-center" style="background:#22d3ee"><span style="color:#fff">2</span></div>
+      <div class="carousel-item w-24 h-24 items-center" style="background:#f472b6"><span style="color:#fff">3</span></div>
+    </div>
+    <div class="carousel carousel-horizontal carousel-center w-full gap-2">
+      <div class="carousel-item w-24 h-24 items-center" style="background:#a3a3a3"><span style="color:#fff">A</span></div>
+      <div class="carousel-item w-24 h-24 items-center" style="background:#737373"><span style="color:#fff">B</span></div>
+    </div>
+    <div class="carousel carousel-end w-full gap-2">
+      <div class="carousel-item w-24 h-24 items-center" style="background:#525252"><span style="color:#fff">X</span></div>
+      <div class="carousel-item w-24 h-24 items-center" style="background:#404040"><span style="color:#fff">Y</span></div>
+    </div>
+    <div class="carousel carousel-vertical h-24 gap-2">
+      <div class="carousel-item w-24 h-24 items-center" style="background:#8b5cf6"><span style="color:#fff">↑</span></div>
+      <div class="carousel-item w-24 h-24 items-center" style="background:#22d3ee"><span style="color:#fff">↓</span></div>
+    </div>
+  </div>
+
+  <!-- chat -->
+  <h2 class="text-xl font-bold">Chat</h2>
+  <div class="flex flex-col gap-2">
+    <div class="chat chat-start">
+      <div class="chat-image"><div class="avatar"><div class="w-16 h-16" style="background:#8b5cf6"><span style="color:#fff">A</span></div></div></div>
+      <div class="chat-header">Ada · 12:00</div>
+      <div class="chat-bubble">Base bubble on the start side.</div>
+      <div class="chat-footer">Delivered</div>
+    </div>
+    <div class="chat chat-end">
+      <div class="chat-image"><div class="avatar"><div class="w-16 h-16" style="background:#22d3ee"><span style="color:#fff">B</span></div></div></div>
+      <div class="chat-header">Bob · 12:01</div>
+      <div class="chat-bubble chat-bubble-primary">Primary bubble on the end side.</div>
+      <div class="chat-footer">Seen</div>
+    </div>
+    <div class="chat chat-start"><div class="chat-bubble chat-bubble-secondary">Secondary</div></div>
+    <div class="chat chat-start"><div class="chat-bubble chat-bubble-accent">Accent</div></div>
+    <div class="chat chat-start"><div class="chat-bubble chat-bubble-neutral">Neutral</div></div>
+    <div class="chat chat-start"><div class="chat-bubble chat-bubble-info">Info</div></div>
+    <div class="chat chat-start"><div class="chat-bubble chat-bubble-success">Success</div></div>
+    <div class="chat chat-start"><div class="chat-bubble chat-bubble-warning">Warning</div></div>
+    <div class="chat chat-start"><div class="chat-bubble chat-bubble-error">Error</div></div>
+  </div>
+
+  <!-- checkbox -->
+  <h2 class="text-xl font-bold">Checkbox</h2>
+  <div class="flex flex-wrap items-center gap-4">
+    <input type="checkbox" class="checkbox" aria-label="base" />
+    <input type="checkbox" class="checkbox checkbox-primary" checked aria-label="primary" />
+    <input type="checkbox" class="checkbox checkbox-secondary" checked aria-label="secondary" />
+    <input type="checkbox" class="checkbox checkbox-accent" checked aria-label="accent" />
+    <input type="checkbox" class="checkbox checkbox-neutral" checked aria-label="neutral" />
+    <input type="checkbox" class="checkbox checkbox-info" checked aria-label="info" />
+    <input type="checkbox" class="checkbox checkbox-success" checked aria-label="success" />
+    <input type="checkbox" class="checkbox checkbox-warning" checked aria-label="warning" />
+    <input type="checkbox" class="checkbox checkbox-error" checked aria-label="error" />
+    <input type="checkbox" class="checkbox" disabled aria-label="disabled" />
+  </div>
+  <div class="flex flex-wrap items-center gap-4">
+    <input type="checkbox" class="checkbox checkbox-xs" checked aria-label="xs" />
+    <input type="checkbox" class="checkbox checkbox-sm" checked aria-label="sm" />
+    <input type="checkbox" class="checkbox checkbox-md" checked aria-label="md" />
+    <input type="checkbox" class="checkbox checkbox-lg" checked aria-label="lg" />
+    <input type="checkbox" class="checkbox checkbox-xl" checked aria-label="xl" />
+  </div>
+
+  <!-- collapse -->
+  <h2 class="text-xl font-bold">Collapse</h2>
+  <div class="flex flex-col gap-2">
+    <details class="collapse collapse-arrow">
+      <summary class="collapse-title">Arrow collapse (details/summary, no JS)</summary>
+      <div class="collapse-content"><p>Arrow content line one.</p><p>Arrow content line two.</p></div>
+    </details>
+    <div class="collapse collapse-plus">
+      <input type="checkbox" aria-label="toggle plus" />
+      <div class="collapse-title">Plus collapse (checkbox toggle, no JS)</div>
+      <div class="collapse-content"><p>Plus content.</p></div>
+    </div>
+    <div class="collapse collapse-open collapse-plus">
+      <div class="collapse-title">Forced-open plus collapse</div>
+      <div class="collapse-content"><p>Always visible content.</p></div>
+    </div>
+    <div class="collapse collapse-close" tabindex="0">
+      <div class="collapse-title">Forced-close collapse (never opens)</div>
+      <div class="collapse-content"><p>Hidden content.</p></div>
+    </div>
+  </div>
+
+  <!-- countdown -->
+  <h2 class="text-xl font-bold">Countdown</h2>
+  <div class="flex flex-wrap items-center gap-4">
+    <span class="countdown"><span style="--value:59" aria-label="59 seconds"></span></span>
+    <span class="countdown"><span style="--value:24" aria-label="24 hours"></span></span>
+  </div>
+
+  <!-- diff -->
+  <h2 class="text-xl font-bold">Diff</h2>
+  <div class="diff w-full" style="aspect-ratio:16/9" tabindex="0">
+    <div class="diff-item-1" tabindex="0"><div style="background:#8b5cf6"><span style="color:#fff">Before</span></div></div>
+    <div class="diff-item-2"><div style="background:#22d3ee"><span style="color:#fff">After</span></div></div>
+    <div class="diff-resizer"></div>
+  </div>
+</section>
