@@ -1,0 +1,33 @@
+{
+  "name": "unocss-preset-daisy",
+  "version": "0.1.0",
+  "description": "daisyUI v5 ported to UnoCSS — zero-Tailwind preset (hard fork of daisyui@5.7.43)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./themes": "./dist/themes.css"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "bun build.ts",
+    "test": "bun test --parallel=4",
+    "check": "bun run build && bun test",
+    "inventory": "bun scripts/inventory-apply.ts",
+    "tokens": "bun scripts/generate-tokens.ts",
+    "playground": "bunx vite playground --port 3000",
+    "format": "bunx prettier --write 'src/**/*.ts' '*.md'"
+  },
+  "dependencies": {
+    "unocss": "latest"
+  },
+  "devDependencies": {
+    "@unocss/core": "latest",
+    "typescript": "latest",
+    "vitest": "latest"
+  },
+  "peerDependencies": {
+    "unocss": ">=0.60.0"
+  }
+}
