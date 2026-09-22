@@ -19,7 +19,7 @@ interface Ctx {
   exclude: string[];
 }
 
-export function componentShortcuts(opts: Ctx): Preset["shortcuts"] {
+export function componentShortcuts(opts: Ctx): Exclude<Preset["shortcuts"], undefined> {
   const out: StaticShortcut[] = [];
   // Shortcut key: plain class name with prefix. Selector strings go through applyPrefix.
   const key = (name: string): string => `${opts.prefix}${name}`;

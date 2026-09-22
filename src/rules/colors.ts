@@ -52,8 +52,9 @@ export function colorRules(opts: { prefix: string }): Preset['rules'] {
       new RegExp(`^${p}(bg|text|border)-(${colors})(?:\\/(\\d{1,3}))?$`),
       (match): CSSEntries | undefined => {
         const [, style, color, opacity] = match
+        if (style === undefined || color === undefined) return
         const prop = PROP_TO_CSS[style]
-        if (!prop) return
+        if (prop === undefined) return
         if (opacity !== undefined) {
           const n = Number(opacity)
           if (!Number.isInteger(n) || n < 0 || n > 100) return

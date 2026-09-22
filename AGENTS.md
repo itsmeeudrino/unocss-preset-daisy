@@ -33,6 +33,7 @@
 
 - `bun install` — install deps
 - `bun run build` — `build.ts` → `dist/` (`daisy.css` + preset JS)
+- `bun run lint` — `tsc --noEmit` against strict `tsconfig.json` (lint-only; build/test stay Bun)
 - `bun test` — all tests (`bun test --parallel=4` in CI)
 - `bun run check` — `build + test + validatecss`
 - `bun run inventory` — `bun scripts/inventory-apply.ts` (writes `tests/fixtures/apply-inventory.json`)

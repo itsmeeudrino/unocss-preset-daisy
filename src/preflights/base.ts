@@ -216,7 +216,7 @@ const svg = `:root {
 }
 `
 
-export function basePreflights(_opts: { prefix: string }): Preset['preflights'] {
+export function basePreflights(_opts: { prefix: string }): Exclude<Preset['preflights'], undefined> {
   // Base selectors (:root, *, element resets) carry no component classes, so prefix does not apply.
   return [
     { layer: 'base', getCSS: () => properties },

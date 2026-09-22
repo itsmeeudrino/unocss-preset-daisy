@@ -74,7 +74,7 @@ function responsiveVariant(bp: string, query: string): DaisyVariant {
   }
 }
 
-export function daisyVariants(opts: { prefix: string }): Preset['variants'] {
+export function daisyVariants(opts: { prefix: string }): Exclude<Preset['variants'], undefined> {
   const prefix = opts.prefix ?? ''
   const out: DaisyVariant[] = [drawerVariant(prefix, 'open'), drawerVariant(prefix, 'close')]
   for (const [bp, width] of Object.entries(MIN_WIDTH)) {

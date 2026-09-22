@@ -72,7 +72,10 @@ function collectVarRefs(text: string): Set<string> {
   const out = new Set<string>();
   const re = /var\(\s*(--[\w-]+)/g;
   let m: RegExpExecArray | null;
-  while ((m = re.exec(text)) !== null) out.add(m[1]);
+  while ((m = re.exec(text)) !== null) {
+    const name = m[1];
+    if (name !== undefined) out.add(name);
+  }
   return out;
 }
 
@@ -82,7 +85,10 @@ function collectVarDecls(css: string): Set<string> {
   const clean = css.replace(/\/\*[\s\S]*?\*\//g, "");
   const re = /(--[\w-]+)\s*:/g;
   let m: RegExpExecArray | null;
-  while ((m = re.exec(clean)) !== null) out.add(m[1]);
+  while ((m = re.exec(clean)) !== null) {
+    const name = m[1];
+    if (name !== undefined) out.add(name);
+  }
   return out;
 }
 

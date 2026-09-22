@@ -177,7 +177,9 @@ function extractApplies(css: string): { statements: number; tokens: string[] } {
   let m: RegExpExecArray | null;
   while ((m = re.exec(clean)) !== null) {
     statements += 1;
-    const body = m[1].trim();
+    const raw = m[1];
+    if (raw === undefined) continue;
+    const body = raw.trim();
     if (!body) continue;
     for (const tok of body.split(/\s+/)) {
       const t = tok.trim();
@@ -222,7 +224,10 @@ for (const [k, v] of sortedUtils) sortedUtilities[k] = v;
 
 // Sort file keys for stable diffs.
 const sortedFiles: Record<string, string[]> = {};
-for (const k of Object.keys(perFile).sort()) sortedFiles[k] = perFile[k];
+for (const k of Object.keys(perFile).sort()) {
+  const v = perFile[k];
+  if (v !== undefined) sortedFiles[k] = v;
+}
 
 const inventory: Inventory = {
   utilities: sortedUtilities,

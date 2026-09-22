@@ -12,8 +12,9 @@
   "files": ["dist"],
   "scripts": {
     "build": "bun build.ts",
+    "lint": "tsc --noEmit",
     "test": "bun test",
-    "check": "bun run build && bun test",
+    "check": "bun run build && bun run lint && bun test",
     "inventory": "bun scripts/inventory-apply.ts",
     "tokens": "bun scripts/generate-tokens.ts",
     "playground": "bun playground/serve.ts"
@@ -23,5 +24,9 @@
   },
   "peerDependencies": {
     "unocss": ">=0.60.0"
+  },
+  "devDependencies": {
+    "bun-types": "^1.4.2",
+    "typescript": "^7.0.2"
   }
 }
