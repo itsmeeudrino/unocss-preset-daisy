@@ -32,7 +32,7 @@ Key gotchas: `@apply` (e.g. `.btn { @apply inline-flex shrink-0 ... }`), `@utili
 src/
   index.ts              # presetDaisy() entry, exports Preset
   options.ts            # prefix, include/exclude, themes, logs
-  layers.ts             # layer order: base, daisy-l1, daisy-l2, daisy-l3, components, utilities
+  layers.ts             # layer order: base, daisy-l3, daisy-l2, daisy-l1, components, utilities
   preflights/base.ts    # 7 base files as preflight strings
   shortcuts/components.ts # static component CSS (btn, badge, card skeleton)
   rules/components.ts   # dynamic: btn-xs/sm/lg, modal-open, per-size variants
@@ -60,7 +60,7 @@ HTML stays identical: `<button class="btn btn-primary">`, `<div data-theme="dark
 
 1. **`@apply` → shortcuts/rules.** Run `scripts/inventory-apply.ts` to list every Tailwind utility used in `@apply`. Expand once with throwaway Tailwind v4 compile, then codemod raw CSS into `shortcuts` (static) or `rules` (dynamic/size-dependent). Never hand-translate blind.
 2. **Theming.** Keep oklch `themes.css` verbatim as source of truth. Generate `tokens.ts` bridge: `primary: 'var(--color-primary)'`, `base-100: ...`, plus `--depth, --noise, --radius-field, --size-field`. See `scripts/generate-tokens.ts`.
-3. **Layers.** Map `daisyui.l1.l2.l3` → Uno layers `daisy-l1 < daisy-l2 < daisy-l3`. Preserve order; snapshot-test specificity.
+3. **Layers.** Map `daisyui.l1.l2.l3` → Uno layers `daisy-l3 < daisy-l2 < daisy-l1` (outer wins per saadeghi/daisyui#4209: states > modifiers > base). Preserve names; snapshot-test specificity.
 4. **Variants.** Port `breakpoints.js` → Uno variants; `is-drawer-open/close` `addVariant` → `variant()` fns; color states → rules with variants, not static CSS.
 5. **Prefix/include/exclude.** String-replace at preset-generation time (port `addPrefix.js` + `pluginOptionsHandler.js`). Test with `prefix: 'd-'`.
 6. **No Tailwind at runtime.** Tailwind CLI allowed only in `scripts/` throwaway step. `package.json` must NOT depend on `tailwindcss`.
@@ -79,6 +79,7 @@ HTML stays identical: `<button class="btn btn-primary">`, `<div data-theme="dark
 
 - Port upstream tests: `plugin.test, themes.test, contrast.test, validatecss.test` → `tests/*.test.ts`.
 - Per-component snapshot: same HTML rendered with Tailwind+daisyUI vs Uno+preset; diff CSS ignoring layer names. See `tests/snapshot.test.ts`.
+- Compatibility suite (`tests/compat-*.test.ts` + harness `tests/compat.ts`): resolves winning declarations per class combo through emulated cascade (layer rank + specificity + source order) and `var()` chains against real theme values. Covers button/badge color matrices in light+dark (text/bg resolve to the right content/color vars), sizes vs upstream values, states/variants precedence, 35-theme variable contract + upstream spot values.
 - Matrix: 3 core components × 5 themes × `hover/focus/disabled/rtl` + prefix on/off.
 - `bun run check` must pass: `build + test + validatecss`.
 

@@ -16,7 +16,7 @@
 
 - `src/index.ts` — `presetDaisy()` entry, composes preflights/shortcuts/rules/variants/theme.
 - `src/options.ts` — `prefix, include, exclude, themes, logs` (port of `pluginOptionsHandler.js` + `addPrefix.js`).
-- `src/layers.ts` — layer order (`base < daisy-l1 < daisy-l2 < daisy-l3 < components < utilities`).
+- `src/layers.ts` — layer order (`base < daisy-l3 < daisy-l2 < daisy-l1 < components < utilities`; outer wins, see layers.ts comment).
 - `src/preflights/base.ts` — port of `src/base/*.css` (7 files).
 - `src/shortcuts/components.ts` — static component CSS (61 components).
 - `src/rules/components.ts` — dynamic/sized component rules.
