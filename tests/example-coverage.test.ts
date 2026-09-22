@@ -14,7 +14,8 @@ const COLORS = [
 
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 
-const EXPECTED_TOKENS = new Set<string>([
+// Core (P3) public tokens. Batch tokens come from tests/fixtures/batchN-tokens.json.
+const CORE_TOKENS = new Set<string>([
   'btn',
   ...COLORS.map((c) => `btn-${c}`),
   'btn-outline', 'btn-dash', 'btn-soft', 'btn-ghost', 'btn-link',
@@ -48,16 +49,9 @@ const EXPECTED_TOKENS = new Set<string>([
   'border-error',
 ])
 
-// Upstream components with NO port yet: using any of these classes would
-// render unstyled, so they are banned from the showcase.
-const BANNED = [
-  'accordion', 'alert', 'avatar', 'breadcrumbs', 'calendar', 'carousel', 'chat',
-  'checkbox', 'collapse', 'countdown', 'diff', 'divider', 'dock', 'drawer',
-  'dropdown', 'fab', 'fieldset', 'file-input', 'filter', 'footer', 'hero',
-  'indicator', 'kbd', 'label', 'link', 'list', 'loading', 'mask', 'navbar',
-  'progress', 'radial-progress', 'radio', 'range', 'rating', 'select',
-  'skeleton', 'stack', 'stat', 'status', 'steps', 'swap', 'table', 'tabs',
-  'textarea', 'timeline', 'toast', 'toggle', 'tooltip', 'validator',
+// All 61 upstream components are ported, so nothing is banned anymore.
+// The list stays as a tripwire: add a name here if its port is ever dropped.
+const BANNED: string[] = [
 ]
 
 const DAISY_COLORS = [
@@ -74,6 +68,16 @@ function isDaisyToken(tok: string): boolean {
   if (/^(btn|badge|card|input|modal|menu|join|glass|rounded|prose)(-|$)/.test(plain)) return true
   const m = /^(bg|text|border)-(.+)$/.exec(plain)
   return m?.[2] !== undefined && DAISY_COLORS.includes(m[2])
+}
+
+async function expectedTokens(): Promise<Set<string>> {
+  const out = new Set<string>(CORE_TOKENS)
+  for (const n of [1, 2, 3, 4, 5]) {
+    const url = new URL(`./fixtures/batch${n}-tokens.json`, import.meta.url)
+    const arr = (await Bun.file(url).json()) as string[]
+    for (const t of arr) out.add(t)
+  }
+  return out
 }
 
 async function exampleTokens(): Promise<Set<string>> {
@@ -101,7 +105,8 @@ async function exampleTokens(): Promise<Set<string>> {
 describe('example coverage', () => {
   test('every ported public class is demoed', async () => {
     const tokens = await exampleTokens()
-    const missing = [...EXPECTED_TOKENS].filter((t) => !tokens.has(t))
+    const expected = await expectedTokens()
+    const missing = [...expected].filter((t) => !tokens.has(t))
     expect(missing).toEqual([])
   })
 

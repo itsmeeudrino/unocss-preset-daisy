@@ -39,7 +39,13 @@ const cssCache = new Map<string, string>()
 export async function cssFor(classes: string): Promise<string> {
   const hit = cssCache.get(classes)
   if (hit !== undefined) return hit
-  const uno = await createGenerator({ presets: [presetUno(), presetDaisy()] })
+  // Supported config uses colon-only separators (see README: daisy class
+  // names like hover-3d / file-input / link-primary collide with Uno's
+  // dash-form variants, which would eat them before exact matching).
+  const uno = await createGenerator({
+    presets: [presetUno(), presetDaisy()],
+    separators: [':'],
+  })
   const { css } = await uno.generate(classes, { preflights: false })
   cssCache.set(classes, css)
   return css

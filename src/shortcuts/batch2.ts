@@ -1,4 +1,4 @@
-import type { Preset, StaticShortcut } from "unocss";
+import type { StaticShortcut } from "unocss";
 import { applyPrefix, shouldInclude } from "../options.ts";
 
 // Port of packages/daisyui/src/components/*.css — P3 batch 2 (11 components:
@@ -23,7 +23,7 @@ interface Ctx {
   exclude: string[];
 }
 
-export function batch2Shortcuts(opts: Ctx): Exclude<Preset["shortcuts"], undefined> {
+export function batch2Shortcuts(opts: Ctx): StaticShortcut[] {
   const out: StaticShortcut[] = [];
   // Shortcut key: plain class name with prefix. Selector strings go through applyPrefix.
   const key = (name: string): string => `${opts.prefix}${name}`;

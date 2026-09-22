@@ -1,4 +1,4 @@
-import type { Preset, StaticShortcut } from "unocss";
+import type { StaticShortcut } from "unocss";
 import { applyPrefix, shouldInclude } from "../options.ts";
 
 // Port of packages/daisyui/src/components/*.css — batch4 (11 components:
@@ -22,7 +22,7 @@ interface Ctx {
   exclude: string[];
 }
 
-export function batch4Shortcuts(opts: Ctx): Exclude<Preset["shortcuts"], undefined> {
+export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
   const out: StaticShortcut[] = [];
   const key = (name: string): string => `${opts.prefix}${name}`;
 

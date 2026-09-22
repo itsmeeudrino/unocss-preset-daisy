@@ -363,6 +363,1308 @@
       </div>
     </section>
 
+    <!-- batch1: ported components -->
+    <section class="flex flex-col gap-4 p-4 max-w-5xl mx-auto">
+      <h1 class="text-2xl font-bold">Batch 1 — alert, aura, avatar, breadcrumbs, calendar, carousel, chat, checkbox, collapse, countdown, diff</h1>
+
+      <!-- alert -->
+      <h2 class="text-xl font-bold">Alert</h2>
+      <div class="flex flex-col gap-2">
+        <div class="alert" role="alert">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/></svg>
+          <span>Base alert with icon + text (two children trigger the :has grid).</span>
+        </div>
+        <div class="alert alert-info" role="alert"><span>Info alert.</span></div>
+        <div class="alert alert-success" role="alert"><span>Success alert.</span></div>
+        <div class="alert alert-warning" role="alert"><span>Warning alert.</span></div>
+        <div class="alert alert-error" role="alert"><span>Error alert.</span></div>
+        <div class="alert alert-soft alert-error" role="alert"><span>Soft error alert.</span></div>
+        <div class="alert alert-outline alert-info" role="alert"><span>Outline info alert.</span></div>
+        <div class="alert alert-dash alert-warning" role="alert"><span>Dash warning alert.</span></div>
+        <div class="alert alert-vertical alert-success" role="alert">
+          <span>Vertical success alert.</span>
+          <span class="text-sm">Centered stacked layout.</span>
+        </div>
+        <div class="alert alert-horizontal alert-info" role="alert">
+          <span>Horizontal info alert.</span>
+          <span class="text-sm">Column flow layout.</span>
+        </div>
+      </div>
+
+      <!-- aura -->
+      <h2 class="text-xl font-bold">Aura</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="aura" style="color:#8b5cf6"><span class="alert">Base aura</span></span>
+        <span class="aura aura-rainbow"><span class="alert alert-info"><span>Rainbow</span></span></span>
+        <span class="aura aura-holo"><span class="alert alert-success"><span>Holo</span></span></span>
+        <span class="aura aura-dual" style="color:#22d3ee"><span class="alert"><span>Dual</span></span></span>
+        <span class="aura aura-silver"><span class="alert"><span>Silver</span></span></span>
+        <span class="aura aura-gold"><span class="alert"><span>Gold</span></span></span>
+        <span class="aura aura-glow" style="color:#f472b6"><span class="alert"><span>Glow</span></span></span>
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="aura aura-xs" style="color:#8b5cf6"><span class="alert"><span>xs</span></span></span>
+        <span class="aura aura-sm" style="color:#8b5cf6"><span class="alert"><span>sm</span></span></span>
+        <span class="aura aura-md" style="color:#8b5cf6"><span class="alert"><span>md</span></span></span>
+        <span class="aura aura-lg" style="color:#8b5cf6"><span class="alert"><span>lg</span></span></span>
+        <span class="aura aura-xl" style="color:#8b5cf6"><span class="alert"><span>xl</span></span></span>
+      </div>
+
+      <!-- avatar -->
+      <h2 class="text-xl font-bold">Avatar</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="avatar">
+          <div class="w-16 h-16" style="background:#8b5cf6"><span style="color:#fff">AB</span></div>
+        </div>
+        <div class="avatar avatar-online">
+          <div class="w-16 h-16" style="background:#22d3ee"><span style="color:#fff">ON</span></div>
+        </div>
+        <div class="avatar avatar-offline">
+          <div class="w-16 h-16" style="background:#f472b6"><span style="color:#fff">OFF</span></div>
+        </div>
+        <div class="avatar avatar-placeholder">
+          <div class="w-16 h-16" style="background:#a3a3a3"><span style="color:#fff">PH</span></div>
+        </div>
+        <div class="avatar-group">
+          <div class="avatar"><div class="w-16 h-16" style="background:#8b5cf6"><span style="color:#fff">A</span></div></div>
+          <div class="avatar"><div class="w-16 h-16" style="background:#22d3ee"><span style="color:#fff">B</span></div></div>
+          <div class="avatar avatar-placeholder"><div class="w-16 h-16" style="background:#a3a3a3"><span style="color:#fff">+9</span></div></div>
+        </div>
+      </div>
+
+      <!-- breadcrumbs -->
+      <h2 class="text-xl font-bold">Breadcrumbs</h2>
+      <div class="breadcrumbs">
+        <ul>
+          <li><a>Home</a></li>
+          <li><a>Library</a></li>
+          <li><a>Batch 1</a></li>
+        </ul>
+      </div>
+
+      <!-- calendar -->
+      <h2 class="text-xl font-bold">Calendar</h2>
+      <div class="flex flex-col gap-4">
+        <cally-calendar class="cally"><calendar-month></calendar-month></cally-calendar>
+        <div class="react-day-picker" dir="ltr">
+          <div class="rdp-months"><div class="rdp-month">
+            <div class="rdp-month_caption"><span class="rdp-caption_label">September 2026</span></div>
+            <div class="rdp-day"><button class="rdp-day_button" type="button">22</button></div>
+          </div></div>
+          <div class="rdp-footer">Footer</div>
+        </div>
+        <div class="pika-single">
+          <div class="pika-lendar">
+            <div class="pika-title"><span class="pika-label">September 2026</span></div>
+            <table class="pika-table"><tbody><tr><td class="is-today"><button class="pika-button" type="button">22</button></td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="vc" data-vc-calendar>
+          <div data-vc="controls"><button data-vc-arrow="prev" type="button">‹</button></div>
+          <div data-vc="grid"><div data-vc="column">
+            <div data-vc="header"><h3 class="vc-header__content">September</h3></div>
+            <div data-vc="dates"><div class="vc-date" data-vc-date-selected="first"><button data-vc-date-btn type="button">22</button></div></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- carousel -->
+      <h2 class="text-xl font-bold">Carousel</h2>
+      <div class="flex flex-col gap-4">
+        <div class="carousel carousel-start w-full gap-2">
+          <div class="carousel-item w-24 h-24 items-center" style="background:#8b5cf6"><span style="color:#fff">1</span></div>
+          <div class="carousel-item w-24 h-24 items-center" style="background:#22d3ee"><span style="color:#fff">2</span></div>
+          <div class="carousel-item w-24 h-24 items-center" style="background:#f472b6"><span style="color:#fff">3</span></div>
+        </div>
+        <div class="carousel carousel-horizontal carousel-center w-full gap-2">
+          <div class="carousel-item w-24 h-24 items-center" style="background:#a3a3a3"><span style="color:#fff">A</span></div>
+          <div class="carousel-item w-24 h-24 items-center" style="background:#737373"><span style="color:#fff">B</span></div>
+        </div>
+        <div class="carousel carousel-end w-full gap-2">
+          <div class="carousel-item w-24 h-24 items-center" style="background:#525252"><span style="color:#fff">X</span></div>
+          <div class="carousel-item w-24 h-24 items-center" style="background:#404040"><span style="color:#fff">Y</span></div>
+        </div>
+        <div class="carousel carousel-vertical h-24 gap-2">
+          <div class="carousel-item w-24 h-24 items-center" style="background:#8b5cf6"><span style="color:#fff">↑</span></div>
+          <div class="carousel-item w-24 h-24 items-center" style="background:#22d3ee"><span style="color:#fff">↓</span></div>
+        </div>
+      </div>
+
+      <!-- chat -->
+      <h2 class="text-xl font-bold">Chat</h2>
+      <div class="flex flex-col gap-2">
+        <div class="chat chat-start">
+          <div class="chat-image"><div class="avatar"><div class="w-16 h-16" style="background:#8b5cf6"><span style="color:#fff">A</span></div></div></div>
+          <div class="chat-header">Ada · 12:00</div>
+          <div class="chat-bubble">Base bubble on the start side.</div>
+          <div class="chat-footer">Delivered</div>
+        </div>
+        <div class="chat chat-end">
+          <div class="chat-image"><div class="avatar"><div class="w-16 h-16" style="background:#22d3ee"><span style="color:#fff">B</span></div></div></div>
+          <div class="chat-header">Bob · 12:01</div>
+          <div class="chat-bubble chat-bubble-primary">Primary bubble on the end side.</div>
+          <div class="chat-footer">Seen</div>
+        </div>
+        <div class="chat chat-start"><div class="chat-bubble chat-bubble-secondary">Secondary</div></div>
+        <div class="chat chat-start"><div class="chat-bubble chat-bubble-accent">Accent</div></div>
+        <div class="chat chat-start"><div class="chat-bubble chat-bubble-neutral">Neutral</div></div>
+        <div class="chat chat-start"><div class="chat-bubble chat-bubble-info">Info</div></div>
+        <div class="chat chat-start"><div class="chat-bubble chat-bubble-success">Success</div></div>
+        <div class="chat chat-start"><div class="chat-bubble chat-bubble-warning">Warning</div></div>
+        <div class="chat chat-start"><div class="chat-bubble chat-bubble-error">Error</div></div>
+      </div>
+
+      <!-- checkbox -->
+      <h2 class="text-xl font-bold">Checkbox</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <input type="checkbox" class="checkbox" aria-label="base" />
+        <input type="checkbox" class="checkbox checkbox-primary" checked aria-label="primary" />
+        <input type="checkbox" class="checkbox checkbox-secondary" checked aria-label="secondary" />
+        <input type="checkbox" class="checkbox checkbox-accent" checked aria-label="accent" />
+        <input type="checkbox" class="checkbox checkbox-neutral" checked aria-label="neutral" />
+        <input type="checkbox" class="checkbox checkbox-info" checked aria-label="info" />
+        <input type="checkbox" class="checkbox checkbox-success" checked aria-label="success" />
+        <input type="checkbox" class="checkbox checkbox-warning" checked aria-label="warning" />
+        <input type="checkbox" class="checkbox checkbox-error" checked aria-label="error" />
+        <input type="checkbox" class="checkbox" disabled aria-label="disabled" />
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <input type="checkbox" class="checkbox checkbox-xs" checked aria-label="xs" />
+        <input type="checkbox" class="checkbox checkbox-sm" checked aria-label="sm" />
+        <input type="checkbox" class="checkbox checkbox-md" checked aria-label="md" />
+        <input type="checkbox" class="checkbox checkbox-lg" checked aria-label="lg" />
+        <input type="checkbox" class="checkbox checkbox-xl" checked aria-label="xl" />
+      </div>
+
+      <!-- collapse -->
+      <h2 class="text-xl font-bold">Collapse</h2>
+      <div class="flex flex-col gap-2">
+        <details class="collapse collapse-arrow">
+          <summary class="collapse-title">Arrow collapse (details/summary, no JS)</summary>
+          <div class="collapse-content"><p>Arrow content line one.</p><p>Arrow content line two.</p></div>
+        </details>
+        <div class="collapse collapse-plus">
+          <input type="checkbox" aria-label="toggle plus" />
+          <div class="collapse-title">Plus collapse (checkbox toggle, no JS)</div>
+          <div class="collapse-content"><p>Plus content.</p></div>
+        </div>
+        <div class="collapse collapse-open collapse-plus">
+          <div class="collapse-title">Forced-open plus collapse</div>
+          <div class="collapse-content"><p>Always visible content.</p></div>
+        </div>
+        <div class="collapse collapse-close" tabindex="0">
+          <div class="collapse-title">Forced-close collapse (never opens)</div>
+          <div class="collapse-content"><p>Hidden content.</p></div>
+        </div>
+      </div>
+
+      <!-- countdown -->
+      <h2 class="text-xl font-bold">Countdown</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="countdown"><span style="--value:59" aria-label="59 seconds"></span></span>
+        <span class="countdown"><span style="--value:24" aria-label="24 hours"></span></span>
+      </div>
+
+      <!-- diff -->
+      <h2 class="text-xl font-bold">Diff</h2>
+      <div class="diff w-full" style="aspect-ratio:16/9" tabindex="0">
+        <div class="diff-item-1" tabindex="0"><div style="background:#8b5cf6"><span style="color:#fff">Before</span></div></div>
+        <div class="diff-item-2"><div style="background:#22d3ee"><span style="color:#fff">After</span></div></div>
+        <div class="diff-resizer"></div>
+      </div>
+    </section>
+
+    <!-- batch2: ported components -->
+    <!doctype html>
+    <html lang="en" data-theme="light">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>batch2 — divider, dock, drawer, dropdown, fab, fieldset, fileinput, filter, footer, hero, hover3d</title>
+    </head>
+    <body class="bg-gray-100 text-gray-900">
+      <div class="max-w-5xl mx-auto px-4 pb-16 flex flex-col gap-10">
+
+        <header class="flex flex-col gap-2 py-6">
+          <h1 class="text-2xl font-bold">Batch 2 components</h1>
+          <p class="text-sm text-gray-600">Static-only showcase: checkbox toggles and details/summary, no JavaScript. Only batch-2 classes + presetUno layout utilities.</p>
+        </header>
+
+        <!-- divider -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">Divider</h2>
+          <div class="divider">OR</div>
+          <div class="flex items-stretch gap-2 p-4 bg-white rounded border">
+            <span class="text-sm">left</span>
+            <div class="divider divider-horizontal"></div>
+            <span class="text-sm">right</span>
+          </div>
+          <div class="flex gap-2 p-4 bg-white rounded border">
+            <span class="text-sm">top</span>
+            <div class="divider divider-vertical">mid</div>
+            <span class="text-sm">bottom</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="divider divider-neutral">neutral</div>
+            <div class="divider divider-primary">primary</div>
+            <div class="divider divider-secondary">secondary</div>
+            <div class="divider divider-accent">accent</div>
+            <div class="divider divider-success">success</div>
+            <div class="divider divider-warning">warning</div>
+            <div class="divider divider-info">info</div>
+            <div class="divider divider-error">error</div>
+            <div class="divider divider-start">start</div>
+            <div class="divider divider-end">end</div>
+          </div>
+        </section>
+
+        <!-- dock -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">Dock</h2>
+          <p class="text-sm text-gray-600">The live dock below is fixed to the viewport bottom. Size variants are shown as static blocks.</p>
+          <div class="dock dock-xs static border">
+            <button type="button"><span class="dock-label">xs home</span></button>
+            <button type="button" class="dock-active"><span class="dock-label">xs active</span></button>
+          </div>
+          <div class="dock dock-sm static border">
+            <button type="button"><span class="dock-label">sm home</span></button>
+            <button type="button" class="dock-active"><span class="dock-label">sm active</span></button>
+          </div>
+          <div class="dock dock-md static border">
+            <button type="button"><span class="dock-label">md home</span></button>
+            <button type="button" class="dock-active"><span class="dock-label">md active</span></button>
+          </div>
+          <div class="dock dock-lg static border">
+            <button type="button"><span class="dock-label">lg home</span></button>
+            <button type="button" class="dock-active"><span class="dock-label">lg active</span></button>
+          </div>
+          <div class="dock dock-xl static border">
+            <button type="button"><span class="dock-label">xl home</span></button>
+            <button type="button" class="dock-active"><span class="dock-label">xl active</span></button>
+          </div>
+          <div class="dock">
+            <button type="button"><span class="dock-label">home</span></button>
+            <button type="button" class="dock-active"><span class="dock-label">search</span></button>
+            <button type="button" aria-disabled="true"><span class="dock-label">off</span></button>
+          </div>
+        </section>
+
+        <!-- drawer -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">Drawer</h2>
+          <div class="drawer border rounded bg-white" style="min-height:12rem">
+            <input id="batch2-drawer" type="checkbox" class="drawer-toggle" />
+            <div class="drawer-content flex flex-col items-center justify-center gap-2 p-4">
+              <p class="text-sm">Checkbox-driven drawer (closed by default).</p>
+              <label for="batch2-drawer" class="cursor-pointer underline text-sm">open drawer</label>
+            </div>
+            <div class="drawer-side">
+              <label for="batch2-drawer" class="drawer-overlay" aria-label="close sidebar"></label>
+              <div class="p-4 bg-white text-sm" style="width:12rem">side skeleton</div>
+            </div>
+          </div>
+          <div class="drawer drawer-end border rounded bg-white" style="min-height:12rem">
+            <input id="batch2-drawer-end" type="checkbox" class="drawer-toggle" />
+            <div class="drawer-content flex flex-col items-center justify-center gap-2 p-4">
+              <p class="text-sm">End-side drawer (closed by default).</p>
+              <label for="batch2-drawer-end" class="cursor-pointer underline text-sm">open end drawer</label>
+            </div>
+            <div class="drawer-side">
+              <label for="batch2-drawer-end" class="drawer-overlay" aria-label="close sidebar"></label>
+              <div class="p-4 bg-white text-sm" style="width:12rem">end skeleton</div>
+            </div>
+          </div>
+          <div class="drawer drawer-open border rounded bg-white" style="min-height:12rem">
+            <input type="checkbox" class="drawer-toggle" checked />
+            <div class="drawer-content flex flex-col items-center justify-center gap-2 p-4">
+              <p class="text-sm">Always-open drawer.</p>
+            </div>
+            <div class="drawer-side">
+              <label class="drawer-overlay" aria-label="overlay"></label>
+              <div class="p-4 bg-white text-sm" style="width:12rem">open skeleton</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- dropdown -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">Dropdown</h2>
+          <div class="flex flex-wrap gap-4">
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">focus me</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm" style="min-width:10rem">
+                <a href="#batch2">focus content one</a><br />
+                <a href="#batch2">focus content two</a>
+              </div>
+            </div>
+            <details class="dropdown">
+              <summary class="p-2 bg-white rounded border text-sm cursor-pointer">details toggle</summary>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm" style="min-width:10rem">
+                <a href="#batch2">details content</a>
+              </div>
+            </details>
+            <div class="dropdown dropdown-open">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">open</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm" style="min-width:10rem">
+                <a href="#batch2">pinned open</a>
+              </div>
+            </div>
+            <div class="dropdown dropdown-close">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">closed</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm" style="min-width:10rem">
+                <a href="#batch2">forced shut</a>
+              </div>
+            </div>
+            <div class="dropdown dropdown-hover">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">hover me</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm" style="min-width:10rem">
+                <a href="#batch2">hover content</a>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <div class="dropdown dropdown-start">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">start</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">a</a></div>
+            </div>
+            <div class="dropdown dropdown-center">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">center</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">b</a></div>
+            </div>
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">end</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">c</a></div>
+            </div>
+            <div class="dropdown dropdown-left">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">left</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">d</a></div>
+            </div>
+            <div class="dropdown dropdown-right">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">right</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">e</a></div>
+            </div>
+            <div class="dropdown dropdown-top">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">top</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">f</a></div>
+            </div>
+            <div class="dropdown dropdown-bottom">
+              <div tabindex="0" role="button" class="p-2 bg-white rounded border text-sm cursor-pointer">bottom</div>
+              <div class="dropdown-content bg-white rounded border p-2 text-sm"><a href="#batch2">g</a></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- fab -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">Fab</h2>
+          <div class="relative bg-white rounded border" style="min-height:14rem">
+            <div class="fab">
+              <div tabindex="0" role="button" class="w-10 h-10 bg-gray-800 text-white rounded items-center justify-center flex text-sm">+</div>
+              <div class="px-2 py-1 bg-gray-200 rounded text-sm">action one</div>
+              <div class="px-2 py-1 bg-gray-200 rounded text-sm">action two</div>
+              <div class="fab-main-action px-2 py-1 bg-gray-800 text-white rounded text-sm">main</div>
+            </div>
+          </div>
+          <div class="relative bg-white rounded border" style="min-height:14rem">
+            <div class="fab fab-flower">
+              <div tabindex="0" role="button" class="w-10 h-10 bg-gray-800 text-white rounded items-center justify-center flex text-sm">✿</div>
+              <div class="px-2 py-1 bg-gray-200 rounded text-sm">fan one</div>
+              <div class="px-2 py-1 bg-gray-200 rounded text-sm">fan two</div>
+              <div class="px-2 py-1 bg-gray-200 rounded text-sm">fan three</div>
+              <div class="fab-close px-2 py-1 bg-gray-800 text-white rounded text-sm">close</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- fieldset -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">Fieldset</h2>
+          <fieldset class="fieldset bg-white rounded border p-4">
+            <legend class="fieldset-legend">Shipping preferences</legend>
+            <label class="fieldset-label"><input type="checkbox" /> Track this order</label>
+            <label class="fieldset-label"><input type="radio" name="batch2-speed" /> Standard</label>
+            <label class="fieldset-label"><input type="radio" name="batch2-speed" /> Express</label>
+          </fieldset>
+        </section>
+
+        <!-- fileinput -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">File input</h2>
+          <div class="flex flex-wrap gap-2">
+            <input type="file" class="file-input" />
+            <input type="file" class="file-input file-input-ghost" />
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <input type="file" class="file-input file-input-neutral" />
+            <input type="file" class="file-input file-input-primary" />
+            <input type="file" class="file-input file-input-secondary" />
+            <input type="file" class="file-input file-input-accent" />
+            <input type="file" class="file-input file-input-info" />
+            <input type="file" class="file-input file-input-success" />
+            <input type="file" class="file-input file-input-warning" />
+            <input type="file" class="file-input file-input-error" />
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <input type="file" class="file-input file-input-xs" />
+            <input type="file" class="file-input file-input-sm" />
+            <input type="file" class="file-input file-input-md" />
+            <input type="file" class="file-input file-input-lg" />
+            <input type="file" class="file-input file-input-xl" />
+          </div>
+        </section>
+
+        <!-- filter -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">Filter</h2>
+          <form class="filter gap-2">
+            <input type="reset" value="×" class="filter-reset" aria-label="reset" />
+            <input type="radio" name="batch2-filter" aria-label="all" checked />
+            <input type="radio" name="batch2-filter" aria-label="open" />
+            <input type="radio" name="batch2-filter" aria-label="done" />
+          </form>
+        </section>
+
+        <!-- footer -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">Footer</h2>
+          <footer class="footer bg-white rounded border p-6">
+            <nav>
+              <span class="footer-title">services</span>
+              <a href="#batch2" class="text-sm">branding</a>
+              <a href="#batch2" class="text-sm">design</a>
+            </nav>
+            <nav>
+              <span class="footer-title">company</span>
+              <a href="#batch2" class="text-sm">about</a>
+              <a href="#batch2" class="text-sm">jobs</a>
+            </nav>
+          </footer>
+          <footer class="footer footer-center bg-white rounded border p-6">
+            <nav>
+              <span class="footer-title">centered</span>
+              <a href="#batch2" class="text-sm">one</a>
+              <a href="#batch2" class="text-sm">two</a>
+            </nav>
+          </footer>
+          <footer class="footer footer-horizontal bg-white rounded border p-6">
+            <nav>
+              <span class="footer-title">across</span>
+              <a href="#batch2" class="text-sm">one</a>
+            </nav>
+            <nav>
+              <span class="footer-title">across two</span>
+              <a href="#batch2" class="text-sm">two</a>
+            </nav>
+          </footer>
+          <footer class="footer footer-vertical bg-white rounded border p-6">
+            <nav>
+              <span class="footer-title">stacked</span>
+              <a href="#batch2" class="text-sm">one</a>
+            </nav>
+          </footer>
+        </section>
+
+        <!-- hero -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">Hero</h2>
+          <div class="hero rounded overflow-hidden bg-gray-800" style="min-height:16rem">
+            <div class="hero-overlay"></div>
+            <div class="hero-content text-center text-white">
+              <div class="flex flex-col gap-2 max-w-sm">
+                <h3 class="text-2xl font-bold">Layered headline</h3>
+                <p class="text-sm">Overlay dims the backdrop; content stays isolated on top.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- hover3d -->
+        <section class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold">Hover 3D</h2>
+          <div class="hover-3d w-full max-w-sm">
+            <div class="bg-gray-800 text-white p-8 rounded text-center text-sm">tilt card — hover the zones</div>
+            <div aria-hidden="true"></div>
+            <div aria-hidden="true"></div>
+            <div aria-hidden="true"></div>
+            <div aria-hidden="true"></div>
+            <div aria-hidden="true"></div>
+            <div aria-hidden="true"></div>
+            <div aria-hidden="true"></div>
+            <div aria-hidden="true"></div>
+          </div>
+        </section>
+
+      </div>
+    </body>
+    </html>
+
+    <!-- batch3: ported components -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Hovergallery</h2>
+      <div class="hover-gallery w-full max-w-md">
+        <div class="w-full h-32" style="background:linear-gradient(135deg,#f472b6,#8b5cf6)"></div>
+        <div class="w-full h-32" style="background:linear-gradient(135deg,#60a5fa,#34d399)"></div>
+        <div class="w-full h-32" style="background:linear-gradient(135deg,#fbbf24,#f97316)"></div>
+        <div class="w-full h-32" style="background:linear-gradient(135deg,#22d3ee,#6366f1)"></div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Indicator</h2>
+      <div class="flex flex-wrap items-start gap-6">
+        <div class="indicator">
+          <span class="indicator-item">new</span>
+          <div class="w-16 h-16" style="background:#e5e7eb"></div>
+        </div>
+        <div class="indicator indicator-start indicator-top">
+          <span class="indicator-item">1</span>
+          <div class="w-16 h-16" style="background:#e5e7eb"></div>
+        </div>
+        <div class="indicator indicator-center indicator-middle">
+          <span class="indicator-item">2</span>
+          <div class="w-16 h-16" style="background:#e5e7eb"></div>
+        </div>
+        <div class="indicator indicator-end indicator-bottom">
+          <span class="indicator-item">3</span>
+          <div class="w-16 h-16" style="background:#e5e7eb"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Kbd</h2>
+      <div class="flex flex-wrap items-center gap-2">
+        <kbd class="kbd">Ctrl</kbd>
+        <kbd class="kbd kbd-xs">xs</kbd>
+        <kbd class="kbd kbd-sm">sm</kbd>
+        <kbd class="kbd kbd-md">md</kbd>
+        <kbd class="kbd kbd-lg">lg</kbd>
+        <kbd class="kbd kbd-xl">xl</kbd>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Label</h2>
+      <div class="flex flex-col gap-2">
+        <label class="label">
+          <input type="checkbox" />
+          Accept terms
+        </label>
+        <label class="floating-label">
+          <input type="text" placeholder="Email" class="w-full" />
+          <span>Email</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Link</h2>
+      <div class="flex flex-wrap gap-3">
+        <a class="link">default</a>
+        <a class="link link-hover">hover underline</a>
+        <a class="link link-primary">primary</a>
+        <a class="link link-secondary">secondary</a>
+        <a class="link link-accent">accent</a>
+        <a class="link link-neutral">neutral</a>
+        <a class="link link-info">info</a>
+        <a class="link link-success">success</a>
+        <a class="link link-warning">warning</a>
+        <a class="link link-error">error</a>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">List</h2>
+      <div class="list w-full max-w-md">
+        <div class="list-row">
+          <div class="w-10 h-10" style="background:#e5e7eb"></div>
+          <div class="list-col-grow">
+            <div>First row title</div>
+            <div class="list-col-wrap">wrapped meta line</div>
+          </div>
+        </div>
+        <div class="list-row">
+          <div class="w-10 h-10" style="background:#e5e7eb"></div>
+          <div class="list-col-grow">
+            <div>Second row title</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Loading</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="loading"></span>
+        <span class="loading loading-spinner"></span>
+        <span class="loading loading-dots"></span>
+        <span class="loading loading-ring"></span>
+        <span class="loading loading-ball"></span>
+        <span class="loading loading-bars"></span>
+        <span class="loading loading-infinity"></span>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="loading loading-spinner loading-xs"></span>
+        <span class="loading loading-spinner loading-sm"></span>
+        <span class="loading loading-spinner loading-md"></span>
+        <span class="loading loading-spinner loading-lg"></span>
+        <span class="loading loading-spinner loading-xl"></span>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Mask</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="mask w-20 h-20" style="background:linear-gradient(135deg,#f472b6,#8b5cf6)"></div>
+        <div class="mask mask-squircle w-20 h-20" style="background:linear-gradient(135deg,#60a5fa,#34d399)"></div>
+        <div class="mask mask-heart w-20 h-20" style="background:linear-gradient(135deg,#fbbf24,#ef4444)"></div>
+        <div class="mask mask-star w-20 h-20" style="background:linear-gradient(135deg,#22d3ee,#6366f1)"></div>
+        <div class="mask mask-circle w-20 h-20" style="background:linear-gradient(135deg,#a3e635,#14b8a6)"></div>
+        <div class="mask mask-decagon w-20 h-20" style="background:linear-gradient(135deg,#f472b6,#6366f1)"></div>
+        <div class="mask mask-diamond w-20 h-20" style="background:linear-gradient(135deg,#fbbf24,#8b5cf6)"></div>
+        <div class="mask mask-hexagon w-20 h-20" style="background:linear-gradient(135deg,#34d399,#60a5fa)"></div>
+        <div class="mask mask-hexagon-2 w-20 h-20" style="background:linear-gradient(135deg,#f97316,#ec4899)"></div>
+        <div class="mask mask-pentagon w-20 h-20" style="background:linear-gradient(135deg,#6366f1,#22d3ee)"></div>
+        <div class="mask mask-star-2 w-20 h-20" style="background:linear-gradient(135deg,#ef4444,#fbbf24)"></div>
+        <div class="mask mask-triangle w-20 h-20" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)"></div>
+        <div class="mask mask-triangle-2 w-20 h-20" style="background:linear-gradient(135deg,#14b8a6,#6366f1)"></div>
+        <div class="mask mask-triangle-3 w-20 h-20" style="background:linear-gradient(135deg,#f472b6,#f97316)"></div>
+        <div class="mask mask-triangle-4 w-20 h-20" style="background:linear-gradient(135deg,#60a5fa,#a3e635)"></div>
+        <div class="mask mask-half-1 w-20 h-20" style="background:linear-gradient(135deg,#fbbf24,#6366f1)"></div>
+        <div class="mask mask-half-2 w-20 h-20" style="background:linear-gradient(135deg,#34d399,#f472b6)"></div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Megamenu</h2>
+      <div class="megamenu w-full">
+        <button popovertarget="mm-demo-1">Products</button>
+        <div popover id="mm-demo-1">Product links</div>
+        <button popovertarget="mm-demo-2">Solutions</button>
+        <div popover id="mm-demo-2">Solution links</div>
+        <div class="megamenu-active"></div>
+      </div>
+      <div class="megamenu megamenu-xs w-full">
+        <button popovertarget="mm-xs">XS menu</button>
+        <div popover id="mm-xs">XS panel</div>
+        <div class="megamenu-active"></div>
+      </div>
+      <div class="megamenu megamenu-sm w-full">
+        <button popovertarget="mm-sm">SM menu</button>
+        <div popover id="mm-sm">SM panel</div>
+        <div class="megamenu-active"></div>
+      </div>
+      <div class="megamenu megamenu-md w-full">
+        <button popovertarget="mm-md">MD menu</button>
+        <div popover id="mm-md">MD panel</div>
+        <div class="megamenu-active"></div>
+      </div>
+      <div class="megamenu megamenu-lg w-full">
+        <button popovertarget="mm-lg">LG menu</button>
+        <div popover id="mm-lg">LG panel</div>
+        <div class="megamenu-active"></div>
+      </div>
+      <div class="megamenu megamenu-xl w-full">
+        <button popovertarget="mm-xl">XL menu</button>
+        <div popover id="mm-xl">XL panel</div>
+        <div class="megamenu-active"></div>
+      </div>
+      <div class="megamenu megamenu-wide w-full">
+        <button popovertarget="mm-wide">Wide</button>
+        <div popover id="mm-wide">Wide panel</div>
+        <div class="megamenu-active"></div>
+      </div>
+      <div class="megamenu megamenu-full w-full">
+        <button popovertarget="mm-full">Full</button>
+        <div popover id="mm-full">Full panel</div>
+        <div class="megamenu-active"></div>
+      </div>
+      <div class="megamenu megamenu-vertical w-full">
+        <button popovertarget="mm-vert">Vertical</button>
+        <div popover id="mm-vert">Vertical panel</div>
+        <div class="megamenu-active"></div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Mockup</h2>
+      <div class="mockup-code w-full max-w-md">
+        <pre data-prefix="1"><code>npm install</code></pre>
+        <pre data-prefix="2"><code>npm run dev</code></pre>
+      </div>
+      <div class="mockup-window w-full max-w-md">
+        <pre data-prefix="$"><code>Hello window</code></pre>
+      </div>
+      <div class="mockup-browser w-full max-w-md">
+        <div class="mockup-browser-toolbar">
+          <div>https://example.com</div>
+        </div>
+        <div class="w-full h-20" style="background:#f3f4f6"></div>
+      </div>
+      <div class="mockup-phone w-64">
+        <div class="mockup-phone-camera"></div>
+        <div class="mockup-phone-display">
+          <div class="w-full h-full" style="background:linear-gradient(135deg,#60a5fa,#8b5cf6)"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Navbar</h2>
+      <div class="navbar w-full" style="background:#f3f4f6">
+        <div class="navbar-start">
+          <span>Start</span>
+        </div>
+        <div class="navbar-center">
+          <span>Center</span>
+        </div>
+        <div class="navbar-end">
+          <span>End</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- batch4: ported components -->
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">OTP</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="otp otp-md otp-primary">
+          <input maxlength="4" value="1234" />
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="otp otp-joined otp-sm otp-secondary">
+          <input maxlength="4" value="5678" />
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="otp otp-xs otp-neutral">
+          <input maxlength="2" value="12" />
+          <span></span><span></span>
+        </div>
+        <div class="otp otp-lg otp-accent">
+          <input maxlength="4" value="0000" />
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="otp otp-xl otp-error">
+          <input maxlength="4" value="9999" />
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="otp otp-info">
+          <input maxlength="4" value="1111" />
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="otp otp-success">
+          <input maxlength="4" value="2222" />
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="otp otp-warning">
+          <input maxlength="4" value="3333" disabled />
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Progress</h2>
+      <div class="flex flex-col gap-2 w-full max-w-md">
+        <progress class="progress" value="30" max="100"></progress>
+        <progress class="progress progress-primary" value="50" max="100"></progress>
+        <progress class="progress progress-secondary" value="60" max="100"></progress>
+        <progress class="progress progress-accent" value="70" max="100"></progress>
+        <progress class="progress progress-neutral" value="40" max="100"></progress>
+        <progress class="progress progress-info" value="55" max="100"></progress>
+        <progress class="progress progress-success" value="80" max="100"></progress>
+        <progress class="progress progress-warning" value="65" max="100"></progress>
+        <progress class="progress progress-error" value="90" max="100"></progress>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Radial progress</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="radial-progress" style="--value:70">70%</div>
+        <div class="radial-progress" style="--value:45; --size:3rem">45%</div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Radio</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <input type="radio" name="b4-radio" class="radio" checked />
+        <input type="radio" name="b4-radio" class="radio radio-neutral" />
+        <input type="radio" name="b4-radio2" class="radio radio-primary" checked />
+        <input type="radio" name="b4-radio2" class="radio radio-secondary" />
+        <input type="radio" name="b4-radio3" class="radio radio-accent" checked />
+        <input type="radio" name="b4-radio3" class="radio radio-info" />
+        <input type="radio" name="b4-radio4" class="radio radio-success" checked />
+        <input type="radio" name="b4-radio4" class="radio radio-warning" />
+        <input type="radio" name="b4-radio5" class="radio radio-error" />
+        <input type="radio" name="b4-radio5" class="radio" disabled />
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <input type="radio" name="b4-size" class="radio radio-xs" checked />
+        <input type="radio" name="b4-size" class="radio radio-sm" />
+        <input type="radio" name="b4-size" class="radio radio-md" />
+        <input type="radio" name="b4-size" class="radio radio-lg" />
+        <input type="radio" name="b4-size" class="radio radio-xl" />
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Range</h2>
+      <div class="flex flex-col gap-2 w-full max-w-md">
+        <input type="range" class="range" value="30" />
+        <input type="range" class="range range-primary" value="50" />
+        <input type="range" class="range range-secondary" value="60" />
+        <input type="range" class="range range-accent" value="70" />
+        <input type="range" class="range range-neutral" value="40" />
+        <input type="range" class="range range-success" value="80" />
+        <input type="range" class="range range-warning" value="65" />
+        <input type="range" class="range range-info" value="55" />
+        <input type="range" class="range range-error" value="90" />
+        <input type="range" class="range" value="20" disabled />
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <input type="range" class="range range-xs" value="20" />
+        <input type="range" class="range range-sm" value="30" />
+        <input type="range" class="range range-md" value="40" />
+        <input type="range" class="range range-lg" value="50" />
+        <input type="range" class="range range-xl" value="60" />
+        <input type="range" class="range range-vertical" value="50" style="height:8rem" />
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Rating</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="rating">
+          <input type="radio" name="b4-rating" class="rating-hidden" />
+          <input type="radio" name="b4-rating" checked />
+          <input type="radio" name="b4-rating" />
+          <input type="radio" name="b4-rating" />
+          <input type="radio" name="b4-rating" />
+          <input type="radio" name="b4-rating" />
+        </div>
+        <div class="rating rating-half">
+          <input type="radio" name="b4-rating-half" checked />
+          <input type="radio" name="b4-rating-half" />
+          <input type="radio" name="b4-rating-half" />
+          <input type="radio" name="b4-rating-half" />
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="rating rating-xs">
+          <input type="radio" name="b4-rxs" checked />
+          <input type="radio" name="b4-rxs" />
+          <input type="radio" name="b4-rxs" />
+        </div>
+        <div class="rating rating-sm">
+          <input type="radio" name="b4-rsm" checked />
+          <input type="radio" name="b4-rsm" />
+          <input type="radio" name="b4-rsm" />
+        </div>
+        <div class="rating rating-md">
+          <input type="radio" name="b4-rmd" checked />
+          <input type="radio" name="b4-rmd" />
+          <input type="radio" name="b4-rmd" />
+        </div>
+        <div class="rating rating-lg">
+          <input type="radio" name="b4-rlg" checked />
+          <input type="radio" name="b4-rlg" />
+          <input type="radio" name="b4-rlg" />
+        </div>
+        <div class="rating rating-xl">
+          <input type="radio" name="b4-rxl" checked />
+          <input type="radio" name="b4-rxl" />
+          <input type="radio" name="b4-rxl" />
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Select</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <select class="select">
+          <option>default</option>
+          <option>two</option>
+        </select>
+        <select class="select select-ghost">
+          <option>ghost</option>
+        </select>
+        <select class="select select-neutral">
+          <option>neutral</option>
+        </select>
+        <select class="select select-primary">
+          <option>primary</option>
+        </select>
+        <select class="select select-secondary">
+          <option>secondary</option>
+        </select>
+        <select class="select select-accent">
+          <option>accent</option>
+        </select>
+        <select class="select select-info">
+          <option>info</option>
+        </select>
+        <select class="select select-success">
+          <option>success</option>
+        </select>
+        <select class="select select-warning">
+          <option>warning</option>
+        </select>
+        <select class="select select-error">
+          <option>error</option>
+        </select>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <select class="select select-xs">
+          <option>xs</option>
+        </select>
+        <select class="select select-sm">
+          <option>sm</option>
+        </select>
+        <select class="select select-md">
+          <option>md</option>
+        </select>
+        <select class="select select-lg">
+          <option>lg</option>
+        </select>
+        <select class="select select-xl">
+          <option>xl</option>
+        </select>
+        <select class="select" disabled>
+          <option>disabled</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Skeleton</h2>
+      <div class="flex flex-col gap-2 w-full max-w-md">
+        <div class="skeleton" style="height:2rem; width:100%"></div>
+        <div class="skeleton" style="height:1rem; width:60%"></div>
+        <div class="skeleton-text text-xl font-bold">shimmer text</div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Stack</h2>
+      <div class="flex flex-wrap items-center gap-6">
+        <div class="stack">
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">one</div>
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">two</div>
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">three</div>
+        </div>
+        <div class="stack stack-bottom">
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">one</div>
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">two</div>
+        </div>
+        <div class="stack stack-top">
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">one</div>
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">two</div>
+        </div>
+        <div class="stack stack-start">
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">one</div>
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">two</div>
+        </div>
+        <div class="stack stack-end">
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">one</div>
+          <div style="width:6rem; height:4rem; border:1px solid currentColor">two</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Stat</h2>
+      <div class="stats stats-horizontal">
+        <div class="stat">
+          <div class="stat-figure">↗</div>
+          <div class="stat-title">downloads</div>
+          <div class="stat-value">31K</div>
+          <div class="stat-desc">Jan to Feb</div>
+          <div class="stat-actions">more</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">users</div>
+          <div class="stat-value">4.2K</div>
+          <div class="stat-desc">up 12%</div>
+        </div>
+      </div>
+      <div class="stats stats-vertical">
+        <div class="stat">
+          <div class="stat-title">vertical one</div>
+          <div class="stat-value">100</div>
+          <div class="stat-desc">first</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">vertical two</div>
+          <div class="stat-value">200</div>
+          <div class="stat-desc">second</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Status</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="status"></span>
+        <span class="status status-neutral"></span>
+        <span class="status status-primary"></span>
+        <span class="status status-secondary"></span>
+        <span class="status status-accent"></span>
+        <span class="status status-info"></span>
+        <span class="status status-success"></span>
+        <span class="status status-warning"></span>
+        <span class="status status-error"></span>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="status status-xs status-success"></span>
+        <span class="status status-sm status-info"></span>
+        <span class="status status-md status-warning"></span>
+        <span class="status status-lg status-error"></span>
+        <span class="status status-xl status-primary"></span>
+      </div>
+    </section>
+
+    <!-- batch5: ported components -->
+    <!-- batch5: steps, swap, tab, table, textarea, textrotate, timeline, toast, toggle, tooltip, validator -->
+    <!-- Static-only demos (no JS): checkbox/radio hacks, tooltip-open, static toast/timeline blocks. -->
+    <!-- Uses batch5 component classes + presetUno layout utilities only. -->
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Steps</h2>
+      <ul class="steps">
+        <li class="step step-primary">Register</li>
+        <li class="step step-primary">Choose plan</li>
+        <li class="step step-secondary">Purchase</li>
+        <li class="step" data-content="★">Review</li>
+      </ul>
+      <ul class="steps steps-horizontal">
+        <li class="step step-accent">Start</li>
+        <li class="step step-info"><span class="step-icon">✓</span>Middle</li>
+        <li class="step step-neutral">End</li>
+      </ul>
+      <ul class="steps steps-vertical">
+        <li class="step step-success">Done</li>
+        <li class="step step-warning">Pending</li>
+        <li class="step step-error">Failed</li>
+      </ul>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Swap</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <label class="swap">
+          <input type="checkbox" />
+          <div class="swap-on">ON</div>
+          <div class="swap-off">OFF</div>
+        </label>
+        <label class="swap swap-rotate">
+          <input type="checkbox" />
+          <div class="swap-on">+</div>
+          <div class="swap-off">×</div>
+        </label>
+        <label class="swap swap-flip">
+          <input type="checkbox" />
+          <div class="swap-on">A</div>
+          <div class="swap-off">B</div>
+          <div class="swap-indeterminate">–</div>
+        </label>
+        <div class="swap swap-active">
+          <div class="swap-on">active-on</div>
+          <div class="swap-off">active-off</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Tabs</h2>
+      <div class="tabs tabs-border" role="tablist">
+        <input type="radio" name="demo-tabs" class="tab" aria-label="Bordered" checked="checked" />
+        <div class="tab-content">bordered content</div>
+        <a role="tab" class="tab tab-active">Active link</a>
+        <a role="tab" class="tab tab-disabled">Disabled</a>
+      </div>
+      <div class="tabs tabs-lift" role="tablist">
+        <input type="radio" name="demo-tabs-lift" class="tab" aria-label="Lift" checked="checked" />
+        <div class="tab-content">lifted content</div>
+        <input type="radio" name="demo-tabs-lift" class="tab" aria-label="Second" />
+      </div>
+      <div class="tabs tabs-box" role="tablist">
+        <input type="radio" name="demo-tabs-box" class="tab" aria-label="Box" checked="checked" />
+        <div class="tab-content">boxed content</div>
+      </div>
+      <div class="tabs tabs-top" role="tablist">
+        <a role="tab" class="tab tab-active">Top</a>
+        <a role="tab" class="tab">Second</a>
+      </div>
+      <div class="tabs tabs-bottom" role="tablist">
+        <a role="tab" class="tab tab-active">Bottom</a>
+        <a role="tab" class="tab">Second</a>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="tabs tabs-xs" role="tablist"><a role="tab" class="tab tab-active">xs</a></div>
+        <div class="tabs tabs-sm" role="tablist"><a role="tab" class="tab tab-active">sm</a></div>
+        <div class="tabs tabs-md" role="tablist"><a role="tab" class="tab tab-active">md</a></div>
+        <div class="tabs tabs-lg" role="tablist"><a role="tab" class="tab tab-active">lg</a></div>
+        <div class="tabs tabs-xl" role="tablist"><a role="tab" class="tab tab-active">xl</a></div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Table</h2>
+      <div class="overflow-x-auto">
+        <table class="table table-zebra">
+          <thead><tr><th>Name</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr class="row-hover"><td>Ada</td><td>Engineer</td></tr>
+            <tr><td>Grace</td><td>Admiral</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="table table-xs table-pin-rows table-pin-cols">
+          <thead><tr><th>#</th><th>Value</th></tr></thead>
+          <tbody><tr><td>1</td><td>xs</td></tr></tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="table table-sm"><tbody><tr><td>sm size</td></tr></tbody></table>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="table table-md"><tbody><tr><td>md size</td></tr></tbody></table>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="table table-lg"><tbody><tr><td>lg size</td></tr></tbody></table>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="table table-xl"><tbody><tr><td>xl size</td></tr></tbody></table>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Textarea</h2>
+      <div class="flex flex-wrap gap-2">
+        <textarea class="textarea" placeholder="default"></textarea>
+        <textarea class="textarea textarea-ghost" placeholder="ghost"></textarea>
+        <textarea class="textarea textarea-neutral" placeholder="neutral"></textarea>
+        <textarea class="textarea textarea-primary" placeholder="primary"></textarea>
+        <textarea class="textarea textarea-secondary" placeholder="secondary"></textarea>
+        <textarea class="textarea textarea-accent" placeholder="accent"></textarea>
+        <textarea class="textarea textarea-info" placeholder="info"></textarea>
+        <textarea class="textarea textarea-success" placeholder="success"></textarea>
+        <textarea class="textarea textarea-warning" placeholder="warning"></textarea>
+        <textarea class="textarea textarea-error" placeholder="error"></textarea>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <textarea class="textarea textarea-xs" placeholder="xs"></textarea>
+        <textarea class="textarea textarea-sm" placeholder="sm"></textarea>
+        <textarea class="textarea textarea-md" placeholder="md"></textarea>
+        <textarea class="textarea textarea-lg" placeholder="lg"></textarea>
+        <textarea class="textarea textarea-xl" placeholder="xl"></textarea>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Textrotate</h2>
+      <p class="text-sm">We ship <span class="text-rotate"><span><span>fast</span><span>clean</span><span>tiny</span></span></span> CSS.</p>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Timeline</h2>
+      <ul class="timeline timeline-vertical">
+        <li>
+          <hr />
+          <div class="timeline-start timeline-box">Start box</div>
+          <div class="timeline-middle">●</div>
+          <div class="timeline-end">End note</div>
+          <hr />
+        </li>
+        <li>
+          <hr />
+          <div class="timeline-start">Second</div>
+          <div class="timeline-middle">●</div>
+          <div class="timeline-end timeline-box">End box</div>
+          <hr />
+        </li>
+      </ul>
+      <ul class="timeline timeline-horizontal timeline-compact">
+        <li>
+          <hr />
+          <div class="timeline-start">A</div>
+          <div class="timeline-middle">●</div>
+          <div class="timeline-end">B</div>
+          <hr />
+        </li>
+      </ul>
+      <ul class="timeline timeline-snap-icon">
+        <li>
+          <hr />
+          <div class="timeline-start">Snap</div>
+          <div class="timeline-middle">●</div>
+          <div class="timeline-end">Icon</div>
+          <hr />
+        </li>
+      </ul>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Toast</h2>
+      <div class="flex flex-wrap gap-2">
+        <div class="toast toast-start"><div class="timeline-box">start toast</div></div>
+        <div class="toast toast-center"><div class="timeline-box">center toast</div></div>
+        <div class="toast toast-end"><div class="timeline-box">end toast</div></div>
+        <div class="toast toast-top"><div class="timeline-box">top toast</div></div>
+        <div class="toast toast-middle"><div class="timeline-box">middle toast</div></div>
+        <div class="toast toast-bottom"><div class="timeline-box">bottom toast</div></div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Toggle</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <input type="checkbox" class="toggle" checked="checked" />
+        <input type="checkbox" class="toggle toggle-primary" checked="checked" />
+        <input type="checkbox" class="toggle toggle-secondary" checked="checked" />
+        <input type="checkbox" class="toggle toggle-accent" checked="checked" />
+        <input type="checkbox" class="toggle toggle-neutral" checked="checked" />
+        <input type="checkbox" class="toggle toggle-success" checked="checked" />
+        <input type="checkbox" class="toggle toggle-warning" checked="checked" />
+        <input type="checkbox" class="toggle toggle-info" checked="checked" />
+        <input type="checkbox" class="toggle toggle-error" checked="checked" />
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <input type="checkbox" class="toggle toggle-xs" checked="checked" />
+        <input type="checkbox" class="toggle toggle-sm" checked="checked" />
+        <input type="checkbox" class="toggle toggle-md" checked="checked" />
+        <input type="checkbox" class="toggle toggle-lg" checked="checked" />
+        <input type="checkbox" class="toggle toggle-xl" checked="checked" />
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Tooltip</h2>
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="tooltip tooltip-open tooltip-top" data-tip="top tip">top</div>
+        <div class="tooltip tooltip-open tooltip-bottom tooltip-primary" data-tip="bottom tip">bottom</div>
+        <div class="tooltip tooltip-open tooltip-left tooltip-secondary" data-tip="left tip">left</div>
+        <div class="tooltip tooltip-open tooltip-right tooltip-accent" data-tip="right tip">right</div>
+        <div class="tooltip tooltip-open tooltip-start tooltip-info" data-tip="start tip">start</div>
+        <div class="tooltip tooltip-open tooltip-center tooltip-success" data-tip="center tip">center</div>
+        <div class="tooltip tooltip-open tooltip-end tooltip-warning" data-tip="end tip">end</div>
+        <div class="tooltip tooltip-open tooltip-error" data-tip="error tip"><span class="tooltip-content">rich content</span>error</div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-xl font-bold">Validator</h2>
+      <div class="flex flex-col gap-2">
+        <input type="email" class="validator textarea textarea-primary" placeholder="mail@example.com" required="required" />
+        <p class="validator-hint">Enter a valid email address</p>
+      </div>
+    </section>
+
     <!-- colors -->
     <section class="flex flex-col gap-3">
       <h2 class="text-xl font-bold">Theme colors (with opacity)</h2>

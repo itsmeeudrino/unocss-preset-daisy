@@ -21,7 +21,12 @@ export function resolveOptions(user: DaisyOptions): Required<DaisyOptions> {
 // Port of upstream pluginOptionsHandler + addPrefix + shouldIncludeItem
 export function applyPrefix(selector: string, prefix: string): string {
   if (!prefix) return selector
-  return selector.replace(/\.([a-z0-9-]+)/gi, `.${prefix}$1`)
+  // Only treat `.` as a class start when it opens a class name: not part of
+  // a decimal (`0.5rem`), URL (`icon.svg`) or number, and followed by a
+  // letter (daisyUI class names always start with one; this also skips
+  // `.5`-style fragments). Bare `.2`-style decimals previously corrupted to
+  // `.d-2` in prefixed builds.
+  return selector.replace(/(?<![0-9A-Za-z_-])\.([a-zA-Z][a-zA-Z0-9-]*)/g, `.${prefix}$1`)
 }
 
 export function shouldInclude(name: string, include: string[], exclude: string[]): boolean {

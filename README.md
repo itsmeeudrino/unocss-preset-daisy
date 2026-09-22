@@ -10,7 +10,15 @@ See `PLAN.md` for full port plan, `AGENTS.md` for agent instructions.
 // uno.config.ts
 import { presetUno } from 'unocss'
 import { presetDaisy } from 'unocss-preset-daisy'
-export default { presets: [presetUno(), presetDaisy({ themes: ['light','dark'] })] }
+export default {
+  // REQUIRED: colon-only separators. daisyUI names like hover-3d,
+  // file-input-* and link-* collide with Uno's dash-form variants
+  // (hover-*, file-*, link-*), which would swallow them before exact
+  // matching (file-input would even render input styles!). Colon-form
+  // variants (sm:, hover:) keep working — same syntax as Tailwind.
+  separators: [':'],
+  presets: [presetUno(), presetDaisy({ themes: ['light','dark'] })],
+}
 ```
 
 ```ts

@@ -5,6 +5,16 @@ import { layerOrder } from './layers.ts'
 import { basePreflights } from './preflights/base.ts'
 import { componentShortcuts } from './shortcuts/components.ts'
 import { componentRules } from './rules/components.ts'
+import { batch1Shortcuts } from './shortcuts/batch1.ts'
+import { batch1Rules } from './rules/batch1.ts'
+import { batch2Shortcuts } from './shortcuts/batch2.ts'
+import { batch2Rules } from './rules/batch2.ts'
+import { batch3Shortcuts } from './shortcuts/batch3.ts'
+import { batch3Rules } from './rules/batch3.ts'
+import { batch4Shortcuts } from './shortcuts/batch4.ts'
+import { batch4Rules } from './rules/batch4.ts'
+import { batch5Shortcuts } from './shortcuts/batch5.ts'
+import { batch5Rules } from './rules/batch5.ts'
 import { utilityRules } from './rules/utilities.ts'
 import { DAISY_COLORS, colorRules } from './rules/colors.ts'
 import { daisyTheme } from './theme/tokens.ts'
@@ -37,9 +47,21 @@ export function presetDaisy(userOptions: DaisyOptions = {}): Preset {
     name: 'unocss-preset-daisy',
     layers: layerOrder,
     preflights: basePreflights(opts),
-    shortcuts: componentShortcuts(opts),
+    shortcuts: [
+      ...componentShortcuts(opts),
+      ...batch1Shortcuts(opts),
+      ...batch2Shortcuts(opts),
+      ...batch3Shortcuts(opts),
+      ...batch4Shortcuts(opts),
+      ...batch5Shortcuts(opts),
+    ],
     rules: [
       ...(componentRules(opts) ?? []),
+      ...(batch1Rules(opts) ?? []),
+      ...(batch2Rules(opts) ?? []),
+      ...(batch3Rules(opts) ?? []),
+      ...(batch4Rules(opts) ?? []),
+      ...(batch5Rules(opts) ?? []),
       ...(utilityRules(opts) ?? []),
       ...(colorRules(opts) ?? []),
     ],
