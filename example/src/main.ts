@@ -1,4 +1,8 @@
 import 'virtual:uno.css'
+import 'unocss-preset-daisy/themes'
+// Theme variable definitions (oklch --color-*, --radius-*, --size-*, ...).
+// The preset emits component CSS through Uno; the 35 theme blocks ship as a
+// separate stylesheet that must be imported once (see package exports './themes').
 
 const THEMES = ['light', 'dark', 'cupcake', 'synthwave', 'retro'] as const
 
