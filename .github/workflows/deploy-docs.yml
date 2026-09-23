@@ -1,0 +1,48 @@
+# Deploy docs/build (adapter-static, root-domain only — no paths.base)
+# to GitHub Pages. No CNAME here: custom domain undecided; without one the
+# project-pages subpath URL WILL break (absolute / links + trailingSlash).
+name: deploy-docs
+
+on:
+  push:
+    branches: [main]
+    paths: ["docs/**", "src/**", ".github/workflows/deploy-docs.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.0"
+      # docs imports the preset via ../src (TS) + ../src/theme/themes.css —
+      # no root dist build needed.
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
