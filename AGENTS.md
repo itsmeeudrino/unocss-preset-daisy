@@ -36,7 +36,7 @@
 - `bun run build` — `build.ts` → `dist/` (`daisy.css` + preset JS)
 - `bun run lint` — `tsc --noEmit` against strict `tsconfig.json` (lint-only; build/test stay Bun)
 - `bun run format` — Biome (`biome.json`); raw CSS in template literals is untouched, `src/theme/themes.css` excluded
-- `bun test` — all tests (664 pass / 16 files)
+- `bun test` — all tests (1220 pass / 21 files)
 - `bun run check` — `build + lint + test`
 - `bun run inventory` — `bun scripts/inventory-apply.ts` (writes `tests/fixtures/apply-inventory.json`)
 - `bun run tokens` — `bun scripts/generate-tokens.ts` (writes `src/theme/tokens.ts`)
@@ -57,7 +57,7 @@
 
 - Every component batch needs: (a) snapshot entry in `tests/snapshot.test.ts`, (b) theme matrix check, (c) prefix on/off check.
 - Snapshot compares computed CSS, ignoring layer-name strings. Allow oklch rounding ±1.
-- Full gate: 664 pass / 16 files — `batch1-5`, `compat-*` (buttons/components/extended/themes), `deviations` (workstream A resolutions), `prefix-e2e` (B), `composed` (C), `separators` sweep, `options`, `snapshot`, `example-coverage`.
+- Full gate: 1220 pass / 21 files — `batch1-5`, `compat-*` (buttons/components/extended/themes), `deviations` (workstream A resolutions), `prefix-e2e` (B), `composed` (C), `separators` sweep, `options`, `snapshot`, `example-coverage`, `parity-1to1` + `parity-lib` (1:1 upstream behavior parity), `docs-chrome` + `docs-gaps` + `extractor-coverage` + `verify-docs` (docs fork).
 - User Uno config MUST set `separators: [':']` — Uno's dash-form variants eat `hover-3d`, `file-input*`, `link-*` (locked by `tests/separators.test.ts`; README quickstart).
 
 ## Communication rules

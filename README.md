@@ -38,8 +38,8 @@ import 'unocss-preset-daisy/themes' // oklch theme variables (without this, colo
 - [x] P2 base + 35 themes
 - [x] P3 6 core components (button, badge, card, input, modal, menu)
 - [x] P4 utilities + color rules + variants + infra (`bun run check` green)
-- [x] P5 61/61 components (batches 1–5 wired, 664 tests green)
-- [ ] P6 freeze `v5.7-uno.0` (gated on visual sign-off)
+- [x] P5 61/61 components (batches 1–5 wired, 1220 tests green)
+- [x] P6 freeze `v5.7-uno.0` (preset + docs fork + GH Pages deploy)
 
 ## Migration from daisyUI (Tailwind)
 
@@ -62,7 +62,12 @@ import 'unocss-preset-daisy/themes' // oklch theme variables (without this, colo
   OUR `.filter` wins (locked in `tests/composed.test.ts`).
 - Dash-form variants lost for `hover-*`/`file-*`/`link-*` class names (hence
   the `separators: [':']` requirement). Colon-form (`hover:`, `sm:`) works.
-- `typography` is a stub (`.prose` CSS vars only; nested `:where(code)` TBD).
+- `typography`: full upstream port (`.prose` vars + `:where(code)` block). Full
+  prose *styling* needs `@unocss/preset-typography` after `presetDaisy()`
+  (ships inside `unocss` — no new dep; see `docs/uno.config.ts`); with the engine,
+  theme it via `presetTypography({ cssExtend })` (snippet exported as
+  `DAISY_PROSE_CSS_EXTEND` in `tests/docs-gaps.test.ts`) — the engine's `prose`
+  shortcut shadows the standalone bridge (locked in test).
 - Formatted with Biome (`bun run format`; config in `biome.json`, pinned
   `@biomejs/biome@2.5.9`). Raw CSS lives inside template literals, which
   formatters leave untouched; `src/theme/themes.css` (verbatim upstream) is
@@ -70,25 +75,23 @@ import 'unocss-preset-daisy/themes' // oklch theme variables (without this, colo
 
 ## Size
 
-Measured 2026-09-22 (Bun 1.4.0) from `dist/` as built in-repo:
+Measured 2026-09-23 (Bun 1.4.0) from `dist/` as built in-repo:
 
 | file | raw | gzip |
 | --- | --- | --- |
-| `dist/index.js` | 309,806 B (302.5 KiB) | 51,076 B (49.9 KiB) |
+| `dist/index.js` | 320,012 B (312.5 KiB) | 53,251 B (52.0 KiB) |
 | `dist/themes.css` | 43,824 B (42.8 KiB) | 7,190 B (7.0 KiB) |
-| `dist/**/*.d.ts` (20 files, F.1) | 8,652 B total | — (types, not shipped to browsers) |
-| runtime total (`index.js` + `themes.css`) | 353,630 B (345.3 KiB) | 58,266 B (56.9 KiB) |
+| `dist/**/*.d.ts` (22 files, F.1) | 9,602 B total | — (types, not shipped to browsers) |
+| runtime total (`index.js` + `themes.css`) | 363,836 B (355.3 KiB) | 60,441 B (59.0 KiB) |
 
 - Methodology (Bun/Node built-ins only, no analyzer dep): raw = byte length
   via `Bun.file(f).bytes()`; gzip = `Bun.gzipSync(buf).length` at default
   compression level; hashes via `node:crypto` sha256.
 - Dist content hash (sha256 over `index.js` + `themes.css` concatenated):
-  `bd9096a5493b8ac0c23d4bd258914dd327607f783b595d391f70fcf37deb28aa`
-  (per-file sha16: `index.js` 673ac2622ff4c2d4, `themes.css` c6edac045a0ce21e).
-- STALENESS FLAG: the packaging workstream owns `dist/` and may rebuild it
-  (F.2 themes subset). Verified 2026-09-22 post-F.1: `index.js` + `themes.css`
-  are byte-identical to the hash above (F.1 added only the `.d.ts` tree) —
-  re-measure after any rebuild; do not chase drift.
+  `cdf7d046347dc52ca547cd6eec0a60aec49e5552ab59c35fb00b5170d1a795d0`
+  (per-file sha16: `index.js` 268e87278d678d2c, `themes.css` c6edac045a0ce21e).
+- Measured from the `v5.7-uno.0` tree (61/61 + `variantWrap` + `themeOrder`
+  export + tab `:focus` upstream match). Re-measure after any rebuild.
 
 ## Example app
 

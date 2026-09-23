@@ -9,7 +9,7 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
-    "unocss": "latest",
+    "unocss": "^66.0.0",
     "unocss-preset-daisy": "file:.."
   },
   "devDependencies": {

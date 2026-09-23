@@ -1,6 +1,6 @@
 {
   "name": "unocss-preset-daisy",
-  "version": "0.1.0",
+  "version": "5.7-uno.0",
   "description": "daisyUI v5 ported to UnoCSS — zero-Tailwind preset (hard fork of daisyui@5.7.43)",
   "type": "module",
   "main": "./dist/index.js",
