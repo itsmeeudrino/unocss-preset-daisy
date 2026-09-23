@@ -90,8 +90,11 @@ describe("card, modal, menu, join, glass", () => {
       ),
     );
     expect(rule).toBeDefined();
-    expect(rule?.decls.find(([p]) => p === "outline-style")?.[1]).toBe(
-      "hidden",
+    // Compiled outline-hidden form (matches upstream daisyui.css; Tailwind
+    // v4 expands `outline-hidden` to the transparent-outline + tw-style pair).
+    expect(rule?.decls.find(([p]) => p === "outline-style")?.[1]).toBe("none");
+    expect(rule?.decls.find(([p]) => p === "--tw-outline-style")?.[1]).toBe(
+      "none",
     );
   });
 

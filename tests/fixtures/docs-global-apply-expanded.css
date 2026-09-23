@@ -1,0 +1,146 @@
+/* docs global.css @apply expansion reference (DOCS-SPIKE.md §1.2/§2.4).
+ *
+ * Source: https://raw.githubusercontent.com/saadeghi/daisyui/master/packages/docs/src/global.css
+ * (577 lines, 2026-09-23). Only `@apply` sites expanded here — everything else
+ * in global.css is already plain CSS. Shared with the docs scaffold track:
+ * copy these blocks verbatim into the scaffold's stylesheet (see
+ * docs/src/app.css — must match this file for the marked blocks).
+ *
+ * Expansion method (no tailwindcss dep, per AGENTS.md): each utility mapped
+ * via Uno's own `presetUno()` output for the same token
+ * (`bun -e` probe 2026-09-23) + Tailwind v4 plain-CSS equivalents:
+ *   grid -> display:grid, place-items-center -> place-items:center,
+ *   overflow-hidden -> overflow:hidden, z-10 -> z-index:10, flex -> display:flex,
+ *   size-full -> width:100%;height:100%, w-full -> width:100%,
+ *   opacity-0 -> opacity:0, opacity-100 -> opacity:1,
+ *   scale-100 -> scale:100% 100% (Tailwind v4 `scale` property; Uno emits the
+ *     var-heavy `transform:` form for the same token — identical rendering),
+ *   outline-base-300 -> outline-color:var(--color-base-300) (daisy theme var),
+ *   outline-2 -> outline-width:2px, -outline-offset-4 -> outline-offset:-4px,
+ *   `*:[grid-area:1/1]` / `*:w-full` (Tailwind `*` = direct children) ->
+ *     `> *` rules below.
+ *
+ * Docs `pre.syntax` adds explicit `outline-style:solid` (Tailwind's `outline-2`
+ * implies a visible style; Uno's `outline-2` emits width only, so the plain-CSS
+ * snippet pins `solid` to keep `:focus-visible` visible under Uno).
+ */
+
+pre.syntax[tabindex="0"]:focus-visible {
+  /* was: @apply outline-base-300 outline-2 -outline-offset-4 */
+  outline-color: var(--color-base-300);
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: -4px;
+}
+
+/* gallery-column-reveal */
+.gallery-column-reveal {
+  /* was: @apply grid place-items-center overflow-hidden *:[grid-area:1/1] */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  > * {
+    grid-area: 1 / 1;
+  }
+  .gallery-column-reveal-columns {
+    /* was: @apply z-10 flex size-full *:w-full */
+    z-index: 10;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    > * {
+      width: 100%;
+    }
+  }
+  .gallery-column-reveal-images {
+    /* was: @apply grid *:[grid-area:1/1] */
+    display: grid;
+    > * {
+      grid-area: 1 / 1;
+    }
+    > *:not(:nth-child(1)) {
+      /* was: @apply opacity-0 */
+      opacity: 0;
+      transition: opacity 300ms;
+    }
+  }
+  &:has(.gallery-column-reveal-columns > div:nth-child(1):hover) {
+    .gallery-column-reveal-images > *:nth-child(1) {
+      /* was: @apply opacity-100 */
+      opacity: 1;
+      transition: opacity 0s;
+    }
+  }
+  &:has(.gallery-column-reveal-columns > div:nth-child(2):hover) {
+    .gallery-column-reveal-images > *:nth-child(2) {
+      /* was: @apply scale-100 opacity-100 */
+      scale: 100% 100%;
+      opacity: 1;
+      transition: opacity 0s;
+    }
+  }
+  &:has(.gallery-column-reveal-columns > div:nth-child(3):hover) {
+    .gallery-column-reveal-images > *:nth-child(3) {
+      /* was: @apply scale-100 opacity-100 */
+      scale: 100% 100%;
+      opacity: 1;
+      transition: opacity 0s;
+    }
+  }
+  &:has(.gallery-column-reveal-columns > div:nth-child(4):hover) {
+    .gallery-column-reveal-images > *:nth-child(4) {
+      /* was: @apply scale-100 opacity-100 */
+      scale: 100% 100%;
+      opacity: 1;
+      transition: opacity 0s;
+    }
+  }
+  &:has(.gallery-column-reveal-columns > div:nth-child(5):hover) {
+    .gallery-column-reveal-images > *:nth-child(5) {
+      /* was: @apply scale-100 opacity-100 */
+      scale: 100% 100%;
+      opacity: 1;
+      transition: opacity 0s;
+    }
+  }
+  &:has(.gallery-column-reveal-columns > div:nth-child(6):hover) {
+    .gallery-column-reveal-images > *:nth-child(6) {
+      /* was: @apply scale-100 opacity-100 */
+      scale: 100% 100%;
+      opacity: 1;
+      transition: opacity 0s;
+    }
+  }
+  &:has(.gallery-column-reveal-columns > div:nth-child(7):hover) {
+    .gallery-column-reveal-images > *:nth-child(7) {
+      /* was: @apply scale-100 opacity-100 */
+      scale: 100% 100%;
+      opacity: 1;
+      transition: opacity 0s;
+    }
+  }
+  &:has(.gallery-column-reveal-columns > div:nth-child(8):hover) {
+    .gallery-column-reveal-images > *:nth-child(8) {
+      /* was: @apply scale-100 opacity-100 */
+      scale: 100% 100%;
+      opacity: 1;
+      transition: opacity 0s;
+    }
+  }
+  &:has(.gallery-column-reveal-columns > div:nth-child(9):hover) {
+    .gallery-column-reveal-images > *:nth-child(9) {
+      /* was: @apply scale-100 opacity-100 */
+      scale: 100% 100%;
+      opacity: 1;
+      transition: opacity 0s;
+    }
+  }
+  &:has(.gallery-column-reveal-columns > div:nth-child(10):hover) {
+    .gallery-column-reveal-images > *:nth-child(10) {
+      /* was: @apply scale-100 opacity-100 */
+      scale: 100% 100%;
+      opacity: 1;
+      transition: opacity 0s;
+    }
+  }
+}

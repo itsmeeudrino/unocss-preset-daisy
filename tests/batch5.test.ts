@@ -928,7 +928,7 @@ describe("batch5 prefix", () => {
     // Decimal values, svg payload and timings must survive prefixing intact.
     expect(css).not.toMatch(/\.d-\d/);
     expect(css).toContain("M0.500009");
-    expect(css).toContain("cubic-bezier(0.4, 0, 0.2, 1)");
+    expect(css).toContain("cubic-bezier(.4,0,.2,1)");
     expect(css).toContain("padding:0.125rem");
   });
 

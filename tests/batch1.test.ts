@@ -329,7 +329,7 @@ describe("aura variants and sizes", () => {
       "animation:aura var(--tw-duration, 20s) linear infinite",
     );
     expect(css).toContain(
-      "radial-gradient(closest-corner at center, currentColor 0%, transparent 90%)",
+      "radial-gradient(closest-corner,currentColor 0%,#0000 90%)",
     );
   });
 });

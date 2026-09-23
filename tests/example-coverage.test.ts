@@ -195,9 +195,22 @@ describe("example coverage", () => {
     for (const t of daisy) {
       const base = t.split(":").pop()?.split("/")[0] ?? t;
       const esc = `.${t.replace(/:/g, "\\:").replace(/\//g, "\\/")}`;
-      if (!uno.includes(esc) && !uno.includes(`.${base}`)) dead.push(t);
+      if (t.includes(":")) {
+        // Variant-gated tokens must emit the escaped variant selector —
+        // the base-class fallback below would pass vacuously (e.g.
+        // sm:card-side via .card-side) while the variant stays unwrapped.
+        if (!uno.includes(esc)) dead.push(t);
+      } else if (!uno.includes(esc) && !uno.includes(`.${base}`)) dead.push(t);
     }
     expect(dead).toEqual([]);
+  });
+
+  test("responsive variant tokens emit @media + escaped selector", async () => {
+    // Locks the variantWrap fix in this file too (not just verify-docs):
+    // sm:card-side must wrap in its breakpoint, not leak the base rule.
+    const uno = await cssFor("card card-side sm:card-side");
+    expect(uno).toContain("@media");
+    expect(uno).toContain(".sm\\:card-side");
   });
 
   test("no unported upstream component classes", async () => {

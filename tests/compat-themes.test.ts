@@ -112,3 +112,52 @@ describe("theme contract", () => {
     expect(dark.get("--color-error-content")).toBe("oklch(27% 0.105 12.094)");
   });
 });
+
+describe("theme-controller hooks (DOCS-SPIKE §2.1)", () => {
+  // Upstream `functions/themePlugin.js:22` generates per-theme
+  // `:root:has(input.theme-controller[value="…"]:checked)`; file output via
+  // `functions/generateThemeFiles.js wrapContent()` uses the unquoted form
+  // `:root:has(input.theme-controller[value=<name>]:checked)` (functionally
+  // identical for identifier values). `src/theme/themes.css` must preserve
+  // these selectors verbatim or the theme-controller demos stop working.
+  // Verified 2026-09-23 against upstream master (themePlugin.js + light.css
+  // + generateThemeFiles.js): light wraps as
+  // `:root,:root:has(...),[data-theme="light"]`, others as
+  // `:root:has(...),[data-theme="…"]`. No fix needed — selectors intact.
+  test("all 35 themes carry the theme-controller hook", async () => {
+    const css = await Bun.file("src/theme/themes.css").text();
+    const hooks =
+      css.match(
+        /:root:has\(input\.theme-controller\[value=[\w-]+\]:checked\)/g,
+      ) ?? [];
+    expect(hooks.length).toBe(35);
+    for (const theme of EXPECTED_THEMES) {
+      expect(
+        css.includes(
+          `:root:has(input.theme-controller[value=${theme}]:checked)`,
+        ),
+        `${theme} missing :root:has(input.theme-controller[value=${theme}]:checked)`,
+      ).toBe(true);
+      expect(
+        css.includes(`[data-theme="${theme}"]`),
+        `${theme} missing [data-theme="${theme}"]`,
+      ).toBe(true);
+    }
+  });
+
+  test("light keeps the bare :root defaults (others must not)", async () => {
+    const css = await Bun.file("src/theme/themes.css").text();
+    expect(
+      css.includes(
+        ":root,:root:has(input.theme-controller[value=light]:checked)",
+      ),
+    ).toBe(true);
+    // No other theme block may claim bare `:root` (would leak its vars).
+    for (const theme of EXPECTED_THEMES) {
+      if (theme === "light") continue;
+      expect(
+        css.includes(`:root,:root:has(input.theme-controller[value=${theme}]`),
+      ).toBe(false);
+    }
+  });
+});
