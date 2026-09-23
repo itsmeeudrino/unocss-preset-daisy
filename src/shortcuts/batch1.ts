@@ -159,8 +159,10 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
       key("aura-rainbow"),
       [
         {
+          // Upstream COMPILED value verbatim (LightningCSS: oklch L in %,
+          // bare `360` hue without the `deg` unit).
           background:
-            "conic-gradient(from var(--aura-angle) in oklch longer hue, transparent 10%, oklch(80% 0.15 0deg), oklch(80% 0.15 360deg), transparent 90%)",
+            "conic-gradient(from var(--aura-angle) in oklch longer hue, transparent 10%, oklch(80% .15 0), oklch(80% .15 360), transparent 90%)",
         },
       ],
       { layer: "daisy-l2" },
@@ -180,7 +182,7 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
       [
         {
           "background-image":
-            "repeating-conic-gradient(from var(--aura-angle), oklch(0.3 0 0), oklch(0.9 0 0), oklch(0.6 0 0), oklch(0.9 0 0), oklch(0.5 0 0), oklch(0.3 0 0) 50%)",
+            "repeating-conic-gradient(from var(--aura-angle), oklch(30% 0 0), oklch(90% 0 0), oklch(60% 0 0), oklch(90% 0 0), oklch(50% 0 0), oklch(30% 0 0) 50%)",
         },
       ],
       { layer: "daisy-l2" },
@@ -190,7 +192,7 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
       [
         {
           "background-image":
-            "repeating-conic-gradient(from var(--aura-angle), oklch(0.6598 0.1863 72.37), oklch(0.9635 0.0768 102.94), oklch(0.7157 0.1691 82.23), oklch(0.9602 0.0792 103.13), oklch(0.6066 0.1181 76.17), oklch(0.6598 0.1863 72.37) 50%)",
+            "repeating-conic-gradient(from var(--aura-angle), oklch(65.98% .1863 72.37), oklch(96.35% .0768 102.94), oklch(71.57% .1691 82.23), oklch(96.02% .0792 103.13), oklch(60.66% .1181 76.17), oklch(65.98% .1863 72.37) 50%)",
         },
       ],
       { layer: "daisy-l2" },
@@ -715,6 +717,7 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
           display: "grid",
           width: "100%",
           overflow: "hidden",
+          "-webkit-user-select": "none",
           "user-select": "none",
           "align-items": "normal",
           "grid-template-rows": "1fr 1.8rem 1fr",
@@ -773,8 +776,8 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
         {
           position: "relative",
           "grid-column-start": "1",
-          "grid-row": "span 3/span 3",
-          "grid-row-start": "1",
+          // Compiled form (LightningCSS merges row-start into the span).
+          "grid-row": "1/span 3",
         },
         "__daisy-diff-item-2-nested",
       ],
@@ -791,8 +794,8 @@ export function batch1Shortcuts(opts: Ctx): StaticShortcut[] {
           position: "relative",
           "z-index": "1",
           "grid-column-start": "1",
-          "grid-row": "span 3/span 3",
-          "grid-row-start": "1",
+          // Compiled form (LightningCSS merges row-start into the span).
+          "grid-row": "1/span 3",
           overflow: "hidden",
           "border-right": "2px solid var(--color-base-100)",
           "box-shadow": "0 0 0 2px #0000002a",

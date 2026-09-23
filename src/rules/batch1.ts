@@ -99,7 +99,7 @@ const CALLY_NESTED = `.cally::part(container) {
       user-select: none;
     }
 .cally ::part(th) {
-      font-weight: normal;
+      font-weight: 400;
       block-size: auto;
     }
 .cally::part(header) {
@@ -113,7 +113,7 @@ const CALLY_NESTED = `.cally::part(container) {
       border-radius: var(--radius-field);
       border: none;
       padding: 0.5rem;
-      background: #0000;
+      background: 0 0;
     }
 .cally::part(button):hover {
       background: var(--color-base-200);
@@ -474,8 +474,8 @@ const PIKA_BLOCK = `.pika-single:is(div) {
         }
       }
 
-      .pika-prev,
-      .pika-next {
+      & .pika-prev,
+      & .pika-next {
         display: block;
         cursor: pointer;
         position: absolute;
@@ -529,8 +529,8 @@ const PIKA_BLOCK = `.pika-single:is(div) {
         border: 0;
       }
       .pika-table {
-        th,
-        td {
+        & th,
+        & td {
           padding: 0;
         }
         th {
@@ -564,8 +564,8 @@ const PIKA_BLOCK = `.pika-single:is(div) {
           color: var(--color-primary-content);
         }
       }
-      .is-selected,
-      .has-event {
+      & .is-selected,
+      & .has-event {
         .pika-button {
           &,
           &:hover {
@@ -582,8 +582,8 @@ const PIKA_BLOCK = `.pika-single:is(div) {
         }
       }
 
-      .is-disabled,
-      .is-inrange {
+      & .is-disabled,
+      & .is-inrange {
         .pika-button {
           background: var(--color-base-200);
         }
@@ -626,15 +626,15 @@ const PIKA_BLOCK = `.pika-single:is(div) {
         cursor: default;
       }
 
-      .pika-button:hover,
-      .pika-row.pick-whole-week:hover .pika-button {
+      & .pika-button:hover,
+      & .pika-row.pick-whole-week:hover .pika-button {
         color: var(--color-base-content);
         background-color: var(--color-base-200);
         border-radius: var(--radius-field);
       }
       .pika-table abbr {
         text-decoration: none;
-        font-weight: normal;
+        font-weight: 400;
       }
     }
 `;
@@ -649,7 +649,7 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
       pointer-events: none;
       opacity: 0;
       * {
-        pointer-events: none !important;
+        pointer-events: none!important;
       }
     }
 .vc[data-vc-input] {
@@ -703,8 +703,7 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
         inset-block-start: 50%;
         height: 0.5rem;
         width: 0.5rem;
-        border-color: currentColor;
-        border-style: solid;
+        border: 2px solid;
         border-width: 0 2px 2px 0;
         background-repeat: no-repeat;
         background-position: center;
@@ -730,8 +729,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
           opacity: 0.3;
         }
 
-        [data-vc="column"][data-vc-column="month"],
-        [data-vc="column"][data-vc-column="year"] {
+        & [data-vc="column"][data-vc-column="month"],
+        & [data-vc="column"][data-vc-column="year"] {
           pointer-events: auto;
           opacity: 1;
         }
@@ -957,8 +956,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
 .vc [data-vc-date], .vc .vc-date {
       &[data-vc-date-month="prev"],
       &[data-vc-date-month="next"] {
-        [data-vc-date-btn],
-        .vc-date__btn {
+        & [data-vc-date-btn],
+        & .vc-date__btn {
           color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
         }
       }
@@ -966,8 +965,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
       &[data-vc-date-disabled] {
         pointer-events: none;
 
-        [data-vc-date-btn],
-        .vc-date__btn {
+        & [data-vc-date-btn],
+        & .vc-date__btn {
           pointer-events: none;
           color: color-mix(in oklab, var(--color-base-content) 30%, transparent);
           opacity: 0.8;
@@ -983,15 +982,15 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
           border-radius: 0;
         }
 
-        [data-vc-date-btn],
-        .vc-date__btn {
+        & [data-vc-date-btn],
+        & .vc-date__btn {
           background-color: var(--color-base-200);
         }
 
         &[data-vc-date-hover="first"],
         &[data-vc-date-hover="last"] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             background-color: var(--color-base-300);
 
             &:hover {
@@ -1037,8 +1036,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
       }
 
       &[data-vc-date-selected] {
-        [data-vc-date-btn],
-        .vc-date__btn {
+        & [data-vc-date-btn],
+        & .vc-date__btn {
           background-color: var(--color-base-content);
           color: var(--color-base-100);
 
@@ -1093,8 +1092,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
 
         &[data-vc-date-month="prev"],
         &[data-vc-date-month="next"] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             background-color: var(--color-base-300);
             color: color-mix(in oklab, var(--color-base-content) 60%, transparent);
 
@@ -1107,8 +1106,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
 
         &[data-vc-date-selected="middle"][data-vc-date-month="prev"],
         &[data-vc-date-selected="middle"][data-vc-date-month="next"] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             background-color: var(--color-base-200);
             color: color-mix(in oklab, var(--color-base-content) 60%, transparent);
 
@@ -1121,8 +1120,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
       }
 
       &[data-vc-date-today] {
-        [data-vc-date-btn],
-        .vc-date__btn {
+        & [data-vc-date-btn],
+        & .vc-date__btn {
           background-color: var(--color-primary);
           color: var(--color-primary-content);
           font-weight: 700;
@@ -1134,16 +1133,16 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
 
         &[data-vc-date-month="prev"],
         &[data-vc-date-month="next"] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
           }
         }
       }
 
       &[data-vc-date-holiday] {
-        [data-vc-date-btn],
-        .vc-date__btn {
+        & [data-vc-date-btn],
+        & .vc-date__btn {
           color: var(--color-error);
 
           &:hover {
@@ -1152,15 +1151,15 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
         }
 
         &[data-vc-date-hover] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             background-color: color-mix(in oklab, var(--color-error) 10%, transparent);
           }
 
           &[data-vc-date-hover="first"],
           &[data-vc-date-hover="last"] {
-            [data-vc-date-btn],
-            .vc-date__btn {
+            & [data-vc-date-btn],
+            & .vc-date__btn {
               background-color: color-mix(in oklab, var(--color-error) 20%, transparent);
 
               &:hover {
@@ -1171,31 +1170,31 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
         }
 
         &[data-vc-date-disabled] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             color: color-mix(in oklab, var(--color-base-content) 30%, transparent);
             opacity: 0.8;
           }
         }
 
         &[data-vc-date-today] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             background-color: var(--color-error);
             color: var(--color-error-content);
           }
 
           &[data-vc-date-disabled] {
-            [data-vc-date-btn],
-            .vc-date__btn {
+            & [data-vc-date-btn],
+            & .vc-date__btn {
               color: color-mix(in oklab, var(--color-base-content) 30%, transparent);
             }
           }
 
           &[data-vc-date-month="prev"],
           &[data-vc-date-month="next"] {
-            [data-vc-date-btn],
-            .vc-date__btn {
+            & [data-vc-date-btn],
+            & .vc-date__btn {
               color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
             }
           }
@@ -1203,8 +1202,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
 
         &[data-vc-date-month="prev"],
         &[data-vc-date-month="next"] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             background-color: var(--color-base-100);
             color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
 
@@ -1217,24 +1216,24 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
 
         &[data-vc-date-hover][data-vc-date-month="prev"],
         &[data-vc-date-hover][data-vc-date-month="next"] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             background-color: var(--color-base-200);
           }
         }
 
         &[data-vc-date-disabled][data-vc-date-month="prev"],
         &[data-vc-date-disabled][data-vc-date-month="next"] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             color: color-mix(in oklab, var(--color-base-content) 30%, transparent);
             opacity: 0.8;
           }
         }
 
         &[data-vc-date-selected] {
-          [data-vc-date-btn],
-          .vc-date__btn {
+          & [data-vc-date-btn],
+          & .vc-date__btn {
             background-color: var(--color-error);
             color: var(--color-error-content);
 
@@ -1245,8 +1244,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
           }
 
           &[data-vc-date-selected="middle"] {
-            [data-vc-date-btn],
-            .vc-date__btn {
+            & [data-vc-date-btn],
+            & .vc-date__btn {
               background-color: color-mix(in oklab, var(--color-error) 75%, transparent);
               color: var(--color-error-content);
 
@@ -1259,8 +1258,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
 
           &[data-vc-date-month="prev"],
           &[data-vc-date-month="next"] {
-            [data-vc-date-btn],
-            .vc-date__btn {
+            & [data-vc-date-btn],
+            & .vc-date__btn {
               background-color: var(--color-base-300);
               color: color-mix(in oklab, var(--color-base-content) 60%, transparent);
 
@@ -1273,8 +1272,8 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
 
           &[data-vc-date-selected="middle"][data-vc-date-month="prev"],
           &[data-vc-date-selected="middle"][data-vc-date-month="next"] {
-            [data-vc-date-btn],
-            .vc-date__btn {
+            & [data-vc-date-btn],
+            & .vc-date__btn {
               background-color: var(--color-base-200);
               color: color-mix(in oklab, var(--color-base-content) 60%, transparent);
 
@@ -1342,7 +1341,7 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
       z-index: 20;
       min-width: 5rem;
       max-width: 9rem;
-      transform: translateX(-50%);
+      transform: translate(-50%);
       border-radius: var(--radius-field);
       padding: 0.25rem 0.5rem;
       font-size: 0.75rem;
@@ -1414,7 +1413,7 @@ const VC_NESTED = `.vc:focus-visible, .vc button:focus-visible, .vc [tabindex="0
         inset-inline-end: -5px;
         inset-block-start: 50%;
         display: block;
-        margin-top: calc(-50% + 1px);
+        margin-top: calc(1px - 50%);
       }
     }
 .vc [data-vc-time-input="minute"] {
@@ -1668,7 +1667,7 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
     rules.push([
       key("aura-holo"),
       [
-        `${holo}{background-image:repeating-conic-gradient(from var(--aura-angle), oklch(0.82 0.17 327), oklch(0.75 0.12 274), oklch(0.82 0.11 191), oklch(0.91 0.11 105), oklch(0.88 0.08 68), oklch(0.82 0.17 327) 10%);animation:aura var(--tw-duration, 20s) linear infinite;}` +
+        `${holo}{background-image:repeating-conic-gradient(from var(--aura-angle), oklch(82% .17 327), oklch(75% .12 274), oklch(82% .11 191), oklch(91% .11 105), oklch(88% .08 68), oklch(82% .17 327) 10%);animation:aura var(--tw-duration, 20s) linear infinite;}` +
           `@media (prefers-reduced-motion: reduce){${holo}{animation-duration:calc(var(--tw-duration, 20s) * 4);}}`,
       ],
       { layer: "daisy-l2" },
@@ -1678,7 +1677,7 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
     rules.push([
       key("aura-glow"),
       [
-        `${glow}{animation:none;background-image:radial-gradient(closest-corner at center, currentColor 0%, transparent 90%);}` +
+        `${glow}{animation:none;background-image:radial-gradient(closest-corner,currentColor 0%,#0000 90%);}` +
           `${glow}:before{animation:aura-glow var(--tw-duration, 6s) ease-out infinite;}` +
           `@media (prefers-reduced-motion: reduce){${glow}:before{animation-duration:calc(var(--tw-duration, 6s) * 4);}}` +
           `${glow}:after{animation:aura-glow-after var(--tw-duration, 6s) ease-out infinite;}` +
@@ -1789,7 +1788,7 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
             .split(",")
             .map((s) => `${s}:focus-visible`)
             .join(",")}{outline:2px solid currentColor;outline-offset:2px;}` +
-          `${seps}{content:"";margin-inline-start:0.5rem;margin-inline-end:0.75rem;display:block;height:0.375rem;width:0.375rem;opacity:0.4;rotate:45deg;border-top:1px solid;border-right:1px solid;background-color:#0000;}` +
+          `${seps}{content:"";margin-inline:0.5rem 0.75rem;display:block;height:0.375rem;width:0.375rem;opacity:0.4;rotate:45deg;border-top:1px solid;border-right:1px solid;background-color:#0000;}` +
           `${rtlSeps}{rotate:-135deg;}`,
       ],
       { layer: "daisy-l3", internal: true },
@@ -1915,7 +1914,7 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
     rules.push([
       "__daisy-checkbox-nested",
       [
-        `${checkbox}:before{--tw-content:"";content:var(--tw-content);display:block;width:100%;height:100%;rotate:45deg;background-color:currentColor;opacity:0;transition:clip-path 0.3s, opacity 0.1s, rotate 0.3s, translate 0.3s;transition-delay:0.1s;clip-path:polygon(20% 100%, 20% 80%, 50% 80%, 50% 80%, 70% 80%, 70% 100%);box-shadow:0px 3px 0 0px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;font-size:1rem;line-height:0.75;}`,
+        `${checkbox}:before{--tw-content:"";content:var(--tw-content);display:block;width:100%;height:100%;rotate:45deg;background-color:currentColor;opacity:0;transition:clip-path 0.3s 0.1s,opacity 0.1s 0.1s,rotate 0.3s 0.1s,translate 0.3s 0.1s;clip-path:polygon(20% 100%, 20% 80%, 50% 80%, 50% 80%, 70% 80%, 70% 100%);box-shadow:0px 3px 0 0px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;font-size:1rem;line-height:0.75;}`,
       ],
       { layer: "daisy-l3", internal: true },
     ]);
@@ -1926,14 +1925,15 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
     // bg-transparent->background-color:transparent, cursor-not-allowed->cursor,
     // opacity-20->opacity:0.2, [--tw-content:"✔︎"]->[clip-path:none] arbitraries.
     const checked = `${checkbox}:checked,${checkbox}[aria-checked="true"]`;
+    const checkedBefore = `${checkbox}:checked:before,${checkbox}[aria-checked="true"]:before`;
     rules.push([
       "__daisy-checkbox-state",
       [
         `${checkbox}:focus-visible{outline:2px solid var(--input-color, currentColor);outline-offset:2px;}` +
           `${checked}{background-color:var(--input-color, #0000);box-shadow:0 0 #0000 inset, 0 8px 0 -4px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset, 0 1px oklch(0% 0 0 / calc(var(--depth) * 0.1));}` +
-          `${checked}:before{clip-path:polygon(20% 100%, 20% 80%, 50% 80%, 50% 0%, 70% 0%, 70% 100%);translate:3.5% -7%;opacity:1;}` +
-          `@media (forced-colors: active){${checked}:before{--tw-content:"✔︎";clip-path:none;background-color:transparent;rotate:0deg;}}` +
-          `@media print{${checked}:before{--tw-content:"✔︎";clip-path:none;background-color:transparent;rotate:0deg;}}` +
+          `${checkedBefore}{clip-path:polygon(20% 100%, 20% 80%, 50% 80%, 50% 0%, 70% 0%, 70% 100%);translate:3.5% -7%;opacity:1;}` +
+          `@media (forced-colors: active){${checkedBefore}{--tw-content:"✔︎";clip-path:none;background-color:transparent;rotate:0deg;}}` +
+          `@media print{${checkedBefore}{--tw-content:"✔︎";clip-path:none;background-color:transparent;rotate:0deg;}}` +
           `${checkbox}:indeterminate,${checkbox}[aria-checked="mixed"]{background-color:var(--input-color, color-mix(in oklab, var(--color-base-content) 20%, #0000));}` +
           `${checkbox}:indeterminate:before,${checkbox}[aria-checked="mixed"]:before{rotate:0deg;opacity:1;translate:0 -40%;clip-path:polygon(20% 100%, 20% 80%, 50% 80%, 50% 80%, 80% 80%, 80% 100%);}` +
           `${checkbox}:disabled{cursor:not-allowed;opacity:0.2;}`,
@@ -1969,7 +1969,7 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
           `${root}:is(details){width:100%;}` +
           `${root}:is(details)::details-content{--overflow-delay:0s;overflow:clip;height:0;}` +
           `${root}:is(details):where([open])::details-content{overflow:revert-layer;height:auto;}` +
-          `@media (prefers-reduced-motion: no-preference){${root}:is(details)::details-content{transition:overflow 0.2s allow-discrete var(--overflow-delay), content-visibility 0.2s allow-discrete, visibility 0.2s allow-discrete, min-height 0.2s ease-out allow-discrete, padding 0.1s ease-out 20ms, background-color 0.2s ease-out, height 0.2s;interpolate-size:allow-keywords;}${root}:is(details):where([open])::details-content{--overflow-delay:0.2s;}}` +
+          `@media (prefers-reduced-motion: no-preference){${root}:is(details)::details-content{transition:overflow .2s allow-discrete var(--overflow-delay), content-visibility .2s allow-discrete, visibility .2s allow-discrete, min-height .2s ease-out allow-discrete, padding .1s ease-out 20ms, background-color .2s ease-out, height .2s;interpolate-size:allow-keywords;}${root}:is(details):where([open])::details-content{--overflow-delay:0.2s;}}` +
           `${root}:is(details) > summary{position:relative;display:block;outline:none;}` +
           `${root}:is(details) > summary::-webkit-details-marker{display:none;}`,
       ],
@@ -2015,7 +2015,7 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
       "__daisy-collapse-content-nested",
       [
         `@supports not (content-visibility:hidden){${content}{visibility:hidden;}}` +
-          `@media (prefers-reduced-motion: no-preference){${content}{transition:overflow 0.2s allow-discrete var(--overflow-delay), content-visibility 0.2s allow-discrete, visibility 0.2s allow-discrete, min-height 0.2s ease-out allow-discrete, padding 0.1s ease-out 20ms, background-color 0.2s ease-out;}}` +
+          `@media (prefers-reduced-motion: no-preference){${content}{transition:overflow .2s allow-discrete var(--overflow-delay), content-visibility .2s allow-discrete, visibility .2s allow-discrete, min-height .2s ease-out allow-discrete, padding .1s ease-out 20ms, background-color .2s ease-out;}}` +
           `details > ${content}{content-visibility:visible;}`,
       ],
       { layer: "daisy-l3", internal: true },
@@ -2034,7 +2034,7 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
       "__daisy-countdown-nested",
       [
         `${cd} > *{visibility:hidden;position:relative;display:inline-block;overflow-y:clip;transition:width 0.4s ease-out 0.2s;height:1em;--value-v:calc(mod(max(0, var(--value)), 1000));--value-hundreds:calc(round(to-zero, var(--value-v) / 100, 1));--value-tens:calc(round(to-zero, mod(var(--value-v), 100) / 10, 1));--value-ones:calc(mod(var(--value-v), 100));--show-hundreds:clamp(clamp(0, var(--digits, 1) - 2, 1), var(--value-hundreds), 1);--show-tens:clamp(clamp(0, var(--digits, 1) - 1, 1), var(--value-tens) + var(--show-hundreds), 1);--first-digits:calc(round(to-zero, var(--value-v) / 10, 1));width:calc(1ch + var(--show-tens) * 1ch + var(--show-hundreds) * 1ch);direction:ltr;}` +
-          `${cd} > *:before,${cd} > *:after{visibility:visible;position:absolute;overflow-x:clip;--tw-content:"00\\A 01\\A 02\\A 03\\A 04\\A 05\\A 06\\A 07\\A 08\\A 09\\A 10\\A 11\\A 12\\A 13\\A 14\\A 15\\A 16\\A 17\\A 18\\A 19\\A 20\\A 21\\A 22\\A 23\\A 24\\A 25\\A 26\\A 27\\A 28\\A 29\\A 30\\A 31\\A 32\\A 33\\A 34\\A 35\\A 36\\A 37\\A 38\\A 39\\A 40\\A 41\\A 42\\A 43\\A 44\\A 45\\A 46\\A 47\\A 48\\A 49\\A 50\\A 51\\A 52\\A 53\\A 54\\A 55\\A 56\\A 57\\A 58\\A 59\\A 60\\A 61\\A 62\\A 63\\A 64\\A 65\\A 66\\A 67\\A 68\\A 69\\A 70\\A 71\\A 72\\A 73\\A 74\\A 75\\A 76\\A 77\\A 78\\A 79\\A 80\\A 81\\A 82\\A 83\\A 84\\A 85\\A 86\\A 87\\A 88\\A 89\\A 90\\A 91\\A 92\\A 93\\A 94\\A 95\\A 96\\A 97\\A 98\\A 99\\A";content:var(--tw-content);font-variant-numeric:tabular-nums;white-space:pre;text-align:end;direction:rtl;transition:all 1s cubic-bezier(1, 0, 0, 1), width 0.2s ease-out 0.2s, opacity 0.2s ease-out 0.2s;}` +
+          `${cd} > *:before,${cd} > *:after{visibility:visible;position:absolute;overflow-x:clip;--tw-content:"00\\A 01\\A 02\\A 03\\A 04\\A 05\\A 06\\A 07\\A 08\\A 09\\A 10\\A 11\\A 12\\A 13\\A 14\\A 15\\A 16\\A 17\\A 18\\A 19\\A 20\\A 21\\A 22\\A 23\\A 24\\A 25\\A 26\\A 27\\A 28\\A 29\\A 30\\A 31\\A 32\\A 33\\A 34\\A 35\\A 36\\A 37\\A 38\\A 39\\A 40\\A 41\\A 42\\A 43\\A 44\\A 45\\A 46\\A 47\\A 48\\A 49\\A 50\\A 51\\A 52\\A 53\\A 54\\A 55\\A 56\\A 57\\A 58\\A 59\\A 60\\A 61\\A 62\\A 63\\A 64\\A 65\\A 66\\A 67\\A 68\\A 69\\A 70\\A 71\\A 72\\A 73\\A 74\\A 75\\A 76\\A 77\\A 78\\A 79\\A 80\\A 81\\A 82\\A 83\\A 84\\A 85\\A 86\\A 87\\A 88\\A 89\\A 90\\A 91\\A 92\\A 93\\A 94\\A 95\\A 96\\A 97\\A 98\\A 99\\A ";content:var(--tw-content);font-variant-numeric:tabular-nums;white-space:pre;text-align:end;direction:rtl;transition:all 1s cubic-bezier(1, 0, 0, 1), width 0.2s ease-out 0.2s, opacity 0.2s ease-out 0.2s;}` +
           `${cd} > *:before{width:calc(1ch + var(--show-hundreds) * 1ch);top:calc(var(--first-digits) * -1em);inset-inline-end:0;opacity:var(--show-tens);}` +
           `${cd} > *:after{width:1ch;top:calc(var(--value-ones) * -1em);inset-inline-start:0;}`,
       ],
@@ -2055,7 +2055,7 @@ export function batch1Rules(opts: Ctx): Preset["rules"] {
     rules.push([
       "__daisy-diff-nested",
       [
-        `${diff}:focus-visible{outline-style:var(--tw-outline-style, solid);outline-color:var(--color-base-content);outline-width:2px;outline-offset:1px;}` +
+        `${diff}:focus-visible{outline-style:var(--tw-outline-style, solid);outline-color:var(--color-base-content);outline-width:2px;outline-offset:1px;-webkit-user-select:none;user-select:none;}` +
           `${diff}:focus-visible ${resizer}{min-width:95cqi;max-width:95cqi;}` +
           `${diff}:has(${item1}:focus-visible){outline-style:var(--tw-outline-style, solid);outline-width:2px;outline-offset:1px;}` +
           `${diff}:has(${item1}:focus-visible) ${resizer}{min-width:5cqi;max-width:5cqi;}` +

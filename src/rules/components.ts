@@ -68,6 +68,17 @@ export function componentRules(opts: Ctx): Preset["rules"] {
       ],
       { layer: "daisy-l1", internal: true },
     ]);
+    // First .btn-dash block (outline-like reset with border-style:solid),
+    // upstream layer daisyui.l1.l2.l3 -> daisy-l3. Static rules emit before
+    // shortcut expansions within a layer, so this lands before the shortcut's
+    // dashed override — same cascade order as the two upstream source blocks.
+    rules.push([
+      "__daisy-btn-dash",
+      [
+        `${sel(".btn-dash")}{--btn-bg:#0000;color:var(--btn-rest-fg, var(--btn-color, var(--color-base-content)));--btn-border:var(--btn-color, var(--color-base-content));--btn-border-style:solid;background-image:none;--btn-inset:0 0 0 0 oklch(0% 0 0/0);--btn-shadow:0 0 0 0 oklch(0% 0 0/0);}`,
+      ],
+      { layer: "daisy-l3", internal: true },
+    ]);
     // .btn-active block, upstream layer daisyui.l1.l2 -> daisy-l2. Only the .btn-active
     // selector is kept here; the .btn[aria-*] half lives in __daisy-btn-state so the
     // declarations are never emitted twice for `class="btn btn-active"`.
@@ -191,12 +202,12 @@ export function componentRules(opts: Ctx): Preset["rules"] {
     ]);
     // .card-body, upstream layer daisyui.l1.l2.l3 (+ l4 for p) -> daisy-l3,
     // with the l4 part kept in the same raw block and noted.
-    // Expanded: flex/flex-auto/flex-col/gap-2->display:flex/flex:1 1 auto/direction/gap,
+    // Expanded: flex/flex-auto/flex-col/gap-2->display:flex/flex:auto/direction/gap,
     // grow->flex-grow:1.
     rules.push([
       key("card-body"),
       [
-        `${sel(".card-body")}{display:flex;flex:1 1 auto;flex-direction:column;gap:0.5rem;padding:var(--card-p, 1.5rem);font-size:var(--card-fs, 0.875rem);& p{flex-grow:1;}}`,
+        `${sel(".card-body")}{display:flex;flex:auto;flex-direction:column;gap:0.5rem;padding:var(--card-p, 1.5rem);font-size:var(--card-fs, 0.875rem);& p{flex-grow:1;}}`,
       ],
       { layer: "daisy-l3" },
     ]);
@@ -253,10 +264,10 @@ export function componentRules(opts: Ctx): Preset["rules"] {
     rules.push([
       "__daisy-input-nested",
       [
-        `${input} input{height:100%;width:100%;appearance:none;background-color:transparent;border:none;&::placeholder{color:var(--color-base-content);opacity:0.5;}&:focus,&:focus-within{outline-style:hidden;}&::-webkit-calendar-picker-indicator{inset-inline-end:-0.15em;}}` +
+        `${input} input{height:100%;width:100%;appearance:none;background-color:transparent;border:none;&::placeholder{color:var(--color-base-content);opacity:0.5;}&:focus,&:focus-within{outline-offset:2px;outline:2px solid #0000;--tw-outline-style:none;outline-style:none;}&::-webkit-calendar-picker-indicator{inset-inline-end:-0.15em;}}` +
           `${input}::-webkit-inner-spin-button{margin-inline-end:-10px;}` +
           `${input}::-webkit-calendar-picker-indicator{inset-inline-end:0.75em;}` +
-          `${sel("input.input")},${input} input{position:relative;display:inline-flex;text-align:start;&[type="url"],&[type="tel"],&[type="email"],&[type="number"]{direction:ltr;}&::-webkit-datetime-edit,&::-webkit-date-and-time-value{display:grid;min-height:100%;align-items:center;text-align:inherit;}&::-webkit-inner-spin-button{margin-block:calc(var(--spacing) * var(--spin-my, -3));}&::-webkit-calendar-picker-indicator{position:absolute;width:1em;height:1em;cursor:pointer;}&::-webkit-color-swatch-wrapper{padding-block:0.25rem;}}` +
+          `${sel("input.input")},${input} input{position:relative;display:inline-flex;text-align:start;&[type="url"],&[type="tel"],&[type="email"],&[type="number"]{direction:ltr;}&::-webkit-datetime-edit,&::-webkit-date-and-time-value{display:grid;min-height:100%;align-items:center;text-align:inherit;}&::-webkit-inner-spin-button{margin-block:calc(.25rem * var(--spin-my, -3));}&::-webkit-calendar-picker-indicator{position:absolute;width:1em;height:1em;cursor:pointer;}&::-webkit-color-swatch-wrapper{padding-block:0.25rem;}}` +
           `${input}:focus,${input}:focus-within{--input-color:var(--color-base-content);box-shadow:0 1px color-mix(in oklab, var(--input-color) calc(var(--depth) * 10%), #0000);outline:2px solid var(--input-color);outline-offset:2px;}` +
           `@media (pointer:coarse){@supports (-webkit-touch-callout:none){${input}:focus,${input}:focus-within{--font-size:1rem;}}}` +
           `${sel('.input[type="url"]')}:dir(rtl),${sel('.input[type="tel"]')}:dir(rtl),${sel('.input[type="email"]')}:dir(rtl),${sel('.input[type="number"]')}:dir(rtl){border-start-start-radius:var(--join-se, var(--radius-field));border-start-end-radius:var(--join-ss, var(--radius-field));border-end-start-radius:var(--join-ee, var(--radius-field));border-end-end-radius:var(--join-es, var(--radius-field));}`,
@@ -330,12 +341,14 @@ export function componentRules(opts: Ctx): Preset["rules"] {
   if (shouldInclude("modal", opts.include, opts.exclude)) {
     const modal = sel(".modal");
     // ::backdrop + [popover], upstream layer daisyui.l1.l2.l3 -> daisy-l3.
-    // Expanded: hidden->display:none.
+    // Expanded: hidden->display:none. Compiled `[popover]` reset is the
+    // `background: 0 0` shorthand (not `background:transparent`), and the
+    // backdrop color keeps the source space before the slash.
     rules.push([
       "__daisy-modal-nested",
       [
         `${modal}::backdrop{display:none;}` +
-          `${modal}[popover]{inset:0;margin:0;border:0;padding:0;background:transparent;color:inherit;max-width:none;max-height:none;&::backdrop{background-color:oklch(0% 0 0/ 0.4);transition:background-color 0.3s ease-out;}}`,
+          `${modal}[popover]{inset:0;margin:0;border:0;padding:0;background:0 0;color:inherit;max-width:none;max-height:none;&::backdrop{background-color:oklch(0% 0 0/ 0.4);transition:background-color 0.3s ease-out;}}`,
       ],
       { layer: "daisy-l3", internal: true },
     ]);
@@ -350,7 +363,7 @@ export function componentRules(opts: Ctx): Preset["rules"] {
     rules.push([
       "__daisy-modal-open-attr",
       [
-        `${openAttr}{${openDecls}& > ${sel(".modal-box")}{translate:0 0;scale:1;opacity:1;}:root:has(&){--page-scroll-lock:;}}` +
+        `${openAttr}{${openDecls}& > ${sel(".modal-box")}{translate:0;scale:1;opacity:1;}:root:has(&){--page-scroll-lock:;}}` +
           `@starting-style{${openAttr}{opacity:0;}}`,
       ],
       { layer: "daisy-l2", internal: true },
@@ -360,7 +373,7 @@ export function componentRules(opts: Ctx): Preset["rules"] {
     rules.push([
       key("modal-open"),
       [
-        `${openClass}{${openDecls}& > ${sel(".modal-box")}{translate:0 0;scale:1;opacity:1;}}` +
+        `${openClass}{${openDecls}& > ${sel(".modal-box")}{translate:0;scale:1;opacity:1;}}` +
           `@starting-style{${openClass}{opacity:0;}}`,
       ],
       { layer: "daisy-l2" },
@@ -403,14 +416,14 @@ export function componentRules(opts: Ctx): Preset["rules"] {
     rules.push([
       key("modal-start"),
       [
-        `${sel(".modal-start")}{place-items:start;& > ${box}{height:100vh;max-height:none;width:auto;max-width:none;translate:-100% 0;scale:1;--modal-tl:0;--modal-tr:var(--radius-box);--modal-bl:0;--modal-br:var(--radius-box);[dir="rtl"] &{translate:100% 0;--modal-tl:var(--radius-box);--modal-tr:0;--modal-bl:var(--radius-box);--modal-br:0;}}}`,
+        `${sel(".modal-start")}{place-items:start;& > ${box}{height:100vh;max-height:none;width:auto;max-width:none;translate:-100%;scale:1;--modal-tl:0;--modal-tr:var(--radius-box);--modal-bl:0;--modal-br:var(--radius-box);[dir="rtl"] &{translate:100%;--modal-tl:var(--radius-box);--modal-tr:0;--modal-bl:var(--radius-box);--modal-br:0;}}}`,
       ],
       { layer: "daisy-l2" },
     ]);
     rules.push([
       key("modal-end"),
       [
-        `${sel(".modal-end")}{place-items:end;& > ${box}{height:100vh;max-height:none;width:auto;max-width:none;translate:100% 0;scale:1;--modal-tl:var(--radius-box);--modal-tr:0;--modal-bl:var(--radius-box);--modal-br:0;[dir="rtl"] &{translate:-100% 0;--modal-tl:0;--modal-tr:var(--radius-box);--modal-bl:0;--modal-br:var(--radius-box);}}}`,
+        `${sel(".modal-end")}{place-items:end;& > ${box}{height:100vh;max-height:none;width:auto;max-width:none;translate:100%;scale:1;--modal-tl:var(--radius-box);--modal-tr:0;--modal-bl:var(--radius-box);--modal-br:0;[dir="rtl"] &{translate:-100%;--modal-tl:0;--modal-tr:var(--radius-box);--modal-bl:0;--modal-br:var(--radius-box);}}}`,
       ],
       { layer: "daisy-l2" },
     ]);
@@ -437,17 +450,17 @@ export function componentRules(opts: Ctx): Preset["rules"] {
       [
         `${menu} :where(li ul, li menu){position:relative;margin-inline-start:1rem;padding-inline-start:0.5rem;white-space:nowrap;&:before{background-color:var(--color-base-content);position:absolute;inset-inline-start:0;top:0.75rem;bottom:0.75rem;opacity:0.1;width:var(--border);content:"";}}` +
           `${menu} :where(li > ${sel(".menu-dropdown")}:not(${sel(".menu-dropdown-show")})){display:none;}` +
-          `${menu} :where(li:not(${sel(".menu-title")}) > *:not(ul, menu, details, ${sel(".menu-title")}, ${sel(".btn")})),${menu} :where(li:not(${sel(".menu-title")}) > details > summary:not(${sel(".menu-title")})){border-radius:var(--radius-field);display:grid;grid-auto-flow:column;align-content:start;align-items:center;gap:0.5rem;padding-inline:0.75rem;padding-block:0.375rem;text-align:start;transition-property:color, background-color, box-shadow;transition-duration:0.2s;transition-timing-function:cubic-bezier(0, 0, 0.2, 1);grid-auto-columns:minmax(auto, max-content) auto max-content;user-select:none;}` +
-          `${menu} :where(li > details > summary){outline-style:hidden;&::-webkit-details-marker{display:none;}}` +
-          `${menu} :where(li > details > summary),${menu} :where(li > ${sel(".menu-dropdown-toggle")}){&:after{justify-self:end;display:block;height:0.375rem;width:0.375rem;rotate:-135deg;translate:0 -1px;transition-property:rotate, translate;transition-duration:0.2s;content:"";transform-origin:50% 50%;box-shadow:2px 2px inset;pointer-events:none;}}` +
+          `${menu} :where(li:not(${sel(".menu-title")}) > *:not(ul, menu, details, ${sel(".menu-title")}, ${sel(".btn")})),${menu} :where(li:not(${sel(".menu-title")}) > details > summary:not(${sel(".menu-title")})){border-radius:var(--radius-field);display:grid;grid-auto-flow:column;align-content:flex-start;align-items:center;gap:0.5rem;padding-inline:0.75rem;padding-block:0.375rem;text-align:start;transition-property:color, background-color, box-shadow;transition-duration:0.2s;transition-timing-function:cubic-bezier(0, 0, 0.2, 1);grid-auto-columns:minmax(auto, max-content) auto max-content;user-select:none;}` +
+          `${menu} :where(li > details > summary){outline-offset:2px;outline:2px solid #0000;--tw-outline-style:none;outline-style:none;&::-webkit-details-marker{display:none;}}` +
+          `${menu} :where(li > details > summary),${menu} :where(li > ${sel(".menu-dropdown-toggle")}){&:after{justify-self:flex-end;display:block;height:0.375rem;width:0.375rem;rotate:-135deg;translate:0 -1px;transition-property:rotate, translate;transition-duration:0.2s;content:"";transform-origin:50% 50%;box-shadow:2px 2px inset;pointer-events:none;}}` +
           `${menu} details{overflow:hidden;interpolate-size:allow-keywords;}` +
           `${menu} details::details-content{block-size:0;@media (prefers-reduced-motion: no-preference){transition-behavior:allow-discrete;transition-property:block-size, content-visibility;transition-duration:0.2s;transition-timing-function:cubic-bezier(0, 0, 0.2, 1);}}` +
           `${menu} details[open]::details-content{block-size:auto;}` +
           `${menu} :where(li > details[open] > summary):after,${menu} :where(li > ${sel(".menu-dropdown-toggle")}${sel(".menu-dropdown-show")}):after{rotate:45deg;translate:0 1px;}` +
-          `${menu} :where(li:not(${sel(".menu-title")}, ${sel(".disabled")}) > *:not(ul, menu, details, ${sel(".menu-title")}), li:not(${sel(".menu-title")}, ${sel(".disabled")}) > details > summary:not(${sel(".menu-title")})):not(${sel(".menu-active")}, :active, ${sel(".btn")}, [aria-current]:not([aria-current="false"], [aria-current=""])){&.menu-focus,&:focus-visible{background-color:color-mix(in oklab, var(--color-base-content) 10%, transparent);color:var(--color-base-content);cursor:pointer;outline-style:hidden;}}` +
-          `${menu} :where(li:not(${sel(".menu-title")}, ${sel(".disabled")}) > *:not(ul, menu, details, ${sel(".menu-title")}):not(${sel(".menu-active")}, :active, ${sel(".btn")}, [aria-current]:not([aria-current="false"], [aria-current=""])):hover, li:not(${sel(".menu-title")}, ${sel(".disabled")}) > details > summary:not(${sel(".menu-title")}):not(${sel(".menu-active")}, :active, ${sel(".btn")}, [aria-current]:not([aria-current="false"], [aria-current=""]))){background-color:color-mix(in oklab, var(--color-base-content) 10%, transparent);cursor:pointer;outline-style:hidden;box-shadow:0 1px oklch(0% 0 0 / 0.01) inset, 0 -1px oklch(100% 0 0 / 0.01) inset;}` +
+          `${menu} :where(li:not(${sel(".menu-title")}, ${sel(".disabled")}) > *:not(ul, menu, details, ${sel(".menu-title")}), li:not(${sel(".menu-title")}, ${sel(".disabled")}) > details > summary:not(${sel(".menu-title")})):not(${sel(".menu-active")}, :active, ${sel(".btn")}, [aria-current]:not([aria-current="false"], [aria-current=""])){&.menu-focus,&:focus-visible{background-color:color-mix(in oklab, var(--color-base-content) 10%, transparent);color:var(--color-base-content);cursor:pointer;outline-offset:2px;outline:2px solid #0000;--tw-outline-style:none;outline-style:none;}}` +
+          `${menu} :where(li:not(${sel(".menu-title")}, ${sel(".disabled")}) > *:not(ul, menu, details, ${sel(".menu-title")}):not(${sel(".menu-active")}, :active, ${sel(".btn")}, [aria-current]:not([aria-current="false"], [aria-current=""])):hover, li:not(${sel(".menu-title")}, ${sel(".disabled")}) > details > summary:not(${sel(".menu-title")}):not(${sel(".menu-active")}, :active, ${sel(".btn")}, [aria-current]:not([aria-current="false"], [aria-current=""]))){background-color:color-mix(in oklab, var(--color-base-content) 10%, transparent);cursor:pointer;outline-offset:2px;outline:2px solid #0000;--tw-outline-style:none;outline-style:none;box-shadow:0 1px oklch(0% 0 0 / 0.01) inset, 0 -1px oklch(100% 0 0 / 0.01) inset;}` +
           `${menu} :where(li:empty){background-color:var(--color-base-content);opacity:0.1;margin:0.5rem 1rem;height:1px;}` +
-          `${menu} :where(li){position:relative;display:flex;flex-shrink:0;flex-direction:column;flex-wrap:wrap;align-items:stretch;& ${sel(".badge")}{justify-self:end;}& > *:not(ul, menu, ${sel(".menu-title")}, details, ${sel(".btn")}):active,& > *:not(ul, menu, ${sel(".menu-title")}, details, ${sel(".btn")})${sel(".menu-active")},& > *:not(ul, menu, ${sel(".menu-title")}, details, ${sel(".btn")}):is([aria-current]:not([aria-current="false"], [aria-current=""])),& > details > summary:active{outline-style:hidden;color:var(--menu-active-fg);background-color:var(--menu-active-bg);background-size:auto, calc(var(--noise) * 100%);background-image:none, var(--fx-noise);&:not(&:active){box-shadow:0 2px calc(var(--depth) * 3px) -2px var(--menu-active-bg);}}&.menu-disabled, & [disabled]{color:color-mix(in oklab, var(--color-base-content) 20%, transparent);pointer-events:none;}}` +
+          `${menu} :where(li){position:relative;display:flex;flex-shrink:0;flex-flow:column wrap;align-items:stretch;& ${sel(".badge")}{justify-self:flex-end;}& > *:not(ul, menu, ${sel(".menu-title")}, details, ${sel(".btn")}):active,& > *:not(ul, menu, ${sel(".menu-title")}, details, ${sel(".btn")})${sel(".menu-active")},& > *:not(ul, menu, ${sel(".menu-title")}, details, ${sel(".btn")})[aria-current]:not([aria-current="false"], [aria-current=""]),& > details > summary:active{outline-offset:2px;outline:2px solid #0000;--tw-outline-style:none;outline-style:none;color:var(--menu-active-fg);background-color:var(--menu-active-bg);background-size:auto, calc(var(--noise) * 100%);background-image:none, var(--fx-noise);&:not(&:active){box-shadow:0 2px calc(var(--depth) * 3px) -2px var(--menu-active-bg);}}&.menu-disabled, & [disabled]{color:color-mix(in oklab, var(--color-base-content) 20%, transparent);pointer-events:none;}}` +
           `${menu} ${sel(".dropdown")}:focus-within{${sel(".menu-dropdown-toggle")}:after{rotate:45deg;translate:0 1px;}}` +
           `${menu} ${sel(".dropdown-content")}{margin-top:0.5rem;padding:0.5rem;&:before{display:none;}}`,
       ],
@@ -458,19 +471,19 @@ export function componentRules(opts: Ctx): Preset["rules"] {
     rules.push([
       key("menu-active"),
       [
-        `${sel(":where(:not(ul, menu, details, .menu-title, .btn)).menu-active")}{outline-style:hidden;color:var(--menu-active-fg);background-color:var(--menu-active-bg);background-size:auto, calc(var(--noise) * 100%);background-image:none, var(--fx-noise);}`,
+        `${sel(":where(:not(ul, menu, details, .menu-title, .btn)).menu-active")}{outline-offset:2px;outline:2px solid #0000;--tw-outline-style:none;outline-style:none;color:var(--menu-active-fg);background-color:var(--menu-active-bg);background-size:auto, calc(var(--noise) * 100%);background-image:none, var(--fx-noise);}`,
       ],
       { layer: "daisy-l2" },
     ]);
     // Orientations, upstream layer daisyui.l1.l2 -> daisy-l2.
-    // Expanded: inline-flex/flex-row/items-start, bg-base-100->background-color,
+    // Expanded: inline-flex/flex-row/items-start->align-items:flex-start, bg-base-100->background-color,
     // rounded-box->border-radius, absolute, ms-0->margin-inline-start:0, mt-4->1rem,
     // origin-top->transform-origin, py-2/pe-2->padding, opacity-0/100, flex-col/items-stretch,
     // relative/ms-4/mt-0/py-0/pe-0.
     rules.push([
       key("menu-horizontal"),
       [
-        `${sel(".menu-horizontal")}{display:inline-flex;flex-direction:row;align-items:start;& > li:not(${sel(".menu-title")}) > details{& > :is(ul, menu){background-color:var(--color-base-100);border-radius:var(--radius-box);position:absolute;margin-inline-start:0;margin-top:1rem;transform-origin:top;padding-block:0.5rem;padding-inline-end:0.5rem;opacity:0;scale:95%;box-shadow:0 1px 3px 0 oklch(0% 0 0/0.1), 0 1px 2px -1px oklch(0% 0 0/0.1);@media (prefers-reduced-motion: no-preference){@starting-style{scale:95%;opacity:0;}animation:menu 0.2s;transition-property:opacity, scale, display;transition-behavior:allow-discrete;transition-duration:0.2s;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);}}&[open] > :is(ul, menu){opacity:1;scale:100%;}}& > li > details > :is(ul, menu){&:before{--tw-content:none;content:var(--tw-content);}}}@keyframes menu{0%{opacity:0;}}`,
+        `${sel(".menu-horizontal")}{display:inline-flex;flex-direction:row;align-items:flex-start;& > li:not(${sel(".menu-title")}) > details{& > :is(ul, menu){background-color:var(--color-base-100);border-radius:var(--radius-box);position:absolute;margin-inline-start:0;margin-top:1rem;transform-origin:top;padding-block:0.5rem;padding-inline-end:0.5rem;opacity:0;scale:95%;box-shadow:0 1px 3px 0 oklch(0% 0 0/0.1), 0 1px 2px -1px oklch(0% 0 0/0.1);@media (prefers-reduced-motion: no-preference){@starting-style{scale:95%;opacity:0;}animation:menu 0.2s;transition-property:opacity, scale, display;transition-behavior:allow-discrete;transition-duration:0.2s;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);}}&[open] > :is(ul, menu){opacity:1;scale:100%;}}& > li > details > :is(ul, menu){&:before{--tw-content:none;content:var(--tw-content);}}}@keyframes menu{0%{opacity:0;}}`,
       ],
       { layer: "daisy-l2" },
     ]);
@@ -486,7 +499,7 @@ export function componentRules(opts: Ctx): Preset["rules"] {
     rules.push([
       key("menu-paged"),
       [
-        `${sel(".menu-paged")}{--menu-paged-arrow:135deg;--menu-paged-back-arrow:-45deg;[dir="rtl"] &{--menu-paged-arrow:-45deg;--menu-paged-back-arrow:135deg;}& :where(li ul, li menu):before{--tw-content:none;content:var(--tw-content);}& details[open]>summary{font-size:0;&:not(:active){transition-duration:0s;}& > *{display:none;}&:before{--tw-content:"Back";content:var(--tw-content);font-size:0.875rem;}&[aria-label]:before{--tw-content:attr(aria-label);content:var(--tw-content);}}& details::details-content{transition:none;}&:has(> li > details[open]) > li:not(:has(> details[open])),& :where(:is(ul, menu):has(> li > details[open]) > li:not(:has(> details[open]))){display:none;}& :where(li:has(> details[open]), details[open], details[open] > :is(ul, menu)),& :where(details[open])::details-content{display:contents;}& :where(details[open]:has(> :is(ul, menu) > li > details[open]) > summary){display:none;}& :where(li > details > summary):after{rotate:var(--menu-paged-arrow);translate:0;transition:none;}& :where(li > details[open] > summary):after{order:-1;justify-self:start;rotate:var(--menu-paged-back-arrow);}}`,
+        `${sel(".menu-paged")}{--menu-paged-arrow:135deg;--menu-paged-back-arrow:-45deg;[dir="rtl"] &{--menu-paged-arrow:-45deg;--menu-paged-back-arrow:135deg;}& :where(li ul, li menu):before{--tw-content:none;content:var(--tw-content);}& details[open]>summary{font-size:0;&:not(:active){transition-duration:0s;}& > *{display:none;}&:before{--tw-content:"Back";content:var(--tw-content);font-size:0.875rem;}&[aria-label]:before{--tw-content:attr(aria-label);content:var(--tw-content);}}& details::details-content{transition:none;}&:has(> li > details[open]) > li:not(:has(> details[open])),& :where(:is(ul, menu):has(> li > details[open]) > li:not(:has(> details[open]))){display:none;}& :where(li:has(> details[open]), details[open], details[open] > :is(ul, menu)),& :where(details[open])::details-content{display:contents;}& :where(details[open]:has(> :is(ul, menu) > li > details[open]) > summary){display:none;}& :where(li > details > summary):after{rotate:var(--menu-paged-arrow);translate:0;transition:none;}& :where(li > details[open] > summary):after{order:-1;justify-self:flex-start;rotate:var(--menu-paged-back-arrow);}}`,
       ],
       { layer: "daisy-l2" },
     ]);

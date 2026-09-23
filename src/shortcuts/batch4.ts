@@ -299,7 +299,7 @@ export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
           "will-change": "background-position",
           "background-image":
             "linear-gradient(105deg, #0000 0% 40%, var(--color-base-100) 50%, #0000 60% 100%)",
-          "background-size": "200% auto",
+          "background-size": "200%",
           "background-position-x": "-50%",
         },
         "__daisy-skeleton-nested",
@@ -378,8 +378,7 @@ export function batch4Shortcuts(opts: Ctx): StaticShortcut[] {
         {
           "grid-column-start": "2",
           "grid-row": "1 / span 3",
-          "place-self": "center",
-          "justify-self": "end",
+          "place-self": "center flex-end",
         },
       ],
       { layer: "daisy-l3" },

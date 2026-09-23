@@ -167,16 +167,16 @@ export function batch3Rules(opts: Ctx): Preset["rules"] {
     // Expanded: cursor-pointer->cursor:pointer, flex->display:flex,
     // h-[calc(100%-0.5rem)]->height, items-center->align-items,
     // px-3->padding-inline:0.75rem, whitespace-nowrap->white-space:nowrap,
-    // -ms-3->margin-inline-start:-0.75rem, me-3->margin-inline-end:0.75rem,
-    // ms-3->margin-inline-start:0.75rem, -me-3->margin-inline-end:-0.75rem.
+    // -ms-3 me-3->margin-inline:-0.75rem 0.75rem (compiled shorthand kept
+    // verbatim), ms-3 -me-3->margin-inline:0.75rem -0.75rem.
     const label = sel(".label");
     rules.push([
       "__daisy-label-nested",
       [
         `${label}:has(input){cursor:pointer;}` +
           `${sel(".label:is(.input > *, .select > *)")}{display:flex;height:calc(100% - 0.5rem);align-items:center;padding-inline:0.75rem;white-space:nowrap;font-size:inherit;` +
-          `&:first-child{margin-inline-start:-0.75rem;margin-inline-end:0.75rem;border-inline-end:var(--border) solid color-mix(in oklab, currentColor 10%, #0000);}` +
-          `&:last-child{margin-inline-start:0.75rem;margin-inline-end:-0.75rem;border-inline-start:var(--border) solid color-mix(in oklab, currentColor 10%, #0000);}}`,
+          `&:first-child{margin-inline:-0.75rem 0.75rem;border-inline-end:var(--border) solid color-mix(in oklab, currentColor 10%, #0000);}` +
+          `&:last-child{margin-inline:0.75rem -0.75rem;border-inline-start:var(--border) solid color-mix(in oklab, currentColor 10%, #0000);}}`,
       ],
       { layer: "daisy-l3", internal: true },
     ]);
@@ -441,7 +441,7 @@ export function batch3Rules(opts: Ctx): Preset["rules"] {
           `${mm}:has([popovertarget]:nth-of-type(9):hover):not(:has([popover]:popover-open)),${mm}:has([popover]:nth-of-type(9):popover-open){--mm-anchor:--mm9;}` +
           `${mm}:has([popovertarget]:nth-of-type(10):hover):not(:has([popover]:popover-open)),${mm}:has([popover]:nth-of-type(10):popover-open){--mm-anchor:--mm10;}` +
           `${mm} [popovertarget]:has(+ [popover]:popover-open):after{opacity:1;rotate:45deg;}` +
-          `${mm} [popover]{border-width:1px;border-style:solid;border-color:var(--color-base-300);opacity:0;margin-top:0.25rem;max-height:100dvh;` +
+          `${mm} [popover]{border-width:1px;border-style:var(--tw-border-style);border-color:var(--color-base-300);opacity:0;margin-top:0.25rem;max-height:100dvh;` +
           `border-radius:var(--radius-box);background-color:var(--color-base-100);position-area:block-end span-inline-end;max-block-size:calc(100% - 0.25rem);` +
           `translate:0 -0.5rem;scale:0.98;transition:opacity 200ms ease-out, translate 200ms ease-out, scale 200ms ease-out, display 200ms ease-out allow-discrete, overlay 200ms ease-out allow-discrete;` +
           `&:popover-open{opacity:1;@starting-style{opacity:0;}}}` +
@@ -571,7 +571,7 @@ export function batch3Rules(opts: Ctx): Preset["rules"] {
           `& ${sel(".input")}{display:flex;align-items:center;gap:0.5rem;height:100%;margin-inline:auto;background-color:var(--color-base-200);` +
           `overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.75rem;direction:ltr;` +
           `&:before{content:"";width:1rem;height:1rem;opacity:0.5;background-color:currentColor;` +
-          `mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z' clip-rule='evenodd' /%3E%3C/svg%3E") no-repeat center;mask-size:contain;}}}`,
+          `mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z' clip-rule='evenodd' /%3E%3C/svg%3E") 50%/contain no-repeat;}}}`,
       ],
       { layer: "daisy-l3", internal: true },
     ]);

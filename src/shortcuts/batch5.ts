@@ -149,34 +149,9 @@ export function batch5Shortcuts(opts: Ctx): StaticShortcut[] {
       ],
       { layer: "daisy-l3" },
     ]);
-    // .tab-content, upstream layer daisyui.l1.l2.l3 -> daisy-l3. Fully flat.
-    // Expanded: order-1->order:1 (superseded below by the authored
-    // order:var(--tabcontent-order); same cascade as upstream), hidden->display:none,
-    // border-transparent->border-color:#0000.
-    out.push([
-      key("tab-content"),
-      [
-        {
-          "--tabcontent-radius-ss": "var(--radius-box)",
-          "--tabcontent-radius-se": "var(--radius-box)",
-          "--tabcontent-radius-es": "var(--radius-box)",
-          "--tabcontent-radius-ee": "var(--radius-box)",
-          "--tabcontent-order": "1",
-          width: "100%",
-          height: "calc(100% - var(--tab-height) + var(--border))",
-          margin: "var(--tabcontent-margin)",
-          order: "var(--tabcontent-order)",
-          "border-width": "var(--border)",
-          "border-color": "#0000",
-          "border-start-start-radius": "var(--tabcontent-radius-ss)",
-          "border-start-end-radius": "var(--tabcontent-radius-se)",
-          "border-end-start-radius": "var(--tabcontent-radius-es)",
-          "border-end-end-radius": "var(--tabcontent-radius-ee)",
-          display: "none",
-        },
-      ],
-      { layer: "daisy-l3" },
-    ]);
+    // .tab-content base lives in rules/batch5.ts as a raw string (it needs
+    // duplicate `order` declarations — fallback `1`, then the var — which
+    // a shortcut object cannot express). See `key("tab-content")` there.
     // .tab-disabled, upstream layer daisyui.l1.l2 -> daisy-l2. Fully flat.
     // Expanded: pointer-events-none->pointer-events:none, opacity-40->opacity:0.4.
     out.push([

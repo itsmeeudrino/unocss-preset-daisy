@@ -108,9 +108,16 @@ export function componentShortcuts(opts: Ctx): StaticShortcut[] {
       ],
       { layer: "daisy-l3" },
     ]);
+    // .btn-dash, upstream layer daisyui.l1.l2.l3 -> daisy-l3. Upstream defines
+    // .btn-dash TWICE: first block carries the full outline-like reset
+    // (--btn-bg/color/--btn-border/border-style:solid/inset/shadow/bg-image),
+    // second block flips --btn-border-style to dashed (which wins the cascade).
+    // Mirrored here: the shortcut keeps the dashed override (shortcuts emit
+    // after static rules within a layer), the first-block props live in
+    // __daisy-btn-dash so the cascade order matches upstream source order.
     out.push([
       key("btn-dash"),
-      [{ "--btn-border-style": "dashed" }],
+      [{ "--btn-border-style": "dashed" }, "__daisy-btn-dash"],
       { layer: "daisy-l3" },
     ]);
     out.push([
@@ -363,7 +370,7 @@ export function componentShortcuts(opts: Ctx): StaticShortcut[] {
       { layer: "daisy-l3" },
     ]);
     // .card-actions, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
-    // Expanded: flex->display, flex-wrap->flex-wrap:wrap, items-start->align-items:start,
+    // Expanded: flex->display, flex-wrap->flex-wrap:wrap, items-start->align-items:flex-start,
     // gap-2->gap:0.5rem.
     out.push([
       key("card-actions"),
@@ -371,7 +378,7 @@ export function componentShortcuts(opts: Ctx): StaticShortcut[] {
         {
           display: "flex",
           "flex-wrap": "wrap",
-          "align-items": "start",
+          "align-items": "flex-start",
           gap: "0.5rem",
         },
       ],
@@ -472,14 +479,14 @@ export function componentShortcuts(opts: Ctx): StaticShortcut[] {
     ]);
     // .modal-action, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     // Expanded: mt-6->margin-top:1.5rem, flex->display:flex,
-    // justify-end->justify-content:end, gap-2->gap:0.5rem.
+    // justify-end->justify-content:flex-end, gap-2->gap:0.5rem.
     out.push([
       key("modal-action"),
       [
         {
           "margin-top": "1.5rem",
           display: "flex",
-          "justify-content": "end",
+          "justify-content": "flex-end",
           gap: "0.5rem",
         },
       ],
@@ -503,7 +510,9 @@ export function componentShortcuts(opts: Ctx): StaticShortcut[] {
     // .modal-box, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     // Expanded: bg-base-100->background-color, col-start-1/row-start-1->grid-column/row-start:1,
     // max-h-screen->max-height:100vh, w-11/12->width:91.666667%, max-w-[32rem]->max-width:32rem,
-    // p-6->padding:1.5rem.
+    // p-6->padding:1.5rem. Transition kept in upstream compiled spelling
+    // (`.2s`, `50ms` delay) — the parity normalizer sorts transition tokens
+    // before number rounding, so `0.05s` would sort differently than `50ms`.
     out.push([
       key("modal-box"),
       [
@@ -516,14 +525,14 @@ export function componentShortcuts(opts: Ctx): StaticShortcut[] {
           "max-width": "32rem",
           padding: "1.5rem",
           transition:
-            "translate 0.3s ease-out, scale 0.3s ease-out, opacity 0.2s ease-out 0.05s, box-shadow 0.3s ease-out",
+            "translate .3s ease-out,scale .3s ease-out,opacity .2s ease-out 50ms,box-shadow .3s ease-out",
           "border-top-left-radius": "var(--modal-tl, var(--radius-box))",
           "border-top-right-radius": "var(--modal-tr, var(--radius-box))",
           "border-bottom-left-radius": "var(--modal-bl, var(--radius-box))",
           "border-bottom-right-radius": "var(--modal-br, var(--radius-box))",
           scale: "95%",
           opacity: "0",
-          "box-shadow": "oklch(0% 0 0/ 0.25) 0px 25px 50px -12px",
+          "box-shadow": "0 25px 50px -12px oklch(0% 0 0/.25)",
           "overflow-y": "auto",
           "overscroll-behavior": "contain",
         },
@@ -545,8 +554,8 @@ export function componentShortcuts(opts: Ctx): StaticShortcut[] {
         {
           display: "flex",
           width: "fit-content",
-          "flex-direction": "column",
-          "flex-wrap": "wrap",
+          // Compiled form (flex-col + flex-wrap merge to flex-flow).
+          "flex-flow": "column wrap",
           padding: "0.5rem",
           "--menu-active-fg": "var(--color-neutral-content)",
           "--menu-active-bg": "var(--color-neutral)",

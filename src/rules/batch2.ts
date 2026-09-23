@@ -215,7 +215,7 @@ export function batch2Rules(opts: Ctx): Preset["rules"] {
     rules.push([
       key("drawer-overlay"),
       [
-        `${side} > ${sel(".drawer-overlay")}{position:sticky;top:0;cursor:pointer;place-self:stretch;background-color:oklch(0% 0 0 / 40%);}`,
+        `${side} > ${sel(".drawer-overlay")}{position:sticky;top:0;cursor:pointer;place-self:stretch stretch;background-color:oklch(0% 0 0 / 40%);}`,
       ],
       { layer: "daisy-l3" },
     ]);
@@ -312,9 +312,9 @@ export function batch2Rules(opts: Ctx): Preset["rules"] {
           `${dropdown}:not(${sel(".dropdown-close")}):not(${sel(".dropdown-hover")}):focus ${content},${dropdown}:not(${sel(".dropdown-close")}):focus-within ${content}{opacity:1;scale:100%;}` +
           `${dropdown}:is(details){overflow:revert-layer;}` +
           `${dropdown}:is(details) summary::-webkit-details-marker{display:none;}` +
-          `${dropdown}:where([popover]){background:#0000;}` +
+          `${dropdown}:where([popover]){background:0 0;}` +
           `${dropdown}[popover]{color:inherit;position:fixed;}` +
-          `@supports not (position-area:bottom){${dropdown}[popover]{margin:auto;}${dropdown}[popover]::backdrop{background-color:color-mix(in oklab, #000 30%, #0000);}}` +
+          `@supports not (position-area:bottom){${dropdown}[popover]{margin:auto;}${dropdown}[popover]::backdrop{background-color:oklab(0% none none/.3);}}` +
           `${dropdown}[popover]:not(${sel(".dropdown-open")}, :popover-open){transform-origin:top;opacity:0;display:none;scale:95%;}`,
       ],
       { layer: "daisy-l3", internal: true },
@@ -747,7 +747,7 @@ export function batch2Rules(opts: Ctx): Preset["rules"] {
       "__daisy-hover3d-nested",
       [
         `${hover} > :nth-child(n + 2){isolation:isolate;z-index:1;}` +
-          `${hover} > :first-child{overflow:hidden;grid-area:1/1/4/4;transform:rotate3d(var(--transform), 0, 10deg);transition:transform var(--ease) 500ms, scale var(--ease) 500ms, outline-color ease-out 500ms;outline:0.5px solid #0000;outline-offset:-1px;&:before{content:"";pointer-events:none;position:absolute;z-index:1;scale:500%;opacity:0;filter:blur(0.75rem);width:33.3333%;height:33.3333%;background-image:radial-gradient(circle at 50%, #fff3 10%, transparent 50%);translate:var(--shine);transition:translate ease-out 400ms, opacity ease-out 400ms;}}` +
+          `${hover} > :first-child{overflow:hidden;grid-area:1/1/4/4;transform:rotate3d(var(--transform), 0, 10deg);transition:transform var(--ease) 500ms, scale var(--ease) 500ms, outline-color ease-out 500ms;outline:0.5px solid #0000;outline-offset:-1px;&:before{content:"";pointer-events:none;position:absolute;z-index:1;scale:500%;opacity:0;filter:blur(0.75rem);width:33.3333%;height:33.3333%;background-image:radial-gradient(circle,#fff3 10%,#0000 50%);translate:var(--shine);transition:translate ease-out 400ms, opacity ease-out 400ms;}}` +
           `${hover}:hover{--ease:linear(0, 0.708 15.2%, 0.927 23.6%, 1.067 33%, 1.12 41%, 1.13 50.2%, 1.019 83.2%, 1);}` +
           `${hover}:hover > :first-child{outline-color:#fff1;}` +
           `${hover}:hover > :first-child:before,${hover}:hover > :first-child:after{opacity:1;}` +

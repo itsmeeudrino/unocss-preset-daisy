@@ -245,13 +245,23 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
       [`${tabIs}:is(${ACTIVE})+${tabContent}{display:block;}`],
       { layer: "daisy-l3" },
     ]);
+    // .tab-content base as a raw string: upstream keeps both the `order-1`
+    // fallback and the authored `order:var(--tabcontent-order)` (a shortcut
+    // object cannot hold duplicate props). Upstream l1.l2.l3 -> daisy-l3.
+    rules.push([
+      key("tab-content"),
+      [
+        `${tabContent}{--tabcontent-radius-ss:var(--radius-box);--tabcontent-radius-se:var(--radius-box);--tabcontent-radius-es:var(--radius-box);--tabcontent-radius-ee:var(--radius-box);--tabcontent-order:1;width:100%;height:calc(100% - var(--tab-height) + var(--border));margin:var(--tabcontent-margin);order:1;order:var(--tabcontent-order);border-width:var(--border);border-color:#0000;border-start-start-radius:var(--tabcontent-radius-ss);border-start-end-radius:var(--tabcontent-radius-se);border-end-start-radius:var(--tabcontent-radius-es);border-end-end-radius:var(--tabcontent-radius-ee);display:none;}`,
+      ],
+      { layer: "daisy-l3" },
+    ]);
     // .tabs-border, upstream layer daisyui.l1.l2 -> daisy-l2.
     const borderTab = `${sel(".tabs-border")}>${tab}`;
     rules.push([
       key("tabs-border"),
       [
         `${borderTab}{--tab-border-color:#0000 #0000 var(--tab-border-color) #0000;position:relative;border-radius:var(--radius-field);` +
-          `&:before{content:"";background-color:var(--tab-border-color);transition:background-color 0.2s ease;width:calc(100% - var(--tab-p) * 2);height:3px;border-radius:var(--radius-field);bottom:0;left:var(--tab-p);position:absolute;}` +
+          `&:before{content:"";background-color:var(--tab-border-color);transition:background-color 0.2s;width:calc(100% - var(--tab-p) * 2);height:3px;border-radius:var(--radius-field);bottom:0;left:var(--tab-p);position:absolute;}` +
           `&:is(${ACTIVE}):not(${tabDisabled}, [disabled]),&:is(input:checked),&:is(label:has(:checked)){&:before{--tab-border-color:currentColor;border-top:3px solid;}}}`,
       ],
       { layer: "daisy-l2" },
@@ -529,7 +539,7 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
           `&:has(>*:nth-child(4)){--items:4;@media (prefers-reduced-motion:no-preference){animation:rotator var(--duration, 10s) linear(0 0% 24%, 0.25 25% 49%, 0.5 50% 74%, 0.75 75% 99%, 1 100% 100%) infinite;}}` +
           `&:has(>*:nth-child(5)){--items:5;@media (prefers-reduced-motion:no-preference){animation:rotator var(--duration, 10s) linear(0 0% 19%, 0.2 20% 39%, 0.4 40% 59%, 0.6 60% 79%, 0.8 80% 99%, 1 100% 100%) infinite;}}` +
           `&:has(>*:nth-child(6)){--items:6;@media (prefers-reduced-motion:no-preference){animation:rotator var(--duration, 10s) linear(0 0% 15%, 0.16666 16% 32%, 0.333333 33% 49%, 0.5 50% 65%, 0.666666 66% 82%, 0.833333 83% 99%, 1 100% 100%) infinite;}}` +
-          `&>*{clip-path:inset(0.5px 0px 0.5px 0px);align-content:baseline;&:first-child{translate:var(--first-item-position);}}}` +
+          `&>*{clip-path:inset(.5px 0);align-content:baseline;&:first-child{translate:var(--first-item-position);}}}` +
           `${tr}:hover>*{animation-play-state:paused;}` +
           `@keyframes rotator{89.9999%, 100%{--first-item-position:0 0%;}90%, 99.9999%{--first-item-position:0 calc(var(--items) * 100%);}100%{translate:0 -100%;}}`,
       ],
@@ -759,7 +769,7 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
           `${tooltip}:after{position:absolute;opacity:0;background-color:var(--tt-bg);content:"";pointer-events:none;width:0.625rem;height:0.25rem;display:block;` +
           `mask-repeat:no-repeat;mask-position:-1px 0;--mask-tooltip:${maskUrl};mask-image:var(--mask-tooltip);` +
           `transform:translateX(var(--tt-trans, -50%)) translateY(var(--tt-pos, 0.25rem));inset:auto auto var(--tt-tail) 50%;}` +
-          `@media (prefers-reduced-motion:no-preference){${bubble},${tooltip}:after{transition:opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1) 75ms, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) 75ms;}}`,
+          `@media (prefers-reduced-motion:no-preference){${bubble},${tooltip}:after{transition:opacity .2s cubic-bezier(.4,0,.2,1) 75ms,transform .2s cubic-bezier(.4,0,.2,1) 75ms;}}`,
       ],
       { layer: "daisy-l3", internal: true },
     ]);
@@ -774,7 +784,7 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
       "__daisy-tooltip-open",
       [
         `${hoverFocus}>${tcontent},:is(${hoverFocus})[data-tip]:before,:is(${hoverFocus}):after{opacity:1;--tt-pos:0rem;` +
-          `@media (prefers-reduced-motion:no-preference){transition:opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);}}`,
+          `@media (prefers-reduced-motion:no-preference){transition:opacity .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1);}}`,
       ],
       { layer: "daisy-l3", internal: true },
     ]);
@@ -882,7 +892,7 @@ export function batch5Rules(opts: Ctx): Preset["rules"] {
       key("tooltip-open"),
       [
         `${justOpen}>${tcontent},:is(${justOpen})[data-tip]:before,:is(${justOpen}):after{opacity:1;--tt-pos:0rem;` +
-          `@media (prefers-reduced-motion:no-preference){transition:opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);}}`,
+          `@media (prefers-reduced-motion:no-preference){transition:opacity .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1);}}`,
       ],
       { layer: "daisy-l3" },
     ]);

@@ -36,17 +36,19 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     const otp = sel(".otp");
     // Structural nests, upstream layer daisyui.l1.l2.l3 -> daisy-l3.
     // Expanded: pointer-events-none->pointer-events:none, start-0->inset-inline-start:0,
-    // z-1->z-index:1, m-0->margin:0, appearance-none, border-0->border-width:0,
-    // bg-transparent->background-color:transparent, p-0->padding:0, outline-0->outline-width:0,
+    // z-1->z-index:1, m-0->margin:0, appearance-none, border-0->border-width:0 +
+    // border-style:var(--tw-border-style) (Tailwind v4 compiled form),
+    // bg-transparent->background-color:transparent, p-0->padding:0,
+    // outline-0->outline-width:0 + outline-style:var(--tw-outline-style),
     // bg-transparent(selection)->background-color:transparent,
     // caret-transparent->caret-color:transparent, flex->display:flex,
-    // transition-colors->display:flex + border-color transition (explicit below wins),
-    // shrink-0->flex-shrink:0.
+    // transition-colors->transition-property/timing-function/duration longhands
+    // (explicit `transition:border-color 0.2s` after wins), shrink-0->flex-shrink:0.
     rules.push([
       "__daisy-otp-nested",
       [
         `@supports (font:-apple-system-body){${otp}{--otp-ch:0.618164em;}}` +
-          `${otp} > input{pointer-events:none;inset-inline-start:0;z-index:1;margin:0;appearance:none;border-width:0;background-color:#0000;padding:0;outline-width:0;field-sizing:content;padding-inline-start:calc(var(--otp-ch) * 0.5 - 1px);text-indent:1px;line-height:1;letter-spacing:calc(var(--stride) - var(--otp-ch));font-variant-numeric:tabular-nums;&::selection{background-color:#0000;color:color-mix(in oklab, var(--color-base-content) 20%, #0000);}&:valid{caret-color:transparent;}}` +
+          `${otp} > input{pointer-events:none;inset-inline-start:0;z-index:1;margin:0;appearance:none;border-width:0;border-style:var(--tw-border-style);background-color:#0000;padding:0;outline-width:0;outline-style:var(--tw-outline-style);field-sizing:content;padding-inline-start:calc(var(--otp-ch) * 0.5 - 1px);text-indent:1px;line-height:1;letter-spacing:calc(var(--stride) - var(--otp-ch));font-variant-numeric:tabular-nums;&::selection{background-color:#0000;color:color-mix(in oklab, var(--color-base-content) 20%, #0000);}&:valid{caret-color:transparent;}}` +
           `${otp}:has(> span:nth-child(1)){width:calc(var(--stride) * 1);}` +
           `${otp}:has(> span:nth-child(2)){width:calc(var(--stride) * 2);}` +
           `${otp}:has(> span:nth-child(3)){width:calc(var(--stride) * 3);}` +
@@ -55,7 +57,7 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
           `${otp}:has(> span:nth-child(6)){width:calc(var(--stride) * 6);}` +
           `${otp}:has(> span:nth-child(7)){width:calc(var(--stride) * 7);}` +
           `${otp}:has(> span:nth-child(8)){width:calc(var(--stride) * 8);}` +
-          `${otp} > span{position:absolute;display:flex;transition:border-color 0.2s;inline-size:var(--otp-w);block-size:var(--otp-size);background-color:var(--color-base-100);border:var(--border) solid var(--input-color);border-radius:inherit;outline:2px solid #0000;outline-offset:1px;box-shadow:0 1px color-mix(in oklab, var(--input-color) calc(var(--depth) * 10%), #0000) inset, 0 -1px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;&:nth-child(1){left:0;@supports (font:-apple-system-body){left:1px;}}&:nth-child(2){left:calc(var(--stride) * 1);transition-delay:0.02s;}&:nth-child(3){left:calc(var(--stride) * 2);transition-delay:0.04s;}&:nth-child(4){left:calc(var(--stride) * 3);transition-delay:0.06s;}&:nth-child(5){left:calc(var(--stride) * 4);transition-delay:0.08s;}&:nth-child(6){left:calc(var(--stride) * 5);transition-delay:0.1s;}&:nth-child(7){left:calc(var(--stride) * 6);transition-delay:0.12s;}&:nth-child(8){left:calc(var(--stride) * 7);transition-delay:0.14s;}}` +
+          `${otp} > span{position:absolute;display:flex;transition-property:color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,--tw-gradient-from,--tw-gradient-via,--tw-gradient-to;transition-timing-function:var(--tw-ease,var(--default-transition-timing-function));transition-duration:var(--tw-duration,var(--default-transition-duration));transition:border-color 0.2s;inline-size:var(--otp-w);block-size:var(--otp-size);background-color:var(--color-base-100);border:var(--border) solid var(--input-color);border-radius:inherit;outline:2px solid #0000;outline-offset:1px;box-shadow:0 1px color-mix(in oklab, var(--input-color) calc(var(--depth) * 10%), #0000) inset, 0 -1px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;&:nth-child(1){left:0;@supports (font:-apple-system-body){left:1px;}}&:nth-child(2){left:calc(var(--stride) * 1);transition-delay:0.02s;}&:nth-child(3){left:calc(var(--stride) * 2);transition-delay:0.04s;}&:nth-child(4){left:calc(var(--stride) * 3);transition-delay:0.06s;}&:nth-child(5){left:calc(var(--stride) * 4);transition-delay:0.08s;}&:nth-child(6){left:calc(var(--stride) * 5);transition-delay:0.1s;}&:nth-child(7){left:calc(var(--stride) * 6);transition-delay:0.12s;}&:nth-child(8){left:calc(var(--stride) * 7);transition-delay:0.14s;}}` +
           `${otp}:after{flex-shrink:0;content:"";width:var(--otp-w);height:var(--otp-size);border-radius:var(--radius-field);outline:2px solid #0000;outline-offset:1px;z-index:10;margin-inline-start:calc(-1 * (var(--otp-gap) + var(--otp-ch) * 0.5));}`,
       ],
       { layer: "daisy-l3", internal: true },
@@ -139,8 +141,8 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
       "__daisy-progress-nested",
       [
         `${progress}:indeterminate{background-image:repeating-linear-gradient(90deg, currentColor -1%, currentColor 10%, #0000 10%, #0000 90%);background-size:200%;background-position-x:15%;@media (prefers-reduced-motion:no-preference){animation:progress 5s ease-in-out infinite;}@supports (-moz-appearance:none){&::-moz-progress-bar{background-color:#0000;@media (prefers-reduced-motion:no-preference){animation:progress 5s ease-in-out infinite;background-image:repeating-linear-gradient(90deg, currentColor -1%, currentColor 10%, #0000 10%, #0000 90%);background-size:200%;background-position-x:15%;}}}}` +
-          `@supports (-moz-appearance:none){${progress}::-moz-progress-bar{border-radius:var(--radius-box);background-color:currentColor;@media (prefers-reduced-motion:no-preference){transition:inline-size 0.3s ease;}}}` +
-          `@supports (-webkit-appearance:none){${progress}::-webkit-progress-bar{border-radius:var(--radius-box);background-color:#0000;}${progress}::-webkit-progress-value{border-radius:var(--radius-box);background-color:currentColor;@media (prefers-reduced-motion:no-preference){transition:inline-size 0.3s ease;}}}` +
+          `@supports (-moz-appearance:none){${progress}::-moz-progress-bar{border-radius:var(--radius-box);background-color:currentColor;@media (prefers-reduced-motion:no-preference){transition:inline-size 0.3s;}}}` +
+          `@supports (-webkit-appearance:none){${progress}::-webkit-progress-bar{border-radius:var(--radius-box);background-color:#0000;}${progress}::-webkit-progress-value{border-radius:var(--radius-box);background-color:currentColor;@media (prefers-reduced-motion:no-preference){transition:inline-size 0.3s;}}}` +
           `@keyframes progress{50%{background-position-x:-115%;}}`,
       ],
       { layer: "daisy-l3", internal: true },
@@ -199,13 +201,15 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     ]);
     // Focus/checked/disabled states -> daisy-l1 (states beat modifiers).
     // Expanded: bg-base-100->background-color, border-current->border-color,
-    // bg-current->background-color, outline 1px + -outline-offset-1->outline-width/offset,
+    // bg-current->background-color, outline 1px + -outline-offset-1->compiled
+    // var(--tw-outline-style) / 1px / calc(1px * -1) (Tailwind v4 forced-colors
+    // pattern; outline-style:solid@source compiles to the var indirection),
     // cursor-not-allowed->cursor, opacity-20->opacity:0.2.
     rules.push([
       "__daisy-radio-state",
       [
-        `${radio}:focus-visible{outline:2px solid currentColor;}` +
-          `${radio}:checked,${radio}[aria-checked="true"]{background-color:var(--color-base-100);border-color:currentColor;@media (prefers-reduced-motion:no-preference){animation:radio 0.2s ease-out;}&:before{background-color:currentColor;box-shadow:0 -1px oklch(0% 0 0 / calc(var(--depth) * 0.1)) inset, 0 8px 0 -4px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset, 0 1px oklch(0% 0 0 / calc(var(--depth) * 0.1));}@media (forced-colors:active){&:before{outline-style:solid;outline-width:1px;outline-offset:-1px;}}@media print{&:before{outline:0.25rem solid;outline-offset:-1rem;}}}` +
+        `${radio}:focus-visible{outline:2px solid;}` +
+          `${radio}:checked,${radio}[aria-checked=true]{background-color:var(--color-base-100);border-color:currentColor;@media (prefers-reduced-motion:no-preference){animation:radio 0.2s ease-out;}&:before{background-color:currentColor;box-shadow:0 -1px oklch(0% 0 0 / calc(var(--depth) * 0.1)) inset, 0 8px 0 -4px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset, 0 1px oklch(0% 0 0 / calc(var(--depth) * 0.1));}@media (forced-colors:active){&:before{outline-style:var(--tw-outline-style);outline-width:1px;outline-offset:calc(1px * -1);}}@media print{&:before{outline:0.25rem solid;outline-offset:-1rem;}}}` +
           `${radio}:disabled{cursor:not-allowed;opacity:0.2;}`,
       ],
       { layer: "daisy-l1", internal: true },
@@ -323,7 +327,7 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     rules.push([
       key("range-vertical"),
       [
-        `${sel(".range-vertical")}{writing-mode:vertical-lr;direction:rtl;width:var(--range-thumb-size);height:clamp(3rem, 20rem, 100%);--range-fill-x:0;--range-fill-y:calc(100cqh + var(--range-thumb-size) / 2);--range-fill-spread:calc(100cqh * var(--range-fill));&::-webkit-slider-runnable-track{height:100%;width:calc(var(--range-thumb-size) * 0.5);}&::-webkit-slider-thumb{transform:translateX(-50%);}&::-moz-range-track{height:100%;width:calc(var(--range-thumb-size) * 0.5);}}`,
+        `${sel(".range-vertical")}{writing-mode:vertical-lr;direction:rtl;width:var(--range-thumb-size);height:clamp(3rem, 20rem, 100%);--range-fill-x:0;--range-fill-y:calc(100cqh + var(--range-thumb-size) / 2);--range-fill-spread:calc(100cqh * var(--range-fill));&::-webkit-slider-runnable-track{height:100%;width:calc(var(--range-thumb-size) * 0.5);}&::-webkit-slider-thumb{transform:translate(-50%);}&::-moz-range-track{height:100%;width:calc(var(--range-thumb-size) * 0.5);}}`,
       ],
       { layer: "daisy-l2" },
     ]);
@@ -398,18 +402,18 @@ export function batch4Rules(opts: Ctx): Preset["rules"] {
     rules.push([
       "__daisy-select-nested",
       [
-        `${sel('[dir="rtl"]')} ${select}{background-position:calc(0% + 12px) calc(1px + 50%), calc(0% + 16px) calc(1px + 50%);}` +
+        `${sel('[dir="rtl"]')} ${select}{background-position:12px calc(1px + 50%),16px calc(1px + 50%);}` +
           `${select}[multiple]{height:auto;overflow:auto;padding-block:0.75rem;padding-inline-end:0.75rem;background-image:none;}` +
-          `${select} select{appearance:none;width:calc(100% + 2.75rem);height:calc(100% - calc(var(--border) * 2));background:inherit;border-radius:inherit;border-style:none;align-items:center;margin-inline:-0.75rem -1.75rem;padding-inline:0.75rem 1.75rem;&::placeholder{color:var(--color-base-content);opacity:0.5;}&:focus,&:focus-within{outline-style:hidden;}@media (forced-colors:active){&:focus,&:focus-within{outline-offset:2px;outline:2px solid #0000;}}&:not(:last-child){background-image:none;margin-inline-end:-1.375rem;}}` +
+          `${select} select{appearance:none;width:calc(100% + 2.75rem);height:calc(100% - calc(var(--border) * 2));background:inherit;border-radius:inherit;border-style:none;align-items:center;margin-inline:-0.75rem -1.75rem;padding-inline:0.75rem 1.75rem;&::placeholder{color:var(--color-base-content);opacity:0.5;}&:focus,&:focus-within{outline-offset:2px;outline:2px solid #0000;--tw-outline-style:none;outline-style:none;}@media (forced-colors:active){&:focus,&:focus-within{outline-offset:2px;outline:2px solid #0000;}}&:not(:last-child){background-image:none;margin-inline-end:-1.375rem;}}` +
           `${select}:focus,${select}:focus-within,${select}:open{--input-color:var(--color-base-content);box-shadow:0 1px color-mix(in oklab, var(--input-color) calc(var(--depth) * 10%), #0000);outline:2px solid var(--input-color);outline-offset:2px;}` +
           `${select}:open{background-image:linear-gradient(135deg, #0000 50%, currentColor 50%), linear-gradient(45deg, currentColor 50%, #0000 50%);}` +
           `@supports (appearance:base-select){${select},${select} select,${select}::picker(select),${select} select::picker(select){appearance:base-select;}}` +
-          `${select}::picker(select),${select} select::picker(select){color:inherit;max-height:min(24rem, 70dvh);margin-inline:0.5rem;translate:-0.5rem 0;border:var(--border) solid var(--color-base-200);border-radius:var(--radius-box);margin-block:0.5rem;padding:0.5rem;background-color:inherit;box-shadow:0 20px 25px -5px rgb(0 0 0 / calc(var(--depth) * 0.1)), 0 8px 10px -6px rgb(0 0 0 / calc(var(--depth) * 0.1));}` +
+          `${select}::picker(select),${select} select::picker(select){color:inherit;max-height:min(24rem, 70dvh);margin-inline:0.5rem;translate:-0.5rem 0;border:var(--border) solid var(--color-base-200);border-radius:var(--radius-box);margin-block:0.5rem;padding:0.5rem;background-color:inherit;box-shadow:0 2px calc(var(--depth) * 3px) -2px oklch(0% 0 0/0.2);box-shadow:0 20px 25px -5px rgb(0 0 0 / calc(var(--depth) * 0.1)), 0 8px 10px -6px rgb(0 0 0 / calc(var(--depth) * 0.1));}` +
           `${select}::picker-icon,${select} select::picker-icon{display:none;}` +
           `${select} selectedcontent,${select} select selectedcontent{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}` +
           `${select} optgroup,${select} select optgroup{padding-top:0.5em;& option:nth-child(1){margin-top:0.5em;}}` +
-          `${select} option,${select} select option{border-radius:var(--radius-field);padding-block:0.375rem;padding-inline:calc(var(--spacing) * var(--option-px, 3));transition-property:color, background-color;transition-duration:0.2s;transition-timing-function:cubic-bezier(0, 0, 0.2, 1);white-space:normal;&:not(:disabled){&:hover,&:focus-visible{background-color:color-mix(in oklab, var(--color-base-content) 10%, transparent);cursor:pointer;outline-style:hidden;}&:active{background-color:var(--color-neutral);color:var(--color-neutral-content);box-shadow:0 2px calc(var(--depth) * 3px) -2px var(--color-neutral);}}}` +
-          `${sel('[dir="rtl"]')} ${select}::picker(select),${sel('[dir="rtl"]')} ${select} select::picker(select){translate:0.5rem 0;}`,
+          `${select} option,${select} select option{border-radius:var(--radius-field);padding-block:0.375rem;padding-inline:calc(.25rem * var(--option-px, 3));transition-property:color, background-color;transition-duration:0.2s;transition-timing-function:cubic-bezier(0, 0, 0.2, 1);white-space:normal;&:not(:disabled){&:hover,&:focus-visible{background-color:color-mix(in oklab, var(--color-base-content) 10%, transparent);cursor:pointer;outline-offset:2px;outline:2px solid #0000;--tw-outline-style:none;outline-style:none;}&:active{background-color:var(--color-neutral);color:var(--color-neutral-content);box-shadow:0 2px calc(var(--depth) * 3px) -2px var(--color-neutral);}}}` +
+          `${sel('[dir="rtl"]')} ${select}::picker(select),${sel('[dir="rtl"]')} ${select} select::picker(select){translate:.5rem;}`,
       ],
       { layer: "daisy-l3", internal: true },
     ]);
