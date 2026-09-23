@@ -2,7 +2,7 @@
   "name": "daisyUI components (UnoCSS preset port)",
   "short_name": "daisyUI-Uno",
   "description": "daisyUI component docs powered by unocss-preset-daisy — zero Tailwind.",
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff"

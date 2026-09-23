@@ -1,5 +1,7 @@
 <script>
   import { t } from "$lib/i18n.svelte.js"
+  import { base } from "$app/paths"
+  import { withBase } from "$lib/base.js"
 
   let { markdownUrl, sourceCodeUrl } = $props()
   let clipboardState = $state("idle") // 'idle' | 'loading' | 'done'
@@ -152,7 +154,7 @@
       </li>
       <li></li>
       <li>
-        <a class="group" href={markdownUrl} target="_blank" rel="noopener noreferrer">
+        <a class="group" href={withBase(markdownUrl)} target="_blank" rel="noopener noreferrer">
           <svg class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
             <path
               d="M25.674 9.221H6.326c-.899 0-1.63.731-1.63 1.63V21.72c0 .899.731 1.63 1.63 1.63h19.348c.899 0 1.63-.731 1.63-1.63V10.851c0-.899-.731-1.63-1.63-1.63zm-8.261 11.301l-2.826.003v-4.239l-2.12 2.717-2.12-2.717v4.239H7.521v-8.478h2.826l2.12 2.826 2.12-2.826 2.826-.003v8.478zm4.219.707l-3.512-4.943h2.119v-4.239h2.826v4.239h2.119l-3.553 4.943z"
@@ -176,7 +178,7 @@
       </li>
       {#if sourceCodeUrl}
         <li>
-          <a class="group" target="_blank" rel="noopener noreferrer" href={sourceCodeUrl}>
+          <a class="group" target="_blank" rel="noopener noreferrer" href={withBase(sourceCodeUrl)}>
             <svg class="h-3.5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <g
                 stroke-linejoin="round"
@@ -210,7 +212,7 @@
       <li></li>
 
       <li>
-        <a href="/docs/editor/">
+        <a href="{base}/docs/editor/">
           <svg
             width="18"
             height="18"

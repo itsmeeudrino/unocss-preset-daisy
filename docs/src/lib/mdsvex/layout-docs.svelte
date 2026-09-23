@@ -5,6 +5,7 @@
   import ComponentFooter from "$components/ComponentFooter.svelte"
   import SEO from "$components/SEO.svelte"
   import { t } from "$lib/i18n.svelte.js"
+  import { stripBase } from "$lib/base.js"
   let {
     data,
     title,
@@ -39,7 +40,7 @@
   <SEO
     {title}
     {desc}
-    img={`https://img.daisyui.com/images${$page.url.pathname.replace(/\/$/, "")}.webp`}
+    img={`https://img.daisyui.com/images${stripBase($page.url.pathname).replace(/\/$/, "")}.webp`}
   />
 {/if}
 

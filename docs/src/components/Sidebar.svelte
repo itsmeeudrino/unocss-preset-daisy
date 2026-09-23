@@ -5,6 +5,8 @@
   import ChangelogMenu from "$components/ChangelogMenu.svelte"
   import { t } from "$lib/i18n.svelte.js"
   import { track } from "$lib/analytics.svelte.js"
+  import { base } from "$app/paths"
+  import { withBase, stripBase } from "$lib/base.js"
 
   let {
     closeDrawer,
@@ -28,12 +30,12 @@
   const matchesActivePath = (item) => {
     if (!item) return false
 
-    const pathname = $page.url.pathname
+    const path = stripBase($page.url.pathname)
 
     if (item.href) {
-      if (pathname === item.highlightAnotherItem) return true
-      if (item.exact) return pathname === item.href
-      if (pathname === item.href || pathname.startsWith(item.href)) return true
+      if (path === item.highlightAnotherItem) return true
+      if (item.exact) return path === item.href
+      if (path === item.href || path.startsWith(item.href)) return true
 
       return false
     }
@@ -221,7 +223,7 @@
                     {:else if child.iconUrl}
                       <img
                         class="size-4 shrink-0 object-contain"
-                        src={child.iconUrl}
+                        src={withBase(child.iconUrl)}
                         alt={child.name}
                       />
                     {/if}
@@ -230,7 +232,7 @@
                   </button>
                 {:else}
                   <a
-                    href={child.href}
+                    href={withBase(child.href)}
                     target={child.target === "blank" ? "_blank" : undefined}
                     rel={child.target === "blank" ? "noopener noreferrer" : undefined}
                     class={isActive(child) ? "menu-active" : ""}
@@ -244,7 +246,7 @@
                     {:else if child.iconUrl}
                       <img
                         class="size-4 shrink-0 object-contain"
-                        src={child.iconUrl}
+                        src={withBase(child.iconUrl)}
                         alt={child.name}
                       />
                     {/if}
@@ -289,7 +291,7 @@
                             {:else if child.iconUrl}
                               <img
                                 class="size-4 shrink-0 object-contain"
-                                src={child.iconUrl}
+                                src={withBase(child.iconUrl)}
                                 alt={child.name}
                               />
                             {/if}
@@ -298,7 +300,7 @@
                           </button>
                         {:else}
                           <a
-                            href={child.href}
+                            href={withBase(child.href)}
                             target={child.target === "blank" ? "_blank" : undefined}
                             rel={child.target === "blank" ? "noopener noreferrer" : undefined}
                             class={isActive(child) ? "menu-active" : ""}
@@ -312,7 +314,7 @@
                             {:else if child.iconUrl}
                               <img
                                 class="size-4 shrink-0 object-contain"
-                                src={child.iconUrl}
+                                src={withBase(child.iconUrl)}
                                 alt={child.name}
                               />
                             {/if}
@@ -339,7 +341,7 @@
                     {:else if item.iconUrl}
                       <img
                         class="size-4 shrink-0 object-contain"
-                        src={item.iconUrl}
+                        src={withBase(item.iconUrl)}
                         alt={item.name}
                       />
                     {/if}
@@ -348,7 +350,7 @@
                   </button>
                 {:else}
                   <a
-                    href={item.href}
+                    href={withBase(item.href)}
                     class={isActive(item) ? "menu-active" : ""}
                     onclick={() => {
                       track(`Mobile Menu > ${item.name}`)
@@ -360,7 +362,7 @@
                     {:else if item.iconUrl}
                       <img
                         class="size-4 shrink-0 object-contain"
-                        src={item.iconUrl}
+                        src={withBase(item.iconUrl)}
                         alt={item.name}
                       />
                     {/if}
@@ -407,7 +409,7 @@
             {:else if item.iconUrl}
               <img
                 class="ms-1 size-4 shrink-0 object-contain opacity-60"
-                src={item.iconUrl}
+                src={withBase(item.iconUrl)}
                 alt={item.name}
               />
             {/if}
@@ -422,7 +424,7 @@
       {/if}
       {#if !item.items && item.href && hasText(item.name)}
         <a
-          href={item.href}
+          href={withBase(item.href)}
           target={item.target === "blank" ? "_blank" : undefined}
           rel={item.target === "blank" ? "noopener noreferrer" : undefined}
           onclick={closeDrawer}
@@ -437,7 +439,7 @@
               {@html item.icon}
             </span>
           {:else if item.iconUrl}
-            <img class="size-4 shrink-0 object-contain" src={item.iconUrl} alt={item.name} />
+            <img class="size-4 shrink-0 object-contain" src={withBase(item.iconUrl)} alt={item.name} />
           {/if}
           <span class={item.deprecated ? "line-through" : undefined}>
             {#if hasText(item.name)}

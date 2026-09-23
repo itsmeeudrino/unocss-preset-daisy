@@ -2,6 +2,7 @@
   import { onMount } from "svelte"
   import { themeChange } from "theme-change"
   import { t } from "$lib/i18n.svelte.js"
+  import { base } from "$app/paths"
   onMount(() => {
     themeChange(false)
   })
@@ -69,7 +70,7 @@
       {/each}
       <li></li>
       <li>
-        <a href="/theme-generator/">
+        <a href="{base}/theme-generator/">
           <svg
             width="24"
             height="24"

@@ -2,6 +2,8 @@
   import { goto } from "$app/navigation"
   import LogoHorizontal from "$components/LogoHorizontal.svelte"
   import { t } from "$lib/i18n.svelte.js"
+  import { base } from "$app/paths"
+  import { withBase } from "$lib/base.js"
 
   const newtabicon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inline-block ms-1 size-3 fill-current opacity-0 group-hover:opacity-70"><path fill-rule="evenodd" d="M19,14 L19,19 C19,20.1045695 18.1045695,21 17,21 L5,21 C3.8954305,21 3,20.1045695 3,19 L3,7 C3,5.8954305 3.8954305,5 5,5 L10,5 L10,7 L5,7 L5,19 L17,19 L17,14 L19,14 Z M18.9971001,6.41421356 L11.7042068,13.7071068 L10.2899933,12.2928932 L17.5828865,5 L12.9971001,5 L12.9971001,3 L20.9971001,3 L20.9971001,11 L18.9971001,11 L18.9971001,6.41421356 Z" /></svg>`
 </script>
@@ -15,13 +17,13 @@
         <div class="flex items-center gap-2">
           <a
             data-sveltekit-preload-data
-            href="/"
+            href="{base}/"
             aria-current="page"
             aria-label="daisyUI"
             class="-ms-4 flex w-35 shrink-0 items-center gap-2 md:-mt-4 md:w-50"
             oncontextmenu={(e) => {
               e.preventDefault()
-              goto("/brand")
+              goto(withBase("/brand"))
             }}
           >
             <LogoHorizontal />
@@ -185,7 +187,7 @@
             aria-label="StackBlitz"
             target="_blank"
             rel="noopener, noreferrer"
-            href="/stackblitz/"
+            href="{base}/stackblitz/"
             class="opacity-50 hover:opacity-100"
           >
             <svg
@@ -205,7 +207,7 @@
             aria-label="CodePen"
             target="_blank"
             rel="noopener, noreferrer"
-            href="/codepen/"
+            href="{base}/codepen/"
             class="opacity-50 hover:opacity-100"
           >
             <svg
@@ -232,7 +234,7 @@
             aria-label="Tailwind Play"
             target="_blank"
             rel="noopener, noreferrer"
-            href="/tailwindplay/"
+            href="{base}/tailwindplay/"
             class="opacity-50 hover:opacity-100"
           >
             <svg
@@ -259,7 +261,7 @@
             </svg>
           </a>
         </div>
-        <a href="/brand/" class="link link-hover">daisyUI Logo and brand</a>
+        <a href="{base}/brand/" class="link link-hover">daisyUI Logo and brand</a>
         <a
           target="_blank"
           rel="noopener, noreferrer"
@@ -269,11 +271,11 @@
           {$t("license")}
           {@html newtabicon}
         </a>
-        <a href="/docs/faq/" class="link link-hover">{$t("FAQ")}</a>
-        <a href="/docs/roadmap/" class="link link-hover">
+        <a href="{base}/docs/faq/" class="link link-hover">{$t("FAQ")}</a>
+        <a href="{base}/docs/roadmap/" class="link link-hover">
           {$t("Roadmap")}
         </a>
-        <a href="/docs/changelog/" class="link link-hover">
+        <a href="{base}/docs/changelog/" class="link link-hover">
           {$t("changelog")}
         </a>
         <a
@@ -291,118 +293,118 @@
         <a
           target="_blank"
           rel="noopener, noreferrer"
-          href="/llms.txt"
+          href="{base}/llms.txt"
           class="link link-hover group"
         >
           llms.txt
           {@html newtabicon}
         </a>
-        <a class="link link-hover" href="/blueprint/">UI design MCP server</a>
-        <a class="link link-hover" href="/docs/skill/">UI design agent Skill</a>
-        <a class="link link-hover" href="/skills/daisyui-dashboard/"
+        <a class="link link-hover" href="{base}/blueprint/">UI design MCP server</a>
+        <a class="link link-hover" href="{base}/docs/skill/">UI design agent Skill</a>
+        <a class="link link-hover" href="{base}/skills/daisyui-dashboard/"
           >Dashboard design skill for Claude</a
         >
-        <a class="link link-hover" href="/skills/daisyui-charts/">Chart skill for Claude</a>
-        <a class="link link-hover" href="/docs/plugin/codex/">UI design Codex plugin</a>
-        <a class="link link-hover" href="/docs/plugin/grok/">UI design Grok Build plugin</a>
-        <a class="link link-hover" href="/docs/plugin/cursor/">UI design Cursor plugin</a>
-        <a class="link link-hover" href="/docs/plugin/claude-code/">UI design Claude Code plugin</a>
+        <a class="link link-hover" href="{base}/skills/daisyui-charts/">Chart skill for Claude</a>
+        <a class="link link-hover" href="{base}/docs/plugin/codex/">UI design Codex plugin</a>
+        <a class="link link-hover" href="{base}/docs/plugin/grok/">UI design Grok Build plugin</a>
+        <a class="link link-hover" href="{base}/docs/plugin/cursor/">UI design Cursor plugin</a>
+        <a class="link link-hover" href="{base}/docs/plugin/claude-code/">UI design Claude Code plugin</a>
       </div>
       <div>
         <span class="footer-title opacity-70">{$t("Frameworks")}</span>
         <a
           class="link link-hover"
-          href={`/angular-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/angular-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >Angular Component Library</a
         >
         <a
           class="link link-hover"
-          href={`/astro-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/astro-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >Astro Component Library</a
         >
         <a
           class="link link-hover"
-          href={`/django-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/django-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >Django Component Library</a
         >
         <!-- <a
             class="link link-hover"
-            href={`/electron-${["component-library","ui-library","tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+            href={withBase(`/electron-${["component-library","ui-library","tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
             >Electron Component Library</a
         > -->
         <a
           class="link link-hover"
-          href={`/htmx-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/htmx-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >HTMX Component Library</a
         >
         <a
           class="link link-hover"
-          href={`/laravel-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/laravel-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >Laravel Component Library</a
         >
         <!-- <a
             class="link link-hover"
-            href={`/lit-${["component-library","ui-library","tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+            href={withBase(`/lit-${["component-library","ui-library","tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
             >Lit Component Library</a
         > -->
         <a
           class="link link-hover"
-          href={`/nextjs-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/nextjs-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >Nextjs Component Library</a
         >
         <a
           class="link link-hover"
-          href={`/nuxt-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/nuxt-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >Nuxt Component Library</a
         >
         <!-- <a
             class="link link-hover"
-            href={`/qwik-${["component-library","ui-library","tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+            href={withBase(`/qwik-${["component-library","ui-library","tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
             >Qwik Component Library</a
         > -->
         <a
           class="link link-hover"
-          href={`/rails-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/rails-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >Rails Component Library</a
         >
         <a
           class="link link-hover"
-          href={`/react-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/react-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >React Component Library</a
         >
         <!-- <a
             class="link link-hover"
-            href={`/solid-${["component-library","ui-library","tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+            href={withBase(`/solid-${["component-library","ui-library","tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
             >Solid Component Library</a
         > -->
         <a
           class="link link-hover"
-          href={`/svelte-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/svelte-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >Svelte Component Library</a
         >
         <!-- <a
             class="link link-hover"
-            href={`/unocss-${["component-library","ui-library","tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+            href={withBase(`/unocss-${["component-library","ui-library","tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
             >UnoCSS Component Library</a
         > -->
         <a
           class="link link-hover"
-          href={`/vue-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`}
+          href={withBase(`/vue-${["component-library", "ui-library", "tailwind-css"][Math.floor(Math.random() * 3)]}/`)}
           >Vue Component Library</a
         >
       </div>
       <div>
         <span class="footer-title opacity-70">{$t("Compare libraries")}</span>
-        <a class="link link-hover" href="/compare/radix-vs-daisyui/">Radix vs daisyUI</a>
-        <a class="link link-hover" href="/compare/mui-vs-daisyui/">MUI vs daisyUI</a>
-        <a class="link link-hover" href="/compare/shadcn-vs-daisyui/">shadcn/ui vs daisyUI</a>
-        <a class="link link-hover" href="/compare/bootstrap-vs-daisyui/">Bootstrap vs daisyUI</a>
-        <a class="link link-hover" href="/compare/flowbite-vs-daisyui/">Flowbite vs daisyUI</a>
-        <a class="link link-hover" href="/compare/bulma-vs-daisyui/">Bulma vs daisyUI</a>
-        <a class="link link-hover" href="/compare/nuxtui-vs-daisyui/">NuxtUI vs daisyUI</a>
-        <a class="link link-hover" href="/compare/heroui-vs-daisyui/">HeroUI vs daisyUI</a>
-        <a class="link link-hover" href="/compare/preline-vs-daisyui/">Preline UI vs daisyUI</a>
-        <a class="link link-hover" href="/compare/chakra-vs-daisyui/">Chakra UI vs daisyUI</a>
+        <a class="link link-hover" href="{base}/compare/radix-vs-daisyui/">Radix vs daisyUI</a>
+        <a class="link link-hover" href="{base}/compare/mui-vs-daisyui/">MUI vs daisyUI</a>
+        <a class="link link-hover" href="{base}/compare/shadcn-vs-daisyui/">shadcn/ui vs daisyUI</a>
+        <a class="link link-hover" href="{base}/compare/bootstrap-vs-daisyui/">Bootstrap vs daisyUI</a>
+        <a class="link link-hover" href="{base}/compare/flowbite-vs-daisyui/">Flowbite vs daisyUI</a>
+        <a class="link link-hover" href="{base}/compare/bulma-vs-daisyui/">Bulma vs daisyUI</a>
+        <a class="link link-hover" href="{base}/compare/nuxtui-vs-daisyui/">NuxtUI vs daisyUI</a>
+        <a class="link link-hover" href="{base}/compare/heroui-vs-daisyui/">HeroUI vs daisyUI</a>
+        <a class="link link-hover" href="{base}/compare/preline-vs-daisyui/">Preline UI vs daisyUI</a>
+        <a class="link link-hover" href="{base}/compare/chakra-vs-daisyui/">Chakra UI vs daisyUI</a>
       </div>
 
       <div>

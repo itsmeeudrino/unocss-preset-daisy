@@ -2,6 +2,8 @@
   import { page } from "$app/stores"
   import { currentLang, defaultLang, t } from "$lib/i18n.svelte.js"
   import { onMount } from "svelte"
+  import { base } from "$app/paths"
+  import { withBase, stripBase } from "$lib/base.js"
 
   let { pages = [], sourcePageFile = "+page.md" } = $props()
 
@@ -24,8 +26,10 @@
   }
   const arrayOfPagesInOrder = $derived.by(() => extractPages(pages))
 
+  let strippedPath = $derived(stripBase($page.url.pathname))
+
   let currentPageIndex = $derived(
-    arrayOfPagesInOrder.findIndex((item) => item.href === $page.url.pathname),
+    arrayOfPagesInOrder.findIndex((item) => item.href === strippedPath),
   )
 
   onMount(() => {
@@ -47,14 +51,14 @@
         event.preventDefault()
         const nextPage = arrayOfPagesInOrder[currentPageIndex + 1]
         if (nextPage) {
-          window.location.href = nextPage.href
+          window.location.href = withBase(nextPage.href)
         }
       } else if (event.key === "k" && currentPageIndex > 0) {
         // Navigate to previous page
         event.preventDefault()
         const prevPage = arrayOfPagesInOrder[currentPageIndex - 1]
         if (prevPage) {
-          window.location.href = prevPage.href
+          window.location.href = withBase(prevPage.href)
         }
       }
     }
@@ -74,7 +78,7 @@
       <div>
         {#if currentPageIndex > 0 && arrayOfPagesInOrder[currentPageIndex - 1]}
           <a
-            href={arrayOfPagesInOrder[currentPageIndex - 1].href}
+            href={withBase(arrayOfPagesInOrder[currentPageIndex - 1].href)}
             class="btn btn-sm md:btn-md gap-2 lg:gap-3"
           >
             <svg
@@ -100,7 +104,7 @@
       <div>
         {#if currentPageIndex < arrayOfPagesInOrder.length - 1 && arrayOfPagesInOrder[currentPageIndex + 1]}
           <a
-            href={arrayOfPagesInOrder[currentPageIndex + 1].href}
+            href={withBase(arrayOfPagesInOrder[currentPageIndex + 1].href)}
             class="btn btn-neutral btn-sm md:btn-md gap-2 lg:gap-3"
           >
             <div class="flex flex-col items-end gap-0.5 leading-[1.1]">
@@ -126,10 +130,10 @@
     </div>
     <div class="bg-base-content/10 mx-1 my-10 h-[var(--border)]"></div>
   {/if}
-  {#if $page.url.pathname.startsWith("/docs/install/") && $page.url.pathname !== "/docs/install/"}
+  {#if strippedPath.startsWith("/docs/install/") && strippedPath !== "/docs/install/"}
     <div class="flex justify-end">
       <div>
-        <a class="btn btn-neutral btn-sm md:btn-md gap-2 lg:gap-3" href="/docs/use/">
+        <a class="btn btn-neutral btn-sm md:btn-md gap-2 lg:gap-3" href="{base}/docs/use/">
           <div class="flex flex-col items-end gap-0.5 leading-[1.1]">
             <span
               class="text-neutral-content/50 hidden text-[0.5625rem] font-semibold tracking-wide md:block"
@@ -152,10 +156,10 @@
     </div>
     <div class="bg-base-content/10 mx-1 my-10 h-[var(--border)]"></div>
   {/if}
-  {#if $page.url.pathname.startsWith("/docs/editor/") && $page.url.pathname !== "/docs/editor/"}
+  {#if strippedPath.startsWith("/docs/editor/") && strippedPath !== "/docs/editor/"}
     <div class="flex justify-end">
       <div>
-        <a class="btn btn-neutral btn-sm md:btn-md gap-2 lg:gap-3" href="/docs/customize/">
+        <a class="btn btn-neutral btn-sm md:btn-md gap-2 lg:gap-3" href="{base}/docs/customize/">
           <div class="flex flex-col items-end gap-0.5 leading-[1.1]">
             <span
               class="text-neutral-content/50 hidden text-[0.5625rem] font-semibold tracking-wide md:block"
@@ -327,7 +331,7 @@
             target="_blank"
             rel="noopener, noreferrer"
             class="link"
-            href={`https://github.com/saadeghi/daisyui/blob/master/packages/docs/src/routes/(routes)${$page.url.pathname.replace(
+            href={`https://github.com/saadeghi/daisyui/blob/master/packages/docs/src/routes/(routes)${strippedPath.replace(
               /\/$/,
               "",
             )}/${sourcePageFile}?plain=1`}
@@ -359,7 +363,7 @@
             target="_blank"
             rel="noopener, noreferrer"
             class="link"
-            href={`https://raw.githubusercontent.com/saadeghi/daisyui/refs/heads/master/packages/docs/src/routes/(routes)${$page.url.pathname.replace(
+            href={`https://raw.githubusercontent.com/saadeghi/daisyui/refs/heads/master/packages/docs/src/routes/(routes)${strippedPath.replace(
               /\/$/,
               "",
             )}/${sourcePageFile}?plain=1`}
@@ -443,7 +447,7 @@
         with daisyUI Admin Dashboard
       </h2>
     </div>
-    <a class="btn btn-block btn-primary group" href="/store/">
+    <a class="btn btn-block btn-primary group" href="{base}/store/">
       More details
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -461,7 +465,7 @@
     </a>
   </div>
 </div> -->
-{#if !$page.url.pathname.startsWith("/blueprint/")}
+{#if !strippedPath.startsWith("/blueprint/")}
   <div
     class="card not-prose outline-base-content/5 relative overflow-hidden bg-blue-600 font-sans text-white shadow-lg outline-[length:var(--border)] -outline-offset-[var(--border)] [direction:ltr] md:flex-row-reverse"
     style="background-image: linear-gradient(#3B72FE 1px, transparent 1px), linear-gradient(90deg, #3B72FE 1px, transparent 1px), linear-gradient(#3B72FE 0.5px, transparent 0.5px), linear-gradient(90deg, #3B72FE 0.5px, #155dfc 0.5px); background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px; background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;"
@@ -572,7 +576,7 @@
             Available on daisyUI store
         </h2>
         </div>
-        <a class="btn btn-block btn-primary group" href="/store/">
+        <a class="btn btn-block btn-primary group" href="{base}/store/">
         More details
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -619,7 +623,7 @@
             Available on daisyUI store
         </h2>
         </div>
-        <a class="btn btn-block btn-primary group" href="/store/">
+        <a class="btn btn-block btn-primary group" href="{base}/store/">
         More details
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -659,7 +663,7 @@
       </div>
       <a
         class="btn btn-block group btn-outline mt-6 shadow-none"
-        href="/blueprint/"
+        href="{base}/blueprint/"
         data-theme="dark"
       >
         More details

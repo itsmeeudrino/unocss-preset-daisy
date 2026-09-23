@@ -38,6 +38,16 @@ function extractTableColumn(content, headerName) {
 }
 export const prerender = true
 
+// Subpath deploy: no $app/paths on the server — bake base from env
+// (same default as svelte.config kit.paths.base).
+const BASE = process.env.DOCS_BASE_PATH ?? "/unocss-preset-daisy"
+
+// Prefix the url column's root-absolute values; external urls untouched.
+const withBase = (url) =>
+  typeof url === "string" && url.startsWith("/") && !url.startsWith("//")
+    ? `${BASE}${url}`
+    : url
+
 import { readFileSync, readdirSync, statSync } from "node:fs"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "url"
@@ -493,12 +503,11 @@ export async function GET() {
       }
     }
 
-    const csvContent = serializeSearchCsv([
-      ...initialSearchEntries,
-      ...storeEntries,
-      ...pageEntries,
-      ...headingEntries,
-    ])
+    const csvContent = serializeSearchCsv(
+      [...initialSearchEntries, ...storeEntries, ...pageEntries, ...headingEntries].map(
+        (row) => ({ ...row, url: withBase(row.url) }),
+      ),
+    )
 
     return new Response(csvContent, {
       headers: {

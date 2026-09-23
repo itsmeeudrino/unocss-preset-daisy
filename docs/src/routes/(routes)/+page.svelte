@@ -1,6 +1,7 @@
 <script>
   import "../../homepage.css"
   import { browser } from "$app/environment"
+  import { base } from "$app/paths"
 
   import { PUBLIC_DAISYUI_API_PATH } from "$env/static/public"
   import Countup from "$components/homepage/Countup.svelte"
@@ -223,7 +224,7 @@
                 </button>
               </div>
               <a
-                href="/docs/skill/"
+                href="{base}/docs/skill/"
                 class="btn btn-xs btn-circle relative -start-0.5 opacity-0 transition-all duration-600 group-hover:start-0 group-hover:opacity-100 max-xl:hidden"
                 aria-label="Learn about daisyUI Skill.md file"
               >
@@ -326,7 +327,7 @@
               </a> -->
               <a
                 data-sveltekit-preload-data
-                href="/blueprint/"
+                href="{base}/blueprint/"
                 class="btn md:btn-lg grow rounded-full"
               >
                 <svg
@@ -360,7 +361,7 @@
               </a>
               <!-- <a
                 data-sveltekit-preload-data
-                href="/components/"
+                href="{base}/components/"
                 class="btn md:btn-lg grow rounded-full"
                 onclick={() => track("Homepage > Hero > Components")}
               >
@@ -368,7 +369,7 @@
                 <span class="inline sm:hidden">{$t("cta-1-mobile")}</span>
               </a> -->
               <!-- <a
-                href="/discord/"
+                href="{base}/discord/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Discord"
@@ -416,7 +417,7 @@
               <div class="contents">
                 <a
                   data-sveltekit-preload-data
-                  href="/docs/install/"
+                  href="{base}/docs/install/"
                   class="btn btn-neutral md:btn-lg group lg:max-w-86 grow rounded-full"
                   onclick={() => track("Homepage > Hero > HowToUse")}
                 >
@@ -1198,11 +1199,11 @@
       {@html $t(
         "daisyUI adds class names to Tailwind CSS<br />for all common UI components.<br />Class names like",
       )}
-      <a target="_blank" href="/components/button/" class="link">btn</a>
+      <a target="_blank" href="{base}/components/button/" class="link">btn</a>
       ,
-      <a target="_blank" href="/components/card/" class="link">card</a>
+      <a target="_blank" href="{base}/components/card/" class="link">card</a>
       ,
-      <a target="_blank" href="/components/toggle/" class="link">toggle</a>
+      <a target="_blank" href="{base}/components/toggle/" class="link">toggle</a>
       {@html $t("and many more.")}
     </p>
     <div class="h-6"></div>
@@ -1215,7 +1216,7 @@
     <div class="flex w-full justify-center">
       <a
         data-sveltekit-preload-data
-        href="/components/"
+        href="{base}/components/"
         class="btn btn-primary btn-wide"
         onclick={() => track("Homepage > NextLevel > Components")}
       >
@@ -1552,7 +1553,7 @@
         <div class="flex w-full justify-center xl:justify-start">
           <a
             data-sveltekit-preload-data
-            href="/docs/install/"
+            href="{base}/docs/install/"
             class="btn btn-lg btn-wide group"
             onclick={() => track("Homepage > FewerClassNames > HowToInstall")}
           >
@@ -1723,7 +1724,7 @@
       <div class="flex w-full justify-center">
         <a
           data-sveltekit-preload-data
-          href="/docs/customize/"
+          href="{base}/docs/customize/"
           class="btn btn-lg btn-wide group"
           onclick={() => track("Homepage > Customizable > HowToCustomize")}
         >
@@ -1801,7 +1802,7 @@
       <div class="flex w-full justify-center xl:justify-start">
         <a
           data-sveltekit-preload-data
-          href="/docs/install/"
+          href="{base}/docs/install/"
           class="btn btn-lg btn-wide btn-outline group"
           onclick={() => track("Homepage > PureCSS > HowToInstall")}
         >
@@ -1993,7 +1994,7 @@
       <div class="flex w-full flex-col justify-center gap-4 md:flex-row">
         <a
           data-sveltekit-preload-data
-          href="/theme-generator/"
+          href="{base}/theme-generator/"
           class="btn"
           onclick={() => track("Homepage > DesignDecisions > ThemesGenerator")}
         >
@@ -2001,7 +2002,7 @@
         </a>
         <a
           data-sveltekit-preload-data
-          href="/docs/themes/#how-to-add-custom-styles-for-a-specific-theme"
+          href="{base}/docs/themes/#how-to-add-custom-styles-for-a-specific-theme"
           class="btn btn-neutral"
           onclick={() => track("Homepage > DesignDecisions > ThemesGuide")}
         >
@@ -2106,7 +2107,7 @@
       <div class="flex w-full justify-center">
         <a
           data-sveltekit-preload-data
-          href="/components/"
+          href="{base}/components/"
           class="btn btn-outline md:btn-wide w-full"
           onclick={() => track("Homepage > ComponentsStat > Components")}
         >
@@ -2290,7 +2291,7 @@
       <div class="flex w-full justify-center">
         <a
           data-sveltekit-preload-data
-          href="/docs/install/"
+          href="{base}/docs/install/"
           class="btn btn-primary btn-wide"
           onclick={() => track("Homepage > TrydaisyUI > HowToInstall")}
         >
@@ -2300,7 +2301,7 @@
       <div class="h-10"></div>
       <div class="flex w-full flex-col items-center justify-center gap-2 md:flex-row">
         <span class="text-base-content/70">{$t("Or play with daisyUI on")}:</span>
-        <a target="_blank" rel="noopener, noreferrer" href="/codepen/" class="btn-ghost btn-sm btn">
+        <a target="_blank" rel="noopener, noreferrer" href="{base}/codepen/" class="btn-ghost btn-sm btn">
           <svg
             class="h-4 w-4 stroke-current"
             viewBox="0 0 64 64"
@@ -2319,7 +2320,7 @@
           CodePen
         </a>
         <a
-          href="/tailwindplay/"
+          href="{base}/tailwindplay/"
           class="btn-ghost btn-sm btn"
           target="_blank"
           rel="noopener, noreferrer"
@@ -2354,7 +2355,7 @@
       <div class="mx-auto my-2 w-full max-w-md">
         <Install />
         <a
-          href="/docs/install/"
+          href="{base}/docs/install/"
           class="btn-primary btn btn-wide mt-4 mb-20 shadow-lg"
           onclick={() => track("Homepage > InstalldaisyUILastCall > HowToInstall")}
         >

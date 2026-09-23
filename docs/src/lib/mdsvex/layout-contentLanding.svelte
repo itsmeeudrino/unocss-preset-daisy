@@ -9,6 +9,7 @@
   import SEO from "$components/SEO.svelte"
   import { getLegacyMarketingImage } from "$lib/data/marketingPages.js"
   import { t } from "$lib/i18n.svelte.js"
+  import { withBase } from "$lib/base.js"
   let { title, desc, children, data, img = "" } = $props()
   let marketingPrimaryAction = $derived(data?.marketingPrimaryAction ?? null)
   let marketingHubLink = $derived(data?.marketingHubLink ?? null)
@@ -50,7 +51,7 @@
       {#if marketingHubLink}
         <a class="link link-hover" href={marketingHubLink.href}>{marketingHubLink.label}</a>
       {/if}
-      <a class="btn btn-xs btn-ghost group" href="/components/">
+      <a class="btn btn-xs btn-ghost group" href={withBase("/components/")}>
         See all daisyUI components
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +152,7 @@
                 ></path></svg
               >
             </a>
-            <a href="/components/" class="link link-hover text-xs"> See components </a>
+            <a href={withBase("/components/")} class="link link-hover text-xs"> See components </a>
           </div>
         </div>
         <ul class="my-2 flex gap-4 max-sm:flex-col max-sm:items-center sm:justify-around" dir="ltr">

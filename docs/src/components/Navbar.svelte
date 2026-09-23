@@ -11,6 +11,8 @@
   import DiscountCountdown from "$components/DiscountCountdown.svelte"
   import { track } from "$lib/analytics.svelte.js"
   import { fetchActiveDiscount, getDiscountNavbarTarget } from "$lib/storeDiscount.js"
+  import { base } from "$app/paths"
+  import { withBase, stripBase } from "$lib/base.js"
 
   import { t } from "$lib/i18n.svelte.js"
 
@@ -50,11 +52,11 @@
   const matchesActivePath = (item) => {
     if (!item) return false
 
-    const pathname = $page.url.pathname
+    const path = stripBase($page.url.pathname)
 
     if (item.href) {
-      if (item.exact) return pathname === item.href
-      if (pathname === item.href || pathname.startsWith(item.href)) return true
+      if (item.exact) return path === item.href
+      if (path === item.href || path.startsWith(item.href)) return true
 
       return false
     }
@@ -145,13 +147,13 @@
 
       <div class={`flex items-center gap-2`}>
         <a
-          href="/"
+          href="{base}/"
           aria-current="page"
           aria-label="daisyUI"
           class="me-2 flex w-25 sm:w-35 shrink-0 items-center gap-2"
           oncontextmenu={(e) => {
             e.preventDefault()
-            goto("/brand")
+            goto(withBase("/brand"))
           }}
         >
           <LogoHorizontal />
@@ -199,7 +201,7 @@
                   <li>
                     {#if child.href && hasText(child.name)}
                       <a
-                        href={child.href}
+                        href={withBase(child.href)}
                         target={child.target === "blank" ? "_blank" : undefined}
                         rel={child.target === "blank" ? "noopener noreferrer" : undefined}
                         class={`group ${isActive(child) ? "menu-active" : ""}`}
@@ -240,7 +242,7 @@
             </div>
           {:else if item.href && hasText(item.name)}
             <a
-              href={item.href}
+              href={withBase(item.href)}
               class={`tab group font-normal ${isActive(item) ? "tab-active before:[--radius-start:revert]" : ""}`}
               onclick={() => track(`Navbar > ${item.name}`)}
             >

@@ -65,8 +65,18 @@ const skillContent = [
 
 export const prerender = true
 
+// Subpath deploy: no $app/paths on the server — bake site + base from env
+// (same defaults as the deploy workflow). Upstream daisyui.com refs in the
+// vendored skill sources rewrite to our SITE + BASE canonicals.
+const SITE = process.env.DOCS_SITE_URL ?? "https://itsmeeudrino.github.io"
+const BASE = process.env.DOCS_BASE_PATH ?? "/unocss-preset-daisy"
+const UPSTREAM = "https://daisyui.com"
+
+const rewriteUpstream = (text) =>
+  text.replaceAll(`${UPSTREAM}/`, `${SITE}${BASE}/`).replaceAll(UPSTREAM, `${SITE}${BASE}`)
+
 export function GET() {
-  const content = skillContent
+  const content = rewriteUpstream(skillContent)
 
   return new Response(content, {
     headers: {

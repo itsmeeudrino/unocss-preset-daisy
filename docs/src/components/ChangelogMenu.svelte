@@ -1,4 +1,5 @@
 <script>
+  import { base } from "$app/paths"
   let version = $props()
 </script>
 
@@ -25,7 +26,7 @@
   class="dropdown menu menu-sm bg-base-200 rounded-box mt-10 w-36 border-(length:--border) border-white/5 p-2 shadow-2xl outline-(length:--border) outline-black/5"
 >
   <li>
-    <a href="/docs/changelog/">
+    <a href="{base}/docs/changelog/">
       <svg
         width="14"
         height="14"
@@ -63,10 +64,10 @@
   </li>
   <li></li>
   <li>
-    <a href="/docs/v5/">v5 release notes </a>
+    <a href="{base}/docs/v5/">v5 release notes </a>
   </li>
   <li>
-    <a href="/docs/upgrade/">v5 upgrade guide</a>
+    <a href="{base}/docs/upgrade/">v5 upgrade guide</a>
   </li>
   <li></li>
   <li>
@@ -83,7 +84,7 @@
   </li>
   <li></li>
   <li>
-    <a href="/docs/roadmap/">
+    <a href="{base}/docs/roadmap/">
       <svg
         width="14"
         height="14"

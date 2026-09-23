@@ -1,5 +1,6 @@
 <script>
   import { t } from "$lib/i18n.svelte.js"
+  import { base } from "$app/paths"
   let { animateValue, section, index } = $props()
 </script>
 
@@ -533,7 +534,7 @@
       <a
         class="btn btn-wide btn-primary"
         data-sveltekit-preload-data
-        href="/docs/themes/"
+        href="{base}/docs/themes/"
         tabindex={index == 0 ? 0 : -1}
       >
         {$t("See all themes")}
@@ -706,7 +707,7 @@
       <a
         class="btn btn-block"
         data-sveltekit-preload-data
-        href="/docs/colors/"
+        href="{base}/docs/colors/"
         tabindex={index == 0 ? 0 : -1}
       >
         {$t("Learn more about colors")}

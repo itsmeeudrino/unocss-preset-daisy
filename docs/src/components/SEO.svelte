@@ -2,6 +2,8 @@
   import { t } from "$lib/i18n.svelte.js"
   import { page } from "$app/state"
   import { langs } from "$lib/i18n.svelte.js"
+  import { base } from "$app/paths"
+  import { withBase, stripBase } from "$lib/base.js"
 
   let siteData = {
     title: "daisyUI Tailwind CSS Component UI Library",
@@ -64,17 +66,23 @@
     return lang
   }
 
+  // Canonical site root for this fork (matches servers + svelte.config default).
+  // NOTE: `base` from $app/paths renders *relative* per-page in prerender
+  // ("../.."), so full URLs need the literal path, not {base}.
+  const SITE = "https://itsmeeudrino.github.io"
+  const BASE_PATH = "/unocss-preset-daisy"
   const getCanonicalUrl = (pathname) => {
+    const clean = pathname.replace(new RegExp("^" + BASE_PATH), "") || "/"
     const compareRegex = /^\/compare\/(.+)-vs-(.+)\/$/
-    const match = pathname.match(compareRegex)
+    const match = clean.match(compareRegex)
 
     if (match) {
       const [, first, second] = match
       const [smaller, larger] = [first, second].sort()
-      return `https://daisyui.com/compare/${smaller}-vs-${larger}/`
+      return `${SITE}${BASE_PATH}/compare/${smaller}-vs-${larger}/`
     }
 
-    return `https://daisyui.com${pathname}`
+    return `${SITE}${BASE_PATH}${clean}`
   }
 </script>
 
@@ -93,14 +101,14 @@
   <meta property="og:logo" content="https://img.daisyui.com/images/daisyui/daisyui-logo-192.png" />
   <meta property="og:url" content={getCanonicalUrl(page.url.pathname)} />
 
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="{base}/sitemap.xml" />
   <link rel="canonical" href={getCanonicalUrl(page.url.pathname)} />
 
   {#each langs as lang}
     <link
       rel="alternate"
       hreflang={iso15924to31661(lang)}
-      href={`https://daisyui.com${page.url.pathname}?lang=${lang}`}
+      href={`${SITE}${BASE_PATH}${stripBase(page.url.pathname)}?lang=${lang}`}
     />
   {/each}
 </svelte:head>

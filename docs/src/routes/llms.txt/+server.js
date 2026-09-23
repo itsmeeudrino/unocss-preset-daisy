@@ -64,7 +64,17 @@ const skillContent = [
 
 export const prerender = true
 
-const sourceUrl = "https://daisyui.com/llms.txt"
+// Subpath deploy: no $app/paths on the server — bake site + base from env
+// (same defaults as the deploy workflow). Upstream daisyui.com refs in the
+// vendored skill sources rewrite to our SITE + BASE canonicals.
+const SITE = process.env.DOCS_SITE_URL ?? "https://itsmeeudrino.github.io"
+const BASE = process.env.DOCS_BASE_PATH ?? "/unocss-preset-daisy"
+const UPSTREAM = "https://daisyui.com"
+
+const rewriteUpstream = (text) =>
+  text.replaceAll(`${UPSTREAM}/`, `${SITE}${BASE}/`).replaceAll(UPSTREAM, `${SITE}${BASE}`)
+
+const sourceUrl = `${SITE}${BASE}/llms.txt`
 
 function parseFrontmatter(content) {
   if (!content.startsWith("---\n")) {
@@ -121,7 +131,7 @@ function withRuntimeFrontmatter(content) {
 }
 
 export function GET() {
-  const servedContent = withRuntimeFrontmatter(skillContent)
+  const servedContent = rewriteUpstream(withRuntimeFrontmatter(skillContent))
 
   return new Response(servedContent, {
     headers: {

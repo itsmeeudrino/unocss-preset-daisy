@@ -1,5 +1,6 @@
 <script>
   import SEO from "$components/SEO.svelte"
+  import { withBase } from "$lib/base.js"
   let { data } = $props()
 </script>
 
@@ -9,7 +10,7 @@
 />
 <div class="breadcrumbs text-xs m-6">
   <ul>
-    <li><a class="opacity-60" href="/blog/">daisyUI Blog</a></li>
+    <li><a class="opacity-60" href={withBase("/blog/")}>daisyUI Blog</a></li>
     <li>
       <h1 class="no-underline cursor-text opacity-60">{data.params.tag.replace(/-/g, " ")}</h1>
     </li>
@@ -19,7 +20,7 @@
   {#each data.posts as post}
     <a
       class="card sm:card-side hover:bg-base-200 max-w-sm transition-colors sm:max-w-none"
-      href={`/blog/${post.slug}/`}
+      href={withBase(`/blog/${post.slug}/`)}
     >
       {#if post.thumbnail}
         <figure class="mx-auto w-full object-cover p-6 max-sm:pb-0 sm:max-w-48 sm:pe-0">

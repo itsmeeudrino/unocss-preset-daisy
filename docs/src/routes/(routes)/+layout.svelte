@@ -3,6 +3,8 @@
   import Sidebar from "$components/Sidebar.svelte"
   import Search from "$components/Search.svelte"
   import { page } from "$app/stores"
+  import { base } from "$app/paths"
+  import { stripBase } from "$lib/base.js"
   import { defaultLang, langs, loadRouteTranslations, setLang } from "$lib/i18n.svelte.js"
   import { onNavigate } from "$app/navigation"
   import { track } from "$lib/analytics.svelte.js"
@@ -92,6 +94,10 @@
     return pathname.startsWith(href) && href !== "/"
   }
 
+  // Subpath deploy: nav/sidebar hrefs stay unprefixed (1:1 upstream) —
+  // strip kit.paths.base once so active matching works under base.
+  const pathWithoutBase = (pathname) => stripBase(pathname)
+
   const getSidebarSectionLinks = (items = []) =>
     items.flatMap((item) => [
       ...(item?.href ? [item.href] : []),
@@ -121,7 +127,7 @@
     return []
   }
 
-  let activeSidebarPages = $derived(getSidebarPages($page.url.pathname))
+  let activeSidebarPages = $derived(getSidebarPages(pathWithoutBase($page.url.pathname)))
   let hasDesktopSidebar = $derived(activeSidebarPages.length > 0)
 
   // Calculate if drawer-content should be inert

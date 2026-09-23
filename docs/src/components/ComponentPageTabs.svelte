@@ -1,5 +1,8 @@
 <script>
   import { page } from "$app/stores"
+  import { base } from "$app/paths"
+  import { withBase, stripBase } from "$lib/base.js"
+  let strippedPath = $derived(stripBase($page.url.pathname))
   const tabs = [
     {
       title: "Examples",
@@ -22,10 +25,8 @@
 <nav class="tabs not-prose tabs-lift lg:tabs-lg my-10 flex-nowrap whitespace-nowrap">
   {#each tabs as tab}
     <a
-      href={`/components/${$page.url.pathname.split("/")[2]}/${tab.slug}`}
-      class={`tab gap-3 ${
-        $page.url.pathname.split("/")[3] === tab.slug.replace("/", "") ? "tab-active" : ""
-      }`}
+      href={withBase(`/components/${strippedPath.split("/")[2]}/${tab.slug}`)}
+      class={`tab gap-3 ${strippedPath.split("/")[3] === tab.slug.replace("/", "") ? "tab-active" : ""}`}
     >
       <span class="hidden lg:inline">{@html tab.icon}</span>
       {tab.title}

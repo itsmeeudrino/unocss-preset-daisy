@@ -42,6 +42,7 @@ import { visit } from "./visit.js";
 import { renderComponent } from "./render-component.js";
 import { translate } from "./translate.js";
 import { assignFallbackHeadingIds, assignHeadingIds } from "./headingIds.js";
+import { baseLinks } from "./base-links.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -202,6 +203,10 @@ const config = {
   smartypants: false,
   extensions: mdsvexExtensions,
   remarkPlugins: [transformMarkdown],
+  // 11. baseLinks (local, ./base-links.js — rehype/hast, so inherently AFTER
+  // the 10 remark transforms above): prefix root-absolute a[href]/img[src]
+  // with kit.paths.base. Keeps all 187 *.md sources 1:1 upstream.
+  rehypePlugins: [baseLinks],
   layout: {
     components: join(__dirname, "layout-components.svelte"),
     blog: join(__dirname, "layout-blog.svelte"),

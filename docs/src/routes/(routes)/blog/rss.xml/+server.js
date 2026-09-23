@@ -4,7 +4,11 @@ import { dirname } from "node:path"
 
 const siteTitle = "daisyUI Blog"
 const siteDesc = "Updates, ideas and resources"
-const blogUrl = "https://daisyui.com/blog"
+// Subpath deploy: no $app/paths on the server — bake site + base from env
+// (same defaults as the deploy workflow).
+const SITE = process.env.DOCS_SITE_URL ?? "https://itsmeeudrino.github.io"
+const BASE = process.env.DOCS_BASE_PATH ?? "/unocss-preset-daisy"
+const blogUrl = `${SITE}${BASE}/blog`
 
 const get_posts = async () => {
   let posts = await Promise.all(

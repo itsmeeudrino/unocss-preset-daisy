@@ -2,6 +2,7 @@
   import { onMount } from "svelte"
   import Carbon from "$components/Carbon.svelte"
   import { t } from "$lib/i18n.svelte.js"
+  import { withBase } from "$lib/base.js"
 
   const bannerItems = [
     {
@@ -113,9 +114,9 @@
       <div
         class="bg-base-200 rounded-box border-base-300 mt-8 overflow-hidden border-[length:var(--border)] max-xl:hidden"
       >
-        <a href={randomBanner.link} target="_blank" rel="noopener noreferrer" class="group">
+        <a href={withBase(randomBanner.link)} target="_blank" rel="noopener noreferrer" class="group">
           <img
-            src={randomBanner.img}
+            src={withBase(randomBanner.img)}
             alt={randomBanner.title}
             class="h-auto w-full object-cover transition-transform ease-linear group-hover:scale-110 group-hover:duration-2000"
           />

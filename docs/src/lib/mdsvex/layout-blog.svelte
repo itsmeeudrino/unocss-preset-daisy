@@ -3,6 +3,7 @@
   import { page } from "$app/stores"
   import SEO from "$components/SEO.svelte"
   import { timeago, formattedDate } from "$lib/util"
+  import { withBase } from "$lib/base.js"
   let { title, desc, date, author, tags, thumbnail, published, children } = $props()
   const slug = $page.url.pathname.split("/").at(-2) || ""
 
@@ -61,7 +62,7 @@
     <div class="mb-2 flex flex-wrap gap-2 text-xs opacity-60">
       <span>Tags:</span>
       {#each tags as tag}
-        <a class="link" href={`/blog/tag/${tag.replace(/ /g, "-").toLowerCase()}/`}>
+        <a class="link" href={withBase(`/blog/tag/${tag.replace(/ /g, "-").toLowerCase()}/`)}>
           {tag}
         </a>
       {/each}

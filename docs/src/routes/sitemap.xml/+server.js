@@ -24,7 +24,10 @@ import { getBlogTagSlug, getBlogTags } from "$lib/data/blogTags.js";
 
 export const prerender = true;
 
-const ORIGIN = "https://daisyui.com";
+// Subpath deploy: no $app/paths on the server — bake site + base from env
+// (same defaults as the deploy workflow). Full root = SITE + BASE.
+const SITE = process.env.DOCS_SITE_URL ?? "https://itsmeeudrino.github.io";
+const BASE = process.env.DOCS_BASE_PATH ?? "/unocss-preset-daisy";
 
 // Lazy globs: only keys are used (no content bundled). Docs `.md` files map
 // 1:1 to URLs; `[slug]` dynamics are expanded explicitly below.
@@ -43,7 +46,7 @@ function blogSlugFromPath(globPath) {
 }
 
 function sitemapXml(paths) {
-  const urls = [...new Set(paths)].map((path) => `  <url><loc>${ORIGIN}${path}</loc></url>`).join("\n");
+  const urls = [...new Set(paths)].map((path) => `  <url><loc>${SITE}${BASE}${path}</loc></url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
 

@@ -1,6 +1,6 @@
-# Deploy docs/build (adapter-static, root-domain only — no paths.base)
-# to GitHub Pages. No CNAME here: custom domain undecided; without one the
-# project-pages subpath URL WILL break (absolute / links + trailingSlash).
+# Deploy docs/build (adapter-static, base-aware source) to GitHub Pages.
+# No CNAME here: custom domain undecided; project-pages subpath is the
+# default via DOCS_BASE_PATH below.
 name: deploy-docs
 
 on:
@@ -39,8 +39,9 @@ jobs:
       - run: bun run build
         # $env/static/public only exports vars present at build time;
         # locally this comes from gitignored docs/.env (see .env.example).
-        # Subpath deploy (see scripts/fix-base.js); custom domain: set
-        # DOCS_BASE_PATH="" + DOCS_SITE_URL=https://<domain>.
+        # Base-path source fix (kit.paths.base + mdsvex base-links +
+        # $app/paths); custom domain: set DOCS_BASE_PATH="" +
+        # DOCS_SITE_URL=https://<domain>.
         env:
           PUBLIC_DAISYUI_API_PATH: https://api.daisyui.com
           DOCS_SITE_URL: https://itsmeeudrino.github.io

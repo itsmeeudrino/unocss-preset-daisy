@@ -1,5 +1,6 @@
 <script>
   import SEO from "$components/SEO.svelte"
+  import { withBase } from "$lib/base.js"
   let { data } = $props()
   const posts = $derived(data.posts)
 </script>
@@ -25,7 +26,7 @@
   {#each posts as post}
     <a
       class="card sm:card-side hover:bg-base-200 transition-colors sm:max-w-none"
-      href={`/blog/${post.slug}/`}
+      href={withBase(`/blog/${post.slug}/`)}
     >
       {#if post.thumbnail}
         <figure class="mx-auto w-full object-cover p-6 max-sm:pb-0 sm:max-w-48 sm:pe-0">

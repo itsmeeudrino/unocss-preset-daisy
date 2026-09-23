@@ -18,6 +18,11 @@ const config = {
       assets: "build",
       fallback: null,
     }),
+    // Subpath deploy (GitHub Pages project site): base comes from env so
+    // custom-domain (root) builds keep working with DOCS_BASE_PATH="".
+    paths: {
+      base: process.env.DOCS_BASE_PATH ?? "/unocss-preset-daisy",
+    },
     // TODO(content): links to not-yet-ported routes (/store, /blueprint,
     // /theme-generator, /discord, ...) 404 during prerender crawl until the
     // content track lands. Warn-and-continue so existing pages still build;

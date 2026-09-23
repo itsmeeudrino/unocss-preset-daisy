@@ -2,6 +2,7 @@
   import { onMount } from "svelte"
   import { t } from "$lib/i18n.svelte.js"
   import { parseSearchCsv } from "$lib/searchCsv.js"
+  import { withBase } from "$lib/base.js"
 
   // Search functionality
   let searchData = $state([])
@@ -355,7 +356,7 @@ Card,/components/card/`
       if (modal && typeof modal.close === "function") {
         modal.close()
       }
-      window.location.href = result.url
+      window.location.href = withBase(result.url)
     } catch (error) {
       console.error("Error handling result click:", error)
     }
@@ -440,7 +441,7 @@ Card,/components/card/`
       // Use the currently selected item (selectedIndex should always be valid when there are results)
       if (displayedResults[selectedIndex]) {
         addToRecentSearches(displayedResults[selectedIndex])
-        window.location.href = displayedResults[selectedIndex].url
+        window.location.href = withBase(displayedResults[selectedIndex].url)
         const modal = document.getElementById("searchModal")
         if (modal && typeof modal.close === "function") {
           modal.close()
@@ -467,7 +468,7 @@ Card,/components/card/`
       let csvResults = []
       try {
         const today = new Date().toISOString().slice(0, 10)
-        const response = await fetch(`/search.csv?t=${today}`)
+        const response = await fetch(withBase(`/search.csv?t=${today}`))
         if (response.ok) {
           const csvText = await response.text()
           csvResults = parseSearchCsv(csvText, { hasHeader: "auto" })
@@ -589,7 +590,7 @@ Card,/components/card/`
       }}
     >
       <a
-        href={result.url}
+        href={withBase(result.url)}
         class="flex min-w-0 flex-1 cursor-pointer appearance-none items-center py-4 ps-4 focus-visible:outline-none"
         onclick={() => handleResultClick(result)}
       >
@@ -653,7 +654,7 @@ Card,/components/card/`
     <a
       id="search-result-{index}"
       class="has-[a:focus-visible]:bg-neutral focus-visible:bg-neutral rounded-box focus-visible:text-neutral-content aria-selected:bg-neutral aria-selected:text-neutral-content flex w-full items-center p-4 focus-visible:outline-none"
-      href={result.url}
+      href={withBase(result.url)}
       tabindex="0"
       aria-selected={isSelected}
       onmouseenter={() => {

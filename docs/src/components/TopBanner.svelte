@@ -1,12 +1,13 @@
 <script>
   import { page } from "$app/stores"
+  import { base } from "$app/paths"
 </script>
 
 <!-- Without timer -->
-{#if true && !$page.url.pathname.startsWith("/blueprint/")}
+{#if true && !$page.url.pathname.startsWith(`${base}/blueprint/`)}
   <div class="bg-base-100 flex justify-center rounded-sm">
     <a
-      href="/blueprint/"
+      href="{base}/blueprint/"
       class="alert border-base-300 hover:bg-base-200 bg-base-100 flex w-full justify-center rounded-none border-x-0 border-t-0 p-2 text-center text-xs shadow-none transition-colors"
     >
       <div class="font-mono text-[0.6875rem]" dir="ltr">
@@ -17,10 +18,10 @@
 {/if}
 
 <!-- Without timer -->
-{#if false && !$page.url.pathname.startsWith("/skills/")}
+{#if false && !$page.url.pathname.startsWith(`${base}/skills/`)}
   <div class="bg-base-100 flex justify-center rounded-sm">
     <a
-      href="/skills/daisyui-dashboard/"
+      href="{base}/skills/daisyui-dashboard/"
       class="alert border-base-300 hover:bg-base-200 bg-base-100 flex w-full justify-center rounded-none border-x-0 border-t-0 p-2 text-center text-xs shadow-none transition-colors"
     >
       <div class="font-mono text-[0.6875rem]">
