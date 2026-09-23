@@ -5,7 +5,7 @@ name: deploy-docs
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths: ["docs/**", "src/**", ".github/workflows/deploy-docs.yml"]
   workflow_dispatch:
 
