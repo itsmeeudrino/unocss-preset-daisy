@@ -29,9 +29,13 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.4.0"
-      # docs imports the preset via ../src (TS) + ../src/theme/themes.css —
-      # no root dist build needed.
+      # docs/uno.config.ts imports the preset via ../src (TS), and src/
+      # runtime-imports the `unocss` peer — so root node_modules must exist
+      # too (resolution walks up from src/).
       - run: bun install --frozen-lockfile
+        working-directory: ${{ github.workspace }}
+      - run: bun install --frozen-lockfile
+        working-directory: docs
       - run: bun run build
       - uses: actions/upload-pages-artifact@v3
         with:
