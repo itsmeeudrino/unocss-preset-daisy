@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "vite build",
+    "build": "vite build && bun scripts/fix-base.js",
     "preview": "vite preview --port 3000",
     "test": "bun test src",
     "verify": "bun run --parallel test lang:validate sync:themes",

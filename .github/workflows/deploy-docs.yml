@@ -39,8 +39,12 @@ jobs:
       - run: bun run build
         # $env/static/public only exports vars present at build time;
         # locally this comes from gitignored docs/.env (see .env.example).
+        # Subpath deploy (see scripts/fix-base.js); custom domain: set
+        # DOCS_BASE_PATH="" + DOCS_SITE_URL=https://<domain>.
         env:
           PUBLIC_DAISYUI_API_PATH: https://api.daisyui.com
+          DOCS_SITE_URL: https://itsmeeudrino.github.io
+          DOCS_BASE_PATH: /unocss-preset-daisy
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs/build
