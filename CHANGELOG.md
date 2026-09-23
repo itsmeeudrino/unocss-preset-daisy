@@ -10,7 +10,7 @@ Upstream release history lives at
 The docs site renders that upstream changelog at `/docs/changelog/`
 (`docs/src/routes/(routes)/docs/changelog/+page.svelte` imports this file).
 
-## 5.7-uno.0 (2026-09-23)
+## 5.7.0-uno.0 (2026-09-23)
 
 First release. daisyUI v5.7.43 ported to UnoCSS — zero Tailwind.
 
